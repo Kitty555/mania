@@ -1,0 +1,50 @@
+/*
+ * @title		진행중인 이벤트
+ * @author		김현진
+ * @date		2012.04.10
+ * @update		수정날짜(수정자)
+ * @description
+ */
+
+.top_area{ height:70px; border-bottom:1px solid #E4E4E4; }
+.top_area .tab{ position:absolute; top:34px; left:0; }
+.top_area .tab > li{ float:left; margin-right:22px; padding-bottom:12px; font-size:18px; font-weight:bold; }
+.top_area .tab > .selected{ border-bottom:3px solid #159EFD; color:#159EFD; }
+.top_area .g_path{ top:45px; }
+.e_category li{ float:left; width:180px; height:96px; }
+.e_category li > a{ box-sizing:border-box; display:block; width:181px; height:94px; padding-top:25px; border:1px solid #E6E6E6; text-align:center; }
+.e_category .on > a{ width:180px; border-color:#159EFD; color:#159EFD; }
+.e_category i{ display:block; width:36px; height:35px; margin:0 auto; text-indent:-9999px; }
+.e_category .kind000{ background-position:-502px -1682px; }
+.e_category .kind001{ background-position:-540px -1682px; }
+.e_category .kind002{ background-position:-578px -1682px; }
+.e_category .kind003{ background-position:-616px -1682px; }
+.e_category .kind004{ background-position:-654px -1682px; }
+.e_category .kind005{ background-position:-692px -1682px; }
+.e_category .on .kind000{ background-position:-730px -1682px; }
+.e_category .on .kind001{ background-position:-768px -1682px; }
+.e_category .on .kind002{ background-position:-806px -1682px; }
+.e_category .on .kind003{ background-position:-844px -1682px; }
+.e_category .on .kind004{ background-position:-882px -1682px; }
+.e_category .on .kind005{ background-position:-920px -1682px; }
+.event_wrap{ float:left; margin-left:-13px; padding-bottom:40px; }
+.e_box{ box-sizing:border-box; float:left; width:260px; height:270px; margin:30px 0 0 13px; border:1px solid #E6E6E6; }
+/*.e_box{ box-sizing:border-box; float:left; width:260px; height:220px; margin:30px 0 0 13px; border:1px solid #E6E6E6; }*/
+.e_box img{ margin:4px; }
+.e_box .title{ position:relative; padding:9px 14px 9px; font-weight:bold; font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.e_box .new{ padding:0 5px 2px; border-radius:10px; background-color:#159EFD; color:#FFF; font-size:12px; }
+.e_box .descript{ height:52px; padding-left:14px; font-size:12px; color:#9F9F9F; overflow:hidden; }
+.e_box .date{ padding:11px 14px; border-top:1px solid #E6E6E6; font-size:12px; color:#9F9F9F; font-weight:bold; }
+/* 종료된 이벤트 */
+.e_search{ float:right; position:relative; margin-bottom:20px; padding:7px 30px 8px 10px; border:1px solid #DDD; }
+.e_search input{ width:198px; border:0; }
+.e_search i{ position:absolute; top:6px; right:5px; display:block; width:21px; height:21px; background:url(//img4.itemmania.com/new_images/event/sp_event.png) no-repeat -10px -96px; }
+.event_wrap2{ clear:both; }
+.event_wrap2 table{ border-top:5px solid #7F7F7F; }
+.event_wrap2 table tr:hover{ background-color:#F2FAFF; }
+.event_wrap2 .date{ display:block; color:#9F9F9F; }
+.event_wrap2 table td{ padding:6px 10px; border-bottom:1px solid #DADDE4; text-align:left; font-size:12px; line-height:22px; }
+.event_wrap2 table .center{ text-align:center; }
+.event_wrap2 .prize_btn_on{ box-sizing:border-box; display:inline-block; width:92px; height:25px; background-color:#159EFD; line-height:25px; text-align:center; color:#FFF; font-weight:bold; }
+.event_wrap2 .prize_btn{ box-sizing:border-box; display:inline-block; width:92px; height:25px; border:1px solid #9B9B9B; background-color:#B1B1B1; line-height:23px; text-align:center; color:#FFF; font-weight:bold; }
+.load_more{ margin-top:20px; padding:10px 0; border:1px solid #E9EBEF; text-align:center; }
