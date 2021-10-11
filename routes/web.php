@@ -72,14 +72,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/forms', Forms::class)->name('forms');
     Route::get('/modals', Modals::class)->name('modals');
     Route::get('/typography', Typography::class)->name('typography');
+
+    /**
+     * By Jong
+     */
+    Route::get('/sell', [\App\Http\Controllers\VSellController::class, 'index'])->name('sell');
+    Route::get('/buy', [\App\Http\Controllers\VBuyController::class, 'index'])->name('buy');
 });
 
 /**
  * By Jong
  */
 Route::get('/index', [\App\Http\Controllers\VMainController::class, 'index'])->name('index');
-Route::get('/sell', [\App\Http\Controllers\VSellController::class, 'index'])->name('sell');
-Route::get('/buy', [\App\Http\Controllers\VBuyController::class, 'index'])->name('buy');
 Route::get('/character', [\App\Http\Controllers\VChrController::class, 'index'])->name('character');
 Route::get('/myroom', [\App\Http\Controllers\VMyRoomController::class, 'index'])->name('myroom');
 Route::get('/event', [\App\Http\Controllers\VEventController::class, 'index'])->name('event');
