@@ -10,43 +10,43 @@ function _init(){
 // 	g_fnSECURITY2();
 //	StartSmartUpdate();
 
-	$.ajax({
-		url			: "/_include/_loginbox_security.php",
-		dataType	: "text",
-		type		: "get",
-		data		: null,
-		success		: function(request) {
-			reqData = request.split("$");
-
-			var strSecuResult = "미설정";
-			var strLoginAlarm = "미설정";
-			var strLoginResult = "미설정";
-			var strUseService = "<span class='f_blue1'>설정완료</span>";
-			if (reqData[0] == true) { strSecuResult = strUseService; }
-			if (reqData[3] == true) { strLoginResult = strUseService; }
-			if (reqData[4] == true) { strLoginAlarm = strUseService; }
-
-			// $("#login_security_service").html("로그인 보안 서비스 : <b>"+strLoginResult+"</b>");
-            // $("#login_alert_service").html("로그인 알림 서비스 : <b>"+strLoginAlarm+"</b>");
-            // $("#payment_security_service").html("결제 보안 서비스 : <b>"+strSecuResult+"</b>");
-
-			$("#login_security_state").html("<b>"+strLoginResult+"</b>");
-			$("#login_alert_state").html("<b>"+strLoginAlarm+"</b>");
-			$("#payment_state").html("<b>"+strSecuResult+"</b>");
-
-			//$('#loading_img').hide();
-		},
-		error : function (xhr) {
-			alert("접속이 원활하지 않습니다."+xhr.status);
-		}
-	});
+	// $.ajax({
+	// 	url			: "/_include/_loginbox_security.php",
+	// 	dataType	: "text",
+	// 	type		: "get",
+	// 	data		: null,
+	// 	success		: function(request) {
+	// 		reqData = request.split("$");
+    //
+	// 		var strSecuResult = "미설정";
+	// 		var strLoginAlarm = "미설정";
+	// 		var strLoginResult = "미설정";
+	// 		var strUseService = "<span class='f_blue1'>설정완료</span>";
+	// 		if (reqData[0] == true) { strSecuResult = strUseService; }
+	// 		if (reqData[3] == true) { strLoginResult = strUseService; }
+	// 		if (reqData[4] == true) { strLoginAlarm = strUseService; }
+    //
+	// 		// $("#login_security_service").html("로그인 보안 서비스 : <b>"+strLoginResult+"</b>");
+    //         // $("#login_alert_service").html("로그인 알림 서비스 : <b>"+strLoginAlarm+"</b>");
+    //         // $("#payment_security_service").html("결제 보안 서비스 : <b>"+strSecuResult+"</b>");
+    //
+	// 		$("#login_security_state").html("<b>"+strLoginResult+"</b>");
+	// 		$("#login_alert_state").html("<b>"+strLoginAlarm+"</b>");
+	// 		$("#payment_state").html("<b>"+strSecuResult+"</b>");
+    //
+	// 		//$('#loading_img').hide();
+	// 	},
+	// 	error : function (xhr) {
+	// 		alert("접속이 원활하지 않습니다."+xhr.status);
+	// 	}
+	// });
 
 }
 
 function fnTradePage(url){
 	if(url) {
 		location.href = url;
-	}	
+	}
 }
 
 function fnipin()

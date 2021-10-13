@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
 
-class VBuyController extends Controller
+class VBuyController extends BaseController
 {
     public function __construct()
     {

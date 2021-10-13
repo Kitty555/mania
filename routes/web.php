@@ -76,8 +76,18 @@ Route::middleware('auth')->group(function () {
     /**
      * By Jong
      */
+    Route::get('/myroom', [\App\Http\Controllers\VMyRoomController::class, 'index'])->name('myroom');
+    Route::get('/myroom/sell/sell_regist_view', [\App\Http\Controllers\VMyRoomController::class, 'sell_regist_view'])->name('sell_regist_view');
+
     Route::get('/sell', [\App\Http\Controllers\VSellController::class, 'index'])->name('sell');
+    Route::get('/sell/index_view', [\App\Http\Controllers\VSellController::class, 'index_view'])->name('sell_index_view');
+    Route::get('/sell/list_search', [\App\Http\Controllers\VSellController::class, 'list_search'])->name('sell_list_search');
+
+    Route::get('/sell/fixed_trade_subject', [\App\Http\Controllers\VSellController::class, 'fixed_trade_subject'])->name('fixed_trade_subject');
+    Route::get('/user/contact_edit', [\App\Http\Controllers\VSellController::class, 'user_contact_edit']);
+
     Route::get('/buy', [\App\Http\Controllers\VBuyController::class, 'index'])->name('buy');
+
 });
 
 /**
@@ -85,6 +95,6 @@ Route::middleware('auth')->group(function () {
  */
 Route::get('/index', [\App\Http\Controllers\VMainController::class, 'index'])->name('index');
 Route::get('/character', [\App\Http\Controllers\VChrController::class, 'index'])->name('character');
-Route::get('/myroom', [\App\Http\Controllers\VMyRoomController::class, 'index'])->name('myroom');
 Route::get('/event', [\App\Http\Controllers\VEventController::class, 'index'])->name('event');
 Route::get('/guide', [\App\Http\Controllers\VGuideController::class, 'index'])->name('guide');
+

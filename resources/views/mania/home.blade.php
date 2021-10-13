@@ -1,10 +1,31 @@
 @extends('layouts-mania.app')
+
+@section('head_attach')
+    <link type="text/css" rel="stylesheet" href="/mania/_css/_comm.min.css?v=210317">
+    <link type="text/css" rel="stylesheet" href="/mania/_head_tail/css/_head_comm.css?v=211007">
+    <link type="text/css" rel="stylesheet" href="/mania/_banner/css/banner_module.css?v=210422">
+    <link type="text/css" rel="stylesheet" href="/mania/_banner/css/_banner.css?v=210107101945">
+    <link type="text/css" rel="stylesheet" href="/mania/home/index.css?">
+    <script type="text/javascript" src="/mania/advertise/advertise_code_head.js?v=200727"></script>
+    <script type="text/javascript" src="/mania/_banner/js/banner_module.js?v=210209"></script>
+@endsection
+
+@section('foot_attach')
+    <script type="text/javascript" src="/mania/_js/_jquery3.js?v=190220"></script>
+    <script type="text/javascript" src="/mania/_js/_comm.min.js?v=21100516"></script>
+    <script type="text/javascript" src="/mania/_js/_gs_control_200924.min.js?v=21100816"></script>
+    <script type="text/javascript" src="/mania/_js/_common_initialize_new.min.js?v=21050316"></script>
+    <script type="text/javascript" src="/mania/_js/_xml2json.min.js?190220"></script>
+    <script type="text/javascript" src="/mania/_js_chart/_avgGameChart.min.js?210304"></script>
+    <script type="text/javascript" src="/mania/js/index.js?210429"></script>
+@endsection
+
 @section('content')
     <!--▼▼▼ 캐릭터 등롤 알리미 ▼▼▼ -->
     <input type="hidden" name="new_except" value="">
     <div class="g_layer service_layer" id="service_layer">
         <div class="inner"> <a href="javascript:;" class="close" id="service_close">닫기</a>
-            <div class="title"> 나만의 서비스 설정 <span>빠른 메뉴 설정을 위해 아이콘 8개를 선택하신 후 저장 버튼을 클릭하세요.</span>
+            <div class="title f-15"> 즐겨찾는 서비스 <span class="f-13">최대 8개를 선택할수 잇습니다.</span>
                 <div class="r_area"> <a href="javascript:;" class="btn_white2 save" id="service_save">저장</a> <a href="javascript:;" class="btn_white2 init" id="service_init">초기화</a> </div>
             </div>
             <ul class="service_list" id="service_list">
@@ -98,39 +119,44 @@
             </script>
             <!--▲▲▲ 거래 중앙 롤링 배너 ▲▲▲ -->
             <div class="service_wrap">
-                <div class="service_set"> <a href="javascript:;" id="service_btn"><i class="sp_icon setting">설정</i></a>
+                <div class="service_set">
+                    <div class="service_favorite">즐겨찾는 서비스</div>
+                    <a href="javascript:;" id="service_btn"><i class="sp_icon setting">설정</i></a>
                     <ul>
-                        <a href="/customer/myqna/list.html" target="_self">
-                            <li><span class="SpGroup counsel"></span>
-                                <br>상담내역보기 </li>
+                        <a href="#" target="_self">
+                            <li>
+                                <span class="SpGroup counsel"></span><div class="f-16">상담내역보기</div>
+                            </li>
                         </a>
-                        <a href="/myroom/sell/sell_regist.html?strRelationType=regist" target="_self">
-                            <li><span class="SpGroup sell"></span>
-                                <br>판매관련물품 </li>
+                        <a href="#" target="_self">
+                            <li>
+                                <span class="SpGroup sell"></span><div class="f-16">판매관련물품</div>
+                            </li>
                         </a>
-                        <a href="/myroom/buy/buy_regist.html?strRelationType=regist" target="_self">
-                            <li><span class="SpGroup buy"></span>
-                                <br>구매관련물품 </li>
+                        <a href="#" target="_self">
+                            <li>
+                                <span class="SpGroup buy"></span><div class="f-16">구매관련물품</div>
+                            </li>
                         </a>
-                        <a href="/myroom/myinfo/credit_rating.html" target="_self">
-                            <li><span class="SpGroup credit_rating"></span>
-                                <br>신용등급/수수료 </li>
+                        <a href="#" target="_self">
+                            <li>
+                                <span class="SpGroup credit_rating"></span><div class="f-16">신용등급/수수료</div>
+                            </li>
                         </a>
-                        <a href="/guide/frshmn_guide/howto.html" target="_self">
-                            <li><span class="SpGroup guide"></span>
-                                <br>초보자가이드 </li>
+                        <a href="#" target="_self">
+                            <li>
+                                <span class="SpGroup guide"></span><div class="f-16">초보자가이드</div>
+                            </li>
                         </a>
-                        <a href="/myroom/coupon/" target="_self">
-                            <li><span class="SpGroup coupon"></span>
-                                <br>할인쿠폰현황 </li>
+                        <a href="#" target="_self">
+                            <li>
+                                <span class="SpGroup coupon"></span><div class="f-16">할인쿠폰현황</div>
+                            </li>
                         </a>
-                        <a href="/customer/faq/index.html" target="_self">
-                            <li><span class="SpGroup faq"></span>
-                                <br>FAQ </li>
-                        </a>
-                        <a href="/myroom/message/" target="_self">
-                            <li><span class="SpGroup message"></span>
-                                <br>메시지함 </li>
+                        <a href="#" target="_self">
+                            <li>
+                                <span class="SpGroup faq"></span><div class="f-16">FAQ</div>
+                            </li>
                         </a>
                     </ul>
                 </div>
@@ -139,6 +165,7 @@
         </div>
     </div>
     <div class="content_center">
+        {{--
         <div class="power_wrap">
             <div class="power_title"> <span class="power">파워물품 ZONE</span> <a href="/power/auction_ing.html" class="more2">파워등록권 경매신청 ></a> </div>
             <ul class="list" id="power_list">
@@ -334,122 +361,92 @@
                 </div>
             </div>
         </div>
-        <p class="spacer_bottom_10"></p>
+        <p class="spacer_bottom_10"></p> -->
         <!--▲▲▲ 거래 메인 랜덤 up 980x80 ▲▲▲ -->
-        <div class="sec_left">
-            <div class="title">게임별 시세정보 <a href="javascript:_window.open('game_money', '/game_info/money/index.html?win=pop', 800, 900);"><i
-                        class="sp_icon plus_icon">더보기</i></a> </div>
-            <div id="gameChart"></div>
+        --}}
+        <div class="sec_left realtime_status">
+            <div class="initial_screen">
+                <div class="tab searchbar_tab">
+                    <div class="active">
+                        <a class="f-18" href="javascript:void(0);" >실시간 팝니다 목록</a>
+                    </div>
+                    <div>
+                        <a class="f-18" href="javascript:void(0);" >실시간 삽니다 목록</a>
+                    </div>
+                </div>
+                <div class="tab_content">
+                    <div class="tab_child show" data-content="tab_lastsearch">
+                        <table class="f-14 no-border">
+                            <tr>
+                                <td class="realtime_list align-center no-border" >종류</td>
+                                <td class="realtime_game align-center no-border" >게임명/서버명</td>
+                                <td class="realtime_desc align-center no-border" >멘트</td>
+                                <td class="realtime_money align-center no-border" >거래가격</td>
+                            </tr>
+                        </table>
+                        <hr>
+                        <div class="realtime_sell_wrapper">
+                            <table class="realtime_sell_table f-14 no-border">
+                                <tbody>
+                                @for ($i = 0; $i < 20; $i++)
+                                    <tr>
+                                        <td class="realtime_list align-center no-border" >게임머니</td>
+                                        <td class="realtime_game no-border" >리니지 > 린델</td>
+                                        <td class="realtime_desc no-border" >(수량보유즁) 다이아 최저가 판매중</td>
+                                        <td class="realtime_money align-right no-border" >1,000원</td>
+                                    </tr>
+                                @endfor
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab_child" data-content="tab_mygame">
+                        <ul class="g_my_search"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="gs_list g_hidden" data-gslist="true"></div>
         </div>
         <div class="sec_right">
-            <div class="title"> 마일리지 충전
-                <div class="move_btn" id="chargeBtn"> <a href="javascript:;" data-type="p"><i class="sp_icon btn_prev">이전</i></a> <a href="javascript:;" data-type="n"><i class="sp_icon btn_next">다음</i></a> </div>
+            <div class="box3 gamenews">
+                <div class="title f-18 f-normal"> 공지사항 </div>
+                <ul class="g_list news_list f-14">
+                    <li>
+                        <a href="/portal/gamemeca/news/view.html?seq=32957">
+                            게임 나오면 흥할 넷플릭스 오리지널 콘텐츠, 뭐가 있을까?<span class="comp">2021-10-07 18:09:38</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/portal/gamemeca/news/view.html?seq=32961">
+                            엔씨소프트 사내 성희롱 사건 발생, 사측 조사 나서<span class="comp">2021-10-07 15:47:17</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/portal/gamemeca/news/view.html?seq=32958">
+                            독재타도 위해 싸우자, 파 크라이 6 정식 발매<span class="comp">2021-10-07 15:45:27</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/portal/gamemeca/news/view.html?seq=32959">
+                            [순정남] 그걸로 정체가 감춰져? 의미 없는 가면 TOP 5<span class="comp">2021-10-07 14:56:54</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <div class="charge_wrap" id="charge_list">
-                <ul class="charge_list">
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/tcash.html',700,900);"><span
-                                class="c_name">티캐시</span><span class="sp_main tcash"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/ktclip.html',700,900);"><span
-                                class="c_name">카드포인트 </span><span class="sp_main ktclip"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/onlyhpmn.html',700,900);"><span
-                                class="c_name">해피머니상품권</span><span class="sp_main happy"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/onlyculture.html',700,900);"><span
-                                class="c_name">문화상품권</span><span class="sp_main culture"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/phone_ars.html',700,900);"><span
-                                class="c_name">휴대폰 ARS충전</span><span class="sp_main phone_ars"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/bookgift.html',700,900);"><span
-                                class="c_name">도서문화상품권</span><span class="sp_main book"></span></a> </li>
-                </ul>
-                <ul class="charge_list">
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/realaccount.html',700,900);"><span
-                                class="c_name">자동이체</span><span class="sp_main realaccount"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/onlydgcl.html',700,900);"><span
-                                class="c_name">스마트문상(게임문상)</span><span class="sp_main smart"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/cashgate.html',700,900);"><span
-                                class="c_name">캐시플러스</span><span class="sp_main cashgate"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/touchpay.html',700,900);"><span
-                                class="c_name">터치페이</span><span class="sp_main touchpay"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/teencash.html',700,900);"><span
-                                class="c_name">틴캐시</span><span class="sp_main teen"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/eggmoney.html',700,900);"><span
-                                class="c_name">에그머니</span><span class="sp_main eggmoney"></span></a> </li>
-                </ul>
-                <ul class="charge_list">
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/tmoney.html',700,900);"><span
-                                class="c_name">모바일 티머니</span><span class="sp_main tmoney"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/pointpark.html',700,900);"><span
-                                class="c_name">포인트충전</span><span class="sp_main point"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/gpgw.html',700,900);"><span
-                                class="c_name">GP쿠폰</span><span class="sp_main gpcoupon"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/maniacoupon.html',700,900);"><span
-                                class="c_name">매니아 선불</span><span class="sp_main maniacoupon"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/funnycard.html',700,900);"><span
-                                class="c_name">퍼니카드</span><span class="sp_main funny"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/coupon.html',700,900);"><span
-                                class="c_name">이벤트쿠폰</span><span class="sp_main coupon"></span></a> </li>
-                </ul>
-                <ul class="charge_list">
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/ars.html',700,900);"><span
-                                class="c_name">ARS</span><span class="sp_main ars"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/cashbee.html',700,900);"><span
-                                class="c_name">모바일 캐시비</span><span class="sp_main cashbee"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/creditcard.html',700,900);"><span
-                                class="c_name">신용카드 충전</span><span class="sp_main creditcard"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/okcashbag.html',700,900);"><span
-                                class="c_name">OK캐시백</span><span class="sp_main okcashbag"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/mileage.html',700,900);"><span
-                                class="c_name">마일리지 상품권</span><span class="sp_main mileage"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/index.html',700,900);"><span
-                                class="c_name">전용계좌</span><span class="sp_main account"></span></a> </li>
-                </ul>
-                <ul class="charge_list">
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/mmileage.html',700,900);"><span
-                                class="c_name">M마일리지 이용권</span><span class="sp_main mmileage"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/im_gift.html',700,900);"><span
-                                class="c_name">IM기프트</span><span class="sp_main imgift"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/mobilepop.html',700,900);"><span
-                                class="c_name">모바일팝</span><span class="sp_main mobilepop"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/pipe.html',700,900);"><span
-                                class="c_name">암호화폐 충전</span><span class="sp_main pipe"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/paycoin.html',700,900);"><span
-                                class="c_name">페이코인 충전</span><span class="sp_main paycoin"></span></a> </li>
-                    <li> <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/kbank.html',700,900);"><span
-                                class="c_name">케이뱅크 페이</span><span class="sp_main kbank"></span></a> </li>
-                </ul> <i class="border_hz"></i> </div>
         </div>
         <div class="g_finish"></div>
-        <!--▼▼▼ 거래 메인 랜덤 up 980x80 ▼▼▼ -->
-        <p class="spacer_bottom_10"></p>
-        <!--▲▲▲ 거래 메인 랜덤 up 980x80 ▲▲▲ -->
-        <div class="g_finish"></div>
-        <div class="sec_left recom_game">
-            <div class="title"> 매니아 핫게임 <a href="/game_info/recom_game/"><i class="sp_icon plus_icon">더보기</i></a> </div>
-            <ul class="hotgame_list">
-                <li>
-                    <a href="http://trade.itemmania.com/game_info/recom_game/"><img src="/assets/img/mania/20210802144909_1.jpg" width="106" height="130" alt=""></a> <span class="game_name">블레스언리쉬드</span>
-                    <div class="btns"> <a href="http://trade.itemmania.com/game_info/recom_game/" class="btn_white2">할인쿠폰</a> <a href="/sell/list.html?search_type=sell&search_game=4673&search_game_text=%EB%B8%94%EB%A0%88%EC%8A%A4%EC%96%B8%EB%A6%AC%EC%89%AC%EB%93%9C" class="btn_blue1">거래하기</a> </div>
-                </li>
-                <li>
-                    <a href="http://trade.itemmania.com/game_info/recom_game/"><img src="/assets/img/mania/20210427100400_1.jpg" width="106" height="130" alt=""></a> <span class="game_name">서머너즈워:백년전쟁</span>
-                    <div class="btns"> <a href="http://trade.itemmania.com/game_info/recom_game/" class="btn_white2">할인쿠폰</a> <a href="/sell/list.html?search_type=sell&search_game=4702&search_game_text=%EC%84%9C%EB%A8%B8%EB%84%88%EC%A6%88%EC%9B%8C%3A%EB%B0%B1%EB%85%84%EC%A0%84%EC%9F%81" class="btn_blue1">거래하기</a> </div>
-                </li>
-                <li>
-                    <a href="http://trade.itemmania.com/game_info/recom_game/"><img src="/assets/img/mania/20210406091243_1.jpg" width="106" height="130" alt=""></a> <span class="game_name">프로야구H3</span>
-                    <div class="btns"> <a href="http://trade.itemmania.com/game_info/recom_game/" class="btn_white2">할인쿠폰</a> <a href="/sell/list.html?search_type=sell&search_game=4686&search_game_text=%ED%94%84%EB%A1%9C%EC%95%BC%EA%B5%ACH3" class="btn_blue1">거래하기</a> </div>
-                </li>
-                <li>
-                    <a href="http://trade.itemmania.com/game_info/recom_game/"><img src="/assets/img/mania/20210122110502_1.jpg" width="106" height="130" alt=""></a> <span class="game_name">쿠키런:킹덤</span>
-                    <div class="btns"> <a href="http://trade.itemmania.com/game_info/recom_game/" class="btn_white2">할인쿠폰</a> <a href="/sell/list.html?search_type=sell&search_game=4660&search_game_text=%EC%BF%A0%ED%82%A4%EB%9F%B0%3A%ED%82%B9%EB%8D%A4" class="btn_blue1">거래하기</a> </div>
-                </li>
-                <li>
-                    <a href="http://trade.itemmania.com/game_info/recom_game/"><img src="/assets/img/mania/20210122110254_1.jpg" width="106" height="130" alt=""></a> <span class="game_name">원펀맨:최강의남자</span>
-                    <div class="btns"> <a href="http://trade.itemmania.com/game_info/recom_game/" class="btn_white2">할인쿠폰</a> <a href="/sell/list.html?search_type=sell&search_game=4677&search_game_text=%EC%9B%90%ED%8E%80%EB%A7%A8%3A%EC%B5%9C%EA%B0%95%EC%9D%98%EB%82%A8%EC%9E%90" class="btn_blue1">거래하기</a> </div>
-                </li>
-            </ul>
+
+        <div class="sec_left no-border">
+            <div class="title">게임별 시세정보
+                <a href="javascript:_window.open('game_money', '/game_info/money/index.html?win=pop', 800, 900);">
+                    <i class="sp_icon plus_icon">더보기</i>
+                </a>
+            </div>
+            <div id="gameChart" class="border-normal"></div>
         </div>
-        <div class="rank_wrap g_right">
-            <div class="sec_right">
-                <div class="title"> 게임순위 <a href="/game_info/rank_game/index.html"><i class="sp_icon plus_icon">더보기</i></a> </div>
+        <div class="sec_right no-border">
+            <div class="title"> 게임순위 <a href="/game_info/rank_game/index.html"><i class="sp_icon plus_icon">더보기</i></a> </div>
+            <div class="border-normal d-flex">
                 <ul class="rank_list">
                     <li class="top"> <span class="num">1</span> <span class="game_name">디아블로2:레저렉션</span> <span class="sp_icon none"></span> </li>
                     <li class="top"> <span class="num">2</span> <span class="game_name">오딘:발할라라이징</span> <span class="sp_icon none"></span> </li>
@@ -465,82 +462,172 @@
                     <li> <span class="num">10</span> <span class="game_name">월드오브워크래프트:클래식</span> <span class="sp_icon up"></span> </li>
                 </ul>
             </div>
-            <!--▼▼▼ 거래 메인 하단 980x80 ▼▼▼ -->
-            <div class="banner_module">
-                <div class="banner_content_wrapper">
-                    <div class="banner_content">
-                        <a href="http://trade.itemmania.com/counter/survey.php?imcounter=banner_tradebn_tmlow_lotto&returnUrl=http://www.itemmania.com/event/event_ing/e190408_lotto/" target="_blank"> <img id="TF0003" class="banner_content_images" src="http://img3.itemmania.com/new_images/banner_manager/20210113/20210113163201_M3DKq.jpg" alt="로또서비스" title="로또서비스"> </a>
-                    </div>
-                </div>
-            </div>
-            <p class="spacer_bottom_10"></p>
-            <!--▲▲▲ 거래 메인 하단 980x80 ▲▲▲ -->
         </div>
         <div class="g_finish"></div>
-        <div class="sec_bottom">
-            <div class="box3 gamemania">
-                <div class="title"> 게임매니아 <a href="http://www.gamemania.co.kr" target="_blank"><i class="sp_icon plus_icon">더보기</i></a> </div>
-                <div class="gamemania_bn banner_in">
-                    <div class="banner_item">
-                        <a href="http://trade.itemmania.com/gamemania/transfer.html?SendUrl=http://mk.gamemania.co.kr" target="_blank"> <img src="http://img3.itemmania.com/new_images/banner/210707_mk_348x143.png" alt="무신의칼" title="무신의칼" /> </a>
-                    </div>
-                    <div class="banner_item">
-                        <a href="http://trade.itemmania.com/gamemania/transfer.html?SendUrl=http://bb37.gamemania.co.kr" target="_blank"> <img src="http://img3.itemmania.com/new_images/banner/210707_bb37_348x143.jpg" alt="병법37계" title="병법37계" /> </a>
-                    </div>
-                    <div class="banner_item">
-                        <a href="http://trade.itemmania.com/gamemania/transfer.html?SendUrl=http://flexr.gamemania.co.kr" target="_blank"> <img src="http://img4.itemmania.com/new_images/banner/210707_flexr_348x143.jpg" alt="플렉스R" title="플렉스R" /> </a>
+
+        <div class="d-flex w-100">
+            <div class="w-50 sec_left no-border back-normal " style="margin-right: 10px;">
+                <div class="title no-border">
+                    전화 상담안내
+                </div>
+                <div class="d-flex w-100 inquery_part">
+                    <img src="/assets/img/icons/inquery_time.png" height="91" width="97" />
+                    <div class="bottom_info">
+                        <span class="call_num">1532-9945</span>
+                        <span class="call_txt">365일 24시간 연중무휴</span>
                     </div>
                 </div>
-                <div class="banner_indicate indicate"></div>
             </div>
-            <div class="box3 service">
-                <div class="title"> 매니아서비스
-                    <div class="move_btn" id="serviceBtn"> <a href="javascript:;" data-type="p"><i class="sp_icon btn_prev">이전</i></a> <a href="javascript:;" data-type="n"><i class="sp_icon btn_next">다음</i></a> </div>
+            <div class="w-50 sec_right no-border">
+                <div class="title">
+                    마일리지 충전
+                    <div class="move_btn" id="chargeBtn">
+                        <a href="javascript:;" data-type="p"><i class="sp_icon btn_prev">이전</i></a>
+                        <a href="javascript:;" data-type="n"><i class="sp_icon btn_next">다음</i></a>
+                    </div>
                 </div>
-                <div id="mania_bn"> </div>
-            </div>
-            <div class="box3 gamenews">
-                <div class="title"> 최신 게임뉴스 <a href="/portal/gamemeca/news/index.html"><i class="sp_icon plus_icon">더보기</i></a> </div>
-                <ul class="g_list news_list">
-                    <li><a href="/portal/gamemeca/news/view.html?seq=32957">
-                            게임 나오면 흥할 넷플릭스 오리지널 콘텐츠, 뭐가 있을까?                                    <span class="comp">2021-10-07 18:09:38</span>
-                        </a> </li>
-                    <li><a href="/portal/gamemeca/news/view.html?seq=32961">
-                            엔씨소프트 사내 성희롱 사건 발생, 사측 조사 나서                                    <span class="comp">2021-10-07 15:47:17</span>
-                        </a> </li>
-                    <li><a href="/portal/gamemeca/news/view.html?seq=32958">
-                            독재타도 위해 싸우자, 파 크라이 6 정식 발매                                    <span class="comp">2021-10-07 15:45:27</span>
-                        </a> </li>
-                    <li><a href="/portal/gamemeca/news/view.html?seq=32959">
-                            [순정남] 그걸로 정체가 감춰져? 의미 없는 가면 TOP 5                                    <span class="comp">2021-10-07 14:56:54</span>
-                        </a> </li>
-                </ul>
-            </div>
-            <div class="bottom_info">
-                <div class="title2">전화 상담안내</div> <span class="call_num">1544-8278</span> <span class="call_txt">365일 24시간 연중무휴</span> </div>
-            <div class="bottom_info2">
-                <div class="title2">공지사항</div>
-                <dl class="notice">
-                    <dd><a href="javascript:_window.open('notice','/notice/view.html?pub=TRADE&type=all&nowPage=1&id=1955',650,500);">[안내] 스크린샷 첨부용량 하향 조정 안내</a> <img src="//img1.itemmania.com/images/icon/ico_new.gif" width="10" height="9" alt="" /></dd>
-                    <dd><a href="javascript:_window.open('notice','/notice/view.html?pub=TRADE&type=all&nowPage=1&id=1954',650,500);">[당첨자발표] 캐릭터물품등록알리미 이벤..</a> <img src="//img1.itemmania.com/images/icon/ico_new.gif" width="10" height="9" alt="" /></dd>
-                    <dd><a href="javascript:_window.open('notice','/notice/view.html?pub=TRADE&type=all&nowPage=1&id=1951',650,500);">[이벤트] 아이템매니아X녹스앱플레이어, ..</a> </dd>
-                </dl>
-            </div>
-            <div class="bottom_info3">
-                <ul class="center_menu">
-                    <li>
-                        <a href="/customer/report/index.html"> <span class="SpGroup counsel"></span> 온라인 1:1 상담 </a>
-                    </li>
-                    <li>
-                        <a href="/customer/faq/index.html"> <span class="SpGroup faq"></span> FAQ </a>
-                    </li>
-                    <li>
-                        <a href="/customer/myqna/list.html"> <span class="SpGroup qna"></span> 나의 질문과 답변 </a>
-                    </li>
-                    <li>
-                        <a href="/guide/frshmn_guide/howto.html"> <span class="SpGroup guide"></span> 초보자가이드 </a>
-                    </li>
-                </ul>
+                <div class="charge_wrap border-normal fixed-height" id="charge_list">
+                    <ul class="charge_list">
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/tcash.html',700,900);">
+                                <span class="c_name">티캐시</span>
+                                <span class="sp_main tcash"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/ktclip.html',700,900);">
+                                <span class="c_name">카드포인트 </span>
+                                <span class="sp_main ktclip"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/onlyhpmn.html',700,900);">
+                                <span class="c_name">해피머니상품권</span>
+                                <span class="sp_main happy"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/onlyculture.html',700,900);">
+                                <span class="c_name">문화상품권</span>
+                                <span class="sp_main culture"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/phone_ars.html',700,900);">
+                                <span class="c_name">휴대폰 ARS충전</span>
+                                <span class="sp_main phone_ars"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/bookgift.html',700,900);">
+                                <span class="c_name">도서문화상품권</span><span class="sp_main book"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/realaccount.html',700,900);"><span
+                                    class="c_name">자동이체</span><span class="sp_main realaccount"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/onlydgcl.html',700,900);"><span
+                                    class="c_name">스마트문상(게임문상)</span><span class="sp_main smart"></span></a>
+                        </li>
+                    </ul>
+                    <ul class="charge_list">
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/cashgate.html',700,900);"><span
+                                    class="c_name">캐시플러스</span><span class="sp_main cashgate"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/touchpay.html',700,900);"><span
+                                    class="c_name">터치페이</span><span class="sp_main touchpay"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/teencash.html',700,900);"><span
+                                    class="c_name">틴캐시</span><span class="sp_main teen"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/eggmoney.html',700,900);"><span
+                                    class="c_name">에그머니</span><span class="sp_main eggmoney"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/tmoney.html',700,900);"><span
+                                    class="c_name">모바일 티머니</span><span class="sp_main tmoney"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/pointpark.html',700,900);"><span
+                                    class="c_name">포인트충전</span><span class="sp_main point"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/gpgw.html',700,900);"><span
+                                    class="c_name">GP쿠폰</span><span class="sp_main gpcoupon"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/maniacoupon.html',700,900);"><span
+                                    class="c_name">매니아 선불</span><span class="sp_main maniacoupon"></span></a>
+                        </li>
+                    </ul>
+                    <ul class="charge_list">
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/funnycard.html',700,900);"><span
+                                    class="c_name">퍼니카드</span><span class="sp_main funny"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/coupon.html',700,900);"><span
+                                    class="c_name">이벤트쿠폰</span><span class="sp_main coupon"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/ars.html',700,900);"><span
+                                    class="c_name">ARS</span><span class="sp_main ars"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/cashbee.html',700,900);"><span
+                                    class="c_name">모바일 캐시비</span><span class="sp_main cashbee"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/creditcard.html',700,900);"><span
+                                    class="c_name">신용카드 충전</span><span class="sp_main creditcard"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/okcashbag.html',700,900);"><span
+                                    class="c_name">OK캐시백</span><span class="sp_main okcashbag"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/mileage.html',700,900);"><span
+                                    class="c_name">마일리지 상품권</span><span class="sp_main mileage"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/index.html',700,900);"><span
+                                    class="c_name">전용계좌</span><span class="sp_main account"></span></a>
+                        </li>
+                    </ul>
+                    <ul class="charge_list">
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/mmileage.html',700,900);"><span
+                                    class="c_name">M마일리지 이용권</span><span class="sp_main mmileage"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/im_gift.html',700,900);"><span
+                                    class="c_name">IM기프트</span><span class="sp_main imgift"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/mobilepop.html',700,900);"><span
+                                    class="c_name">모바일팝</span><span class="sp_main mobilepop"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/pipe.html',700,900);"><span
+                                    class="c_name">암호화폐 충전</span><span class="sp_main pipe"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/paycoin.html',700,900);"><span
+                                    class="c_name">페이코인 충전</span><span class="sp_main paycoin"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:_window.open('mileage_charge', 'http://trade.itemmania.com/myroom/mileage/charge/kbank.html',700,900);"><span
+                                    class="c_name">케이뱅크 페이</span><span class="sp_main kbank"></span></a>
+                        </li>
+                    </ul>
+                    <i class="border_hz"></i>
+                </div>
             </div>
         </div>
         <div class="g_finish"></div>
