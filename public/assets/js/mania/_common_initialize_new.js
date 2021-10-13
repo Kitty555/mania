@@ -64,7 +64,7 @@ function _header() {
 				$(this).addClass("on");
 				i = k;
 				ajaxRequest({
-					url: "/_include/quicklink" + i.split("_")[0] + ".php",
+					url: "/api/quicklink" + i.split("_")[0],
 					type: "POST",
 					async: false,
 					success: function(m) {

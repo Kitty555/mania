@@ -20,3 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('/sell/include/index_template', [\App\Http\Controllers\VSellController::class, 'ajax_template']);
 Route::get("/json/gameserverlist.json",[\App\Http\Controllers\ManiaController::class,'gameList']);
+
+/**
+ * Created api by Jong
+ */
+Route::post('/quicklinkuser', [\App\Http\Controllers\VAjaxController::class, 'quicklinkuser']);
+Route::get('/character', [\App\Http\Controllers\VAjaxController::class, 'character']);

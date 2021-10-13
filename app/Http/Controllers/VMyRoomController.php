@@ -22,4 +22,8 @@ class VMyRoomController extends BaseController
         return view('mania.myroom.main');
     }
 
+    public function sell_regist_view()
+    {
+        return view('mania.myroom.sell_regist_view');
+    }
 }
