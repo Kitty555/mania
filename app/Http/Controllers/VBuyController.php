@@ -21,4 +21,14 @@ class VBuyController extends BaseController
     {
         return view('mania.buy.main');
     }
+
+    public function index_view()
+    {
+        return view('mania.buy.index_view');
+    }
+
+    public function list_search()
+    {
+        return view('mania.buy.list_search');
+    }
 }
