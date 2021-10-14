@@ -42,6 +42,11 @@ class VMyRoomController extends BaseController
         return view('mania.myroom.complete_cancel_sell');
     }
 
+    public function sell_pay_wait_view()
+    {
+        return view('mania.myroom.sell_pay_wait_view');
+    }
+
     public function sell_regist()
     {
         return view('mania.myroom.sell_regist');
