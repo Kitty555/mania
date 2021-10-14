@@ -12,11 +12,11 @@
 
 @section('foot_attach')
     <script type="text/javascript" src="/mania/_js/_jquery3.js?v=190220"></script>
-    <script type="text/javascript" src="/mania/_js/_comm.min.js?v=21100516"></script>
-    <script type="text/javascript" src="/mania/_js/_gs_control_200924.min.js?v=21100816"></script>
-    <script type="text/javascript" src="/mania/_js/_common_initialize_new.min.js?v=21050316"></script>
-    <script type="text/javascript" src="/mania/_js/_xml2json.min.js?190220"></script>
-    <script type="text/javascript" src="/mania/_js_chart/_avgGameChart.min.js?210304"></script>
+    <script type="text/javascript" src="/mania/_js/_comm.js?v=21100516"></script>
+    <script type="text/javascript" src="/mania/_js/_gs_control_200924.js?v=21100816"></script>
+    <script type="text/javascript" src="/mania/_js/_common_initialize_new.js?v=21050316"></script>
+    <script type="text/javascript" src="/mania/_js/_xml2json.js?190220"></script>
+    <script type="text/javascript" src="/mania/_js_chart/_avgGameChart.js?210304"></script>
     <script type="text/javascript" src="/mania/js/index.js?210429"></script>
 @endsection
 

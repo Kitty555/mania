@@ -27,62 +27,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6622a35a-725d-4fa9-8736-7fe8741a71cc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/alarm_add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/buy_check.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/buy_ing.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/buy_pay_wait.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/complete_buy.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/complete_cancel_buy.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/complete_report.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/sell_check.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/sell_ing.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/mania/_js/_comm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/mania/_js/_common_initialize_new.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/mania/_js/_gs_control_200924.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/mania/_js_chart/_avgGameChart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VMyRoomController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VMyRoomController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/_banner/css/banner_module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/_banner/js/banner_module.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/_css/_comm.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/_head_popup.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/_head_tail/css/_head_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/advertise/advertise_code_head.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/buy/_comm.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/buy/_head_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/buy/banner_module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/buy/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/change.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/chr/_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/chr/_head_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/chr/banner_module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/chr/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/css/common_view.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/css/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/event/_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/event/_head_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/event/banner_module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/event/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/fixed_trade_subject.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/global.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/guide/_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/guide/_head_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/guide/banner_module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/guide/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/main/_banner.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/main/_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/main/_head_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/main/_main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/mania/myroom/complete/css/report.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/main/banner_module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/main/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/myroom/_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/myroom/_head_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/myroom/_myroom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/mania/myroom/complete/js/_search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/myroom/banner_module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/myroom/common_myroom.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/myroom/css/common_myroom.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/myroom/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/sell/_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/sell/_head_comm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/sell/banner_module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/mania/sell/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mania/_js/_comm.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mania/_js/_common_initialize_new.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mania/_js/_gs_control_200924.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mania/_js/_xml2json.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/mania/_js/_xml2json.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mania/_js_chart/_avgGameChart.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/buy/buy_application.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/buy/buy_application.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/buy/index_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/buy/index_view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/buy/list_search.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/buy/list_search.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/buy/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/buy/main.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/certify/payment/user_certify.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/certify/payment/user_certify.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/alarm_add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/alarm_add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/alarm_sell_list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/alarm_sell_list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/buy_check.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/buy_check.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/buy_ing.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/buy_ing.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/buy_pay_wait.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/buy_pay_wait.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/buy_re_reg.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/buy_re_reg.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/buy_regist.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/buy_regist.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/buy_regist_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/buy_regist_view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/complete_buy.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/complete_buy.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/complete_cancel_buy.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/complete_cancel_buy.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/complete_cancel_sell.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/complete_cancel_sell.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/complete_report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/complete_report.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/complete_sell.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/complete_sell.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/main.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/message.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/message.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/sell_check.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/sell_check.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/sell_ing.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/sell_ing.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/sell_pay_wait_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/sell_pay_wait_view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/sell_regist.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/sell_regist.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/myroom/sell_regist_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/myroom/sell_regist_view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/sell/index_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/sell/index_view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/sell/list_search.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/sell/list_search.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/sell/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/sell/main.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/sell/sell_application.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/sell/sell_application.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mania/sell/sell_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mania/sell/sell_view.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -289,7 +274,8 @@
       <workItem from="1634087750988" duration="7694000" />
       <workItem from="1634125926702" duration="12397000" />
       <workItem from="1634140064388" duration="2424000" />
-      <workItem from="1634187599674" duration="13819000" />
+      <workItem from="1634187599674" duration="14341000" />
+      <workItem from="1634211168233" duration="594000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1633958385637</created>
@@ -326,7 +312,21 @@
       <option name="project" value="LOCAL" />
       <updated>1634198607932</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="디자인 수정2">
+      <created>1634203762815</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1634203762815</updated>
+    </task>
+    <task id="LOCAL-00007" summary="디자인 수정3">
+      <created>1634203770437</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1634203770437</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,6 +362,7 @@
     <MESSAGE value="Basic page" />
     <MESSAGE value="디자인 수정" />
     <MESSAGE value="디자인 수정2" />
-    <option name="LAST_COMMIT_MESSAGE" value="디자인 수정2" />
+    <MESSAGE value="디자인 수정3" />
+    <option name="LAST_COMMIT_MESSAGE" value="디자인 수정3" />
   </component>
 </project>
