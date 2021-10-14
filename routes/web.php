@@ -77,17 +77,35 @@ Route::middleware('auth')->group(function () {
      * By Jong
      */
     Route::get('/myroom', [\App\Http\Controllers\VMyRoomController::class, 'index'])->name('myroom');
+    Route::get('/myroom/message', [\App\Http\Controllers\VMyRoomController::class, 'message'])->name('message');
+    Route::get('/myroom/goods_alarm/alarm_sell_list', [\App\Http\Controllers\VMyRoomController::class, 'alarm_sell_list'])->name('alarm_sell_list');
+    Route::get('/myroom/complete/sell', [\App\Http\Controllers\VMyRoomController::class, 'complete_sell'])->name('complete_sell');
+    Route::get('/myroom/complete/cancel_sell', [\App\Http\Controllers\VMyRoomController::class, 'complete_cancel_sell'])->name('complete_cancel_sell');
+
+
+    Route::get('/myroom/sell/sell_regist', [\App\Http\Controllers\VMyRoomController::class, 'sell_regist'])->name('sell_regist');
     Route::get('/myroom/sell/sell_regist_view', [\App\Http\Controllers\VMyRoomController::class, 'sell_regist_view'])->name('sell_regist_view');
+    Route::get('/myroom/sell/sell_re_reg', [\App\Http\Controllers\VMyRoomController::class, 'sell_re_reg'])->name('sell_re_reg');
+
+    Route::get('/myroom/buy/buy_regist', [\App\Http\Controllers\VMyRoomController::class, 'buy_regist'])->name('buy_regist');
+    Route::get('/myroom/buy/buy_regist_view', [\App\Http\Controllers\VMyRoomController::class, 'buy_regist_view'])->name('buy_regist_view');
+    Route::get('/myroom/buy/buy_re_reg', [\App\Http\Controllers\VMyRoomController::class, 'buy_re_reg'])->name('buy_re_reg');
 
     Route::get('/sell', [\App\Http\Controllers\VSellController::class, 'index'])->name('sell');
     Route::get('/sell/index_view', [\App\Http\Controllers\VSellController::class, 'index_view'])->name('sell_index_view');
     Route::get('/sell/list_search', [\App\Http\Controllers\VSellController::class, 'list_search'])->name('sell_list_search');
+    Route::get('/sell/view', [\App\Http\Controllers\VSellController::class, 'sell_view'])->name('sell_view');
+    Route::get('/sell/application', [\App\Http\Controllers\VSellController::class, 'sell_application'])->name('sell_application');
+
 
     Route::get('/sell/fixed_trade_subject', [\App\Http\Controllers\VSellController::class, 'fixed_trade_subject'])->name('fixed_trade_subject');
     Route::get('/user/contact_edit', [\App\Http\Controllers\VSellController::class, 'user_contact_edit']);
 
     Route::get('/buy', [\App\Http\Controllers\VBuyController::class, 'index'])->name('buy');
+    Route::get('/buy/index_view', [\App\Http\Controllers\VBuyController::class, 'index_view'])->name('buy_index_view');
+    Route::get('/buy/list_search', [\App\Http\Controllers\VBuyController::class, 'list_search'])->name('buy_list_search');
 
+    Route::get('/certify/payment/user_certify', [\App\Http\Controllers\VCertifyController::class, 'user_certify'])->name('user_certify');
 });
 
 /**
