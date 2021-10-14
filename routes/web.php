@@ -78,16 +78,27 @@ Route::middleware('auth')->group(function () {
      */
     Route::get('/myroom', [\App\Http\Controllers\VMyRoomController::class, 'index'])->name('myroom');
     Route::get('/myroom/message', [\App\Http\Controllers\VMyRoomController::class, 'message'])->name('message');
+
     Route::get('/myroom/goods_alarm/alarm_sell_list', [\App\Http\Controllers\VMyRoomController::class, 'alarm_sell_list'])->name('alarm_sell_list');
+    Route::get('/myroom/goods_alarm/alarm_add', [\App\Http\Controllers\VMyRoomController::class, 'alarm_add'])->name('alarm_add');
+
+
     Route::get('/myroom/complete/sell', [\App\Http\Controllers\VMyRoomController::class, 'complete_sell'])->name('complete_sell');
+    Route::get('/myroom/complete/buy', [\App\Http\Controllers\VMyRoomController::class, 'complete_buy'])->name('complete_buy');
+    Route::get('/myroom/complete/report', [\App\Http\Controllers\VMyRoomController::class, 'complete_report'])->name('complete_report');
     Route::get('/myroom/complete/cancel_sell', [\App\Http\Controllers\VMyRoomController::class, 'complete_cancel_sell'])->name('complete_cancel_sell');
+    Route::get('/myroom/complete/cancel_buy', [\App\Http\Controllers\VMyRoomController::class, 'complete_cancel_buy'])->name('complete_cancel_buy');
 
-
+    Route::get('/myroom/sell/sell_check', [\App\Http\Controllers\VMyRoomController::class, 'sell_check'])->name('sell_check');
+    Route::get('/myroom/sell/sell_ing', [\App\Http\Controllers\VMyRoomController::class, 'sell_ing'])->name('sell_ing');
     Route::get('/myroom/sell/sell_pay_wait_view', [\App\Http\Controllers\VMyRoomController::class, 'sell_pay_wait_view'])->name('sell_pay_wait_view');
     Route::get('/myroom/sell/sell_regist', [\App\Http\Controllers\VMyRoomController::class, 'sell_regist'])->name('sell_regist');
     Route::get('/myroom/sell/sell_regist_view', [\App\Http\Controllers\VMyRoomController::class, 'sell_regist_view'])->name('sell_regist_view');
     Route::get('/myroom/sell/sell_re_reg', [\App\Http\Controllers\VMyRoomController::class, 'sell_re_reg'])->name('sell_re_reg');
 
+    Route::get('/myroom/buy/buy_check', [\App\Http\Controllers\VMyRoomController::class, 'buy_check'])->name('buy_check');
+    Route::get('/myroom/buy/buy_ing', [\App\Http\Controllers\VMyRoomController::class, 'buy_ing'])->name('buy_ing');
+    Route::get('/myroom/buy/buy_pay_wait', [\App\Http\Controllers\VMyRoomController::class, 'buy_pay_wait'])->name('buy_pay_wait');
     Route::get('/myroom/buy/buy_regist', [\App\Http\Controllers\VMyRoomController::class, 'buy_regist'])->name('buy_regist');
     Route::get('/myroom/buy/buy_regist_view', [\App\Http\Controllers\VMyRoomController::class, 'buy_regist_view'])->name('buy_regist_view');
     Route::get('/myroom/buy/buy_re_reg', [\App\Http\Controllers\VMyRoomController::class, 'buy_re_reg'])->name('buy_re_reg');
