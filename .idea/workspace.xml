@@ -27,48 +27,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6622a35a-725d-4fa9-8736-7fe8741a71cc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/mania/_css/_comm.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/_head_tail/css/_head_popup.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/buy/css/index_view.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/buy/css/list_search.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/buy/js/list.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/buy/js/list_search.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/certify/payment/css/user_certify.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/certify/payment/js/user_certify.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/buy/css/buy_pay_wait_view.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/buy/css/common_list.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/buy/css/common_view.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/buy/js/buy_re_reg.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/buy/js/buy_regist.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/buy/js/buy_regist_view.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/complete/css/common.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/goods_alarm/css/goods_alarm.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/goods_alarm/js/alarm_add.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/goods_alarm/js/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/message/css/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/message/js/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/sell/css/common_list.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/myroom/sell/js/sell_regist.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/sell/css/application.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/sell/css/view.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/sell/js/application.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mania/sell/js/view.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/buy/index_view.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/buy/list_search.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/certify/payment/user_certify.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/alarm_sell_list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/buy_re_reg.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/buy_regist_view.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/complete_cancel_sell.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/complete_sell.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/message.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/sell_regist.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/sell/sell_application.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mania/sell/sell_view.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/mania/buy/css/application.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/mania/buy/js/application.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/mania/buy/buy_application.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/mania/myroom/sell_pay_wait_view.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VBuyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VBuyController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VMyRoomController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VMyRoomController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VSellController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VSellController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,8 +48,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -268,7 +233,7 @@
       <workItem from="1634087750988" duration="7694000" />
       <workItem from="1634125926702" duration="12397000" />
       <workItem from="1634140064388" duration="2424000" />
-      <workItem from="1634187599674" duration="7666000" />
+      <workItem from="1634187599674" duration="8952000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1633958385637</created>
@@ -291,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634140261908</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="디자인 수정">
+      <created>1634196890399</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1634196890399</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,6 +297,7 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="Added middleware route" />
     <MESSAGE value="Basic page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic page" />
+    <MESSAGE value="디자인 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="디자인 수정" />
   </component>
 </project>
