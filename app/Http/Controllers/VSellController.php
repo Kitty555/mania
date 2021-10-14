@@ -27,6 +27,16 @@ class VSellController extends BaseController
         return view('mania.sell.index_view');
     }
 
+    public function sell_view()
+    {
+        return view('mania.sell.sell_view');
+    }
+
+    public function sell_application()
+    {
+        return view('mania.sell.sell_application');
+    }
+
     /**
      * 판매페이지 > 물품제목 > 설정
      */
