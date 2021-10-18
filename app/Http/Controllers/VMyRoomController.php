@@ -122,4 +122,70 @@ class VMyRoomController extends BaseController
     {
         return view('mania.myroom.buy_pay_wait');
     }
+
+    /***************** Resion 마일리지 ****************/
+    /**
+     * 마이룸 > 마일리지 > 내 마일리지 > 마이리지 현황
+     */
+    public function my_mileage_index()
+    {
+        return view('mania.myroom.mileage.my_mileage.index');
+    }
+    /**
+     * * 마이룸 > 마일리지 > 내 마일리지 > 마일리지 달력보기
+     */
+    public function my_mileage_calendar()
+    {
+        return view('mania.myroom.mileage.my_mileage.calendar');
+    }
+    /**
+     * * 마이룸 > 마일리지 > 내 마일리지 > 마일리지 달력보기
+     */
+    public function my_mileage_detail_list()
+    {
+        return view('mania.myroom.mileage.my_mileage.detail_list');
+    }
+    /**
+     * 마이룸 > 마일리지 > 마일리지 충전
+     */
+    public function mileage_guide_charge()
+    {
+        return view('mania.myroom.mileage.guide.charge');
+    }
+    /**
+     * 마이룸 > 마일리지 > 마일리지 출금
+     */
+    public function payment_index()
+    {
+        return view('mania.myroom.mileage.payment.index');
+    }
+    /**
+     * 마이룸 > 마일리지 > 마일리지  > 휴대폰번호 출금
+     */
+    public function payment_phone()
+    {
+        return view('mania.myroom.mileage.payment.payment_phone');
+    }
+    /**
+     * 마이룸 > 마일리지 > 마일리지  > 마일리지 출금내역 보기
+     */
+    public function payment_list()
+    {
+        return view('mania.myroom.mileage.payment.payment_list');
+    }
+    /**
+     * 마이룸 > 마일리지 > 마일리지  > 휴대폰번호 출금내역 보기
+     */
+    public function payment_phone_list()
+    {
+        return view('mania.myroom.mileage.payment.payment_phone_list');
+    }
+    /**
+     * 마이룸 > 마일리지 > 마일리지  > 마일리지 전환
+     */
+    public function culturecash()
+    {
+        return view('mania.myroom.mileage.payment.change.culturecash');
+    }
+    /*************************************************/
 }
