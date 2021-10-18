@@ -72,26 +72,48 @@ Route::middleware('auth')->group(function () {
     Route::get('/forms', Forms::class)->name('forms');
     Route::get('/modals', Modals::class)->name('modals');
     Route::get('/typography', Typography::class)->name('typography');
-    Route::post('/addService', [\App\Http\Controllers\ManiaController::class, 'addService'])->name('addService');
+
     /**
      * By Jong
      */
+    Route::get('/customer/myqna/list', [\App\Http\Controllers\VCustomerController::class, 'myqna_list'])->name('myqna_list');
+    Route::get('/customer/myqna/view', [\App\Http\Controllers\VCustomerController::class, 'myqna_view'])->name('myqna_view');
+
     Route::get('/myroom', [\App\Http\Controllers\VMyRoomController::class, 'index'])->name('myroom');
     Route::get('/myroom/message', [\App\Http\Controllers\VMyRoomController::class, 'message'])->name('message');
+
     Route::get('/myroom/goods_alarm/alarm_sell_list', [\App\Http\Controllers\VMyRoomController::class, 'alarm_sell_list'])->name('alarm_sell_list');
+    Route::get('/myroom/goods_alarm/alarm_add', [\App\Http\Controllers\VMyRoomController::class, 'alarm_add'])->name('alarm_add');
+
     Route::get('/myroom/complete/sell', [\App\Http\Controllers\VMyRoomController::class, 'complete_sell'])->name('complete_sell');
+    Route::get('/myroom/complete/buy', [\App\Http\Controllers\VMyRoomController::class, 'complete_buy'])->name('complete_buy');
+    Route::get('/myroom/complete/report', [\App\Http\Controllers\VMyRoomController::class, 'complete_report'])->name('complete_report');
     Route::get('/myroom/complete/cancel_sell', [\App\Http\Controllers\VMyRoomController::class, 'complete_cancel_sell'])->name('complete_cancel_sell');
+    Route::get('/myroom/complete/cancel_buy', [\App\Http\Controllers\VMyRoomController::class, 'complete_cancel_buy'])->name('complete_cancel_buy');
 
-
+    Route::get('/myroom/sell/sell_check', [\App\Http\Controllers\VMyRoomController::class, 'sell_check'])->name('sell_check');
+    Route::get('/myroom/sell/sell_ing', [\App\Http\Controllers\VMyRoomController::class, 'sell_ing'])->name('sell_ing');
     Route::get('/myroom/sell/sell_pay_wait_view', [\App\Http\Controllers\VMyRoomController::class, 'sell_pay_wait_view'])->name('sell_pay_wait_view');
     Route::get('/myroom/sell/sell_regist', [\App\Http\Controllers\VMyRoomController::class, 'sell_regist'])->name('sell_regist');
     Route::get('/myroom/sell/sell_regist_view', [\App\Http\Controllers\VMyRoomController::class, 'sell_regist_view'])->name('sell_regist_view');
     Route::get('/myroom/sell/sell_re_reg', [\App\Http\Controllers\VMyRoomController::class, 'sell_re_reg'])->name('sell_re_reg');
 
+    Route::get('/myroom/buy/buy_check', [\App\Http\Controllers\VMyRoomController::class, 'buy_check'])->name('buy_check');
+    Route::get('/myroom/buy/buy_ing', [\App\Http\Controllers\VMyRoomController::class, 'buy_ing'])->name('buy_ing');
+    Route::get('/myroom/buy/buy_pay_wait', [\App\Http\Controllers\VMyRoomController::class, 'buy_pay_wait'])->name('buy_pay_wait');
     Route::get('/myroom/buy/buy_regist', [\App\Http\Controllers\VMyRoomController::class, 'buy_regist'])->name('buy_regist');
     Route::get('/myroom/buy/buy_regist_view', [\App\Http\Controllers\VMyRoomController::class, 'buy_regist_view'])->name('buy_regist_view');
     Route::get('/myroom/buy/buy_re_reg', [\App\Http\Controllers\VMyRoomController::class, 'buy_re_reg'])->name('buy_re_reg');
 
+    Route::get('/myroom/mileage/my_mileage/index', [\App\Http\Controllers\VMyRoomController::class, 'my_mileage_index'])->name('my_mileage_index');
+    Route::get('/myroom/mileage/my_mileage/calendar', [\App\Http\Controllers\VMyRoomController::class, 'my_mileage_calendar'])->name('my_mileage_calendar');
+    Route::get('/myroom/mileage/my_mileage/detail_list', [\App\Http\Controllers\VMyRoomController::class, 'my_mileage_detail_list'])->name('my_mileage_detail_list');
+    Route::get('/myroom/mileage/guide/charge', [\App\Http\Controllers\VMyRoomController::class, 'mileage_guide_charge'])->name('mileage_guide_charge');
+    Route::get('/myroom/mileage/payment/index', [\App\Http\Controllers\VMyRoomController::class, 'payment_index'])->name('payment_index');
+    Route::get('/myroom/mileage/payment/payment_phone', [\App\Http\Controllers\VMyRoomController::class, 'payment_phone'])->name('payment_phone');
+    Route::get('/myroom/mileage/payment/payment_list', [\App\Http\Controllers\VMyRoomController::class, 'payment_list'])->name('payment_list');
+    Route::get('/myroom/mileage/payment/payment_phone_list', [\App\Http\Controllers\VMyRoomController::class, 'payment_phone_list'])->name('payment_phone_list');
+    Route::get('/myroom/mileage/payment/culturecash', [\App\Http\Controllers\VMyRoomController::class, 'culturecash'])->name('culturecash');
     Route::get('/sell', [\App\Http\Controllers\VSellController::class, 'index'])->name('sell');
     Route::get('/sell/index_view', [\App\Http\Controllers\VSellController::class, 'index_view'])->name('sell_index_view');
     Route::get('/sell/list_search', [\App\Http\Controllers\VSellController::class, 'list_search'])->name('sell_list_search');
@@ -108,7 +130,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/buy/application', [\App\Http\Controllers\VBuyController::class, 'buy_application'])->name('buy_application');
 
     Route::get('/certify/payment/user_certify', [\App\Http\Controllers\VCertifyController::class, 'user_certify'])->name('user_certify');
-    Route::get('/logout', [\App\Http\Controllers\ManiaController::class,'logout'])->name('logout');
 });
 
 /**

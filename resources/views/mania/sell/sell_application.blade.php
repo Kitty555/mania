@@ -1,36 +1,5 @@
-@php
-
-    $goods = 'money';
-    $goods_label = '게임머니';
-    if($good_type != '기타')
-        $goods_label = $good_type;
-    $selltype = '일반';
-    if(!empty($user_goods_type) && $user_goods_type == 'division'){
-        $selltype = '분할';
-    }
-    if(!empty($user_goods_type) && $user_goods_type == 'bargain'){
-        $selltype = '할인';
-    }
-
-    $category = '> > 기타';
-    if(!empty($game['game'])){
-        $category = $game['game']." > ";
-    }
-    if(!empty($server['game'])){
-        $category .= $server['game']." > ";
-    }
-    if(!empty($good_type)){
-        $category .= $good_type;
-    }
-
-    if($good_type == '기타')
-        $goods = 'etc';
-    if($good_type == '아이템')
-        $goods = 'item';
-    if($good_type == '캐릭터')
-        $goods = 'character';
-@endphp
 @extends('layouts-mania.app')
+
 @section('head_attach')
     <link type="text/css" rel="stylesheet" href="/mania/_css/_comm.min.css?v=210317">
     <link type="text/css" rel="stylesheet" href="/mania/_head_tail/css/_head_comm.css?v=211007">
@@ -44,45 +13,24 @@
 @section('foot_attach')
     <script type="text/javascript" src="/mania/_js/_jquery3.js?v=190220"></script>
     <script type="text/javascript" src="/mania/_js/_comm.js?v=21100516"></script>
-    <script type="text/javascript" src="/mania/_js/_gs_control_200924.min.js?v=21100816"></script>
-    <script type="text/javascript" src="/mania/_js/_common_initialize_new.min.js?v=21050316"></script>
+    <script type="text/javascript" src="/mania/_js/_gs_control_200924.js?v=21100816"></script>
+    <script type="text/javascript" src="/mania/_js/_common_initialize_new.js?v=21050316"></script>
     <script type='text/javascript' src='/mania/sell/js/application.js?v=210802'></script>
     <script type='text/javascript'>
-        g_trade_info.curr_mileage = Number({{$user['mileage']}});
-        g_trade_info.sale	= '{{$user_goods_type}}';
-        g_trade_info.goods	= '{{$goods}}';
-        g_trade_info.id		= '{{$orderNo}}';
-        g_trade_info.subject= '{{$user_title}}';
-        g_trade_info.trade_kind	= '{{$goods}}';
-        @if($user_goods_type == 'general')
-            g_trade_info.price	= {{$user_price}};
-            g_trade_info.payment_price	= {{$user_price}};
-            g_trade_info.trade_money = {{$user_price}};
-        @elseif($user_goods_type == 'division')
-            g_trade_info.price	= {{$user_division_price}};
-            g_trade_info.payment_price	= {{$user_division_price}};
-            g_trade_info.trade_money = {{$user_division_price}};
-            g_trade_info.div_unit = {{$user_division_unit}};
-            g_trade_info.min_unit = {{$user_quantity_min*$user_quantity}};
-            g_trade_info.max_unit = {{$user_quantity_max*$user_quantity}};
-            g_trade_info.curr_unit = {{$user_quantity_max*$user_quantity}};
-            g_trade_info.min_quantity = {{$user_quantity_min/$user_division_unit}};
-            g_trade_info.max_quantity = {{$user_quantity_max/$user_division_unit}};
-            g_trade_info.quantity = {{$user_quantity_min/$user_division_unit}};
-
-            g_trade_info.discount_use='{{$discount_use == 1 ? 'Y' : 'N'}}';
-            g_trade_info.discount_start={{$discount_quantity}};;
-            g_trade_info.discount_cnt={{$discount_quantity_cnt}};
-            g_trade_info.discount_money={{$discount_price}};
-        @else
-
-        @endif
-
+        g_trade_info.curr_mileage = Number(12000);
+        g_trade_info.sale	= 'general';
+        g_trade_info.goods	= 'etc';
+        g_trade_info.id		= '2021101408177351';
+        g_trade_info.subject= '기타 팝니다.';
+        g_trade_info.price	= 3000;
+        g_trade_info.payment_price	= 3000;
+        g_trade_info.trade_kind	= 'etc';
+        g_trade_info.trade_money = 3000;
     </script>
 @endsection
 
 @section('content')
-<!--▼▼▼ 캐릭터 등록 알리미 ▼▼▼ -->
+<!--▼▼▼ 캐릭터 등롤 알리미 ▼▼▼ -->
 <div class="g_container" id="g_CONTENT">
     <div class="aside">
         <div class="title_blue">안전거래수칙</div>
@@ -120,18 +68,20 @@
         </div>
         <!-- ▲ 타이틀 //-->
         <form id="frmSell" name="frmSell" action="application_ok.php?list=YTozNzp7czo5OiJnYW1lX2NvZGUiO3M6NDoiMjQxMiI7czoxMToic2VydmVyX2NvZGUiO3M6NToiMTA1NzUiO3M6OToiZ2FtZV9uYW1lIjtzOjExOiJBdXJhS2luZ2RvbSI7czoxMToic2VydmVyX25hbWUiO3M6Njoi6riw7YOAIjtzOjEyOiJzZWFyY2hfZ29vZHMiO3M6MzoiZXRjIjtzOjExOiJzZWFyY2hfd29yZCI7TjtzOjQ6InR5cGUiO3M6NDoic2VsbCI7czoxMjoic2VhcmNoX29yZGVyIjtzOjE6IjIiO3M6MTQ6InNlYXJjaF9yZWZlcmVyIjtzOjE2OiJsaXN0X3NlYXJjaC5odG1sIjtzOjExOiJ0cmFkZV9zdGF0ZSI7czoxOiIxIjtzOjg6InJlZ190aW1lIjtzOjE6IjEiO3M6MTE6ImNyZWRpdF90eXBlIjtzOjE6IjEiO3M6MTA6Imdvb2RzX3R5cGUiO3M6MToiMSI7czo2OiJjb21wZW4iO047czoxMToic2VsbF9jb21wZW4iO047czo3OiJkaXNjb250IjtOO3M6Nzoib3ZlcmxhcCI7TjtzOjk6ImV4Y2VsbGVudCI7TjtzOjc6ImFtb3VudDEiO3M6MToiMSI7czo3OiJhbW91bnQyIjtzOjg6Ijk5OTk5OTk5IjtzOjc6ImFtb3VudDMiO3M6MToiMSI7czo3OiJhbW91bnQ0IjtzOjg6Ijk5OTk5OTk5IjtzOjEyOiJzZWFyY2hfdHlwZTEiO047czoxMjoic2VhcmNoX3R5cGUyIjtOO3M6MTU6Im1vbmV5X2xpc3Rfcm93cyI7TjtzOjEzOiJnZW5fbGlzdF9yb3dzIjtOO3M6MTY6InNyY2hfaXRlbV9kZXB0aDEiO047czoxNjoic3JjaF9pdGVtX2RlcHRoMiI7TjtzOjE2OiJzcmNoX2l0ZW1fZGVwdGgzIjtOO3M6MTY6InNyY2hfaXRlbV9kZXB0aDQiO047czo2OiJkaXJlY3QiO047czoxMjoiYWNjb3VudF90eXBlIjtOO3M6MTM6InB1cmNoYXNlX3R5cGUiO047czoxNzoicGF5bWVudF9leGlzdGVuY2UiO047czoxMjoibXVsdGlfYWNjZXNzIjtOO3M6MTU6InNyY2hfY2hhcl9hbGFybSI7TjtzOjk6ImJMaW5lYWdlTSI7YjowO30=" method="post">
-            <input type="hidden" name="id" value="{{$orderNo}}">
-            <input type="hidden" name="cur_mileage" value="{{$user['mileage']}}">
+            <input type="hidden" name="id" value="2021101408177351">
+            <input type="hidden" name="use_coupon">
+            <input type="hidden" name="coupon_info" value="YSUzQTYlM0ElN0JzJTNBOCUzQSUyMnRyYWRlX2lkJTIyJTNCcyUzQTE2JTNBJTIyMjAyMTEwMTQwODE3NzM1MSUyMiUzQnMlM0ExMCUzQSUyMnRyYWRlX3R5cGUlMjIlM0JzJTNBNCUzQSUyMnNlbGwlMjIlM0JzJTNBOSUzQSUyMmdhbWVfY29kZSUyMiUzQnMlM0E0JTNBJTIyMjQxMiUyMiUzQnMlM0E5JTNBJTIyZ2FtZV90ZXh0JTIyJTNCcyUzQTExJTNBJTIyQXVyYUtpbmdkb20lMjIlM0JzJTNBMTElM0ElMjJ0cmFkZV9tb25leSUyMiUzQnMlM0E0JTNBJTIyMzAwMCUyMiUzQnMlM0E5JTNBJTIyc2VsbGVyX2lkJTIyJTNCcyUzQTYlM0ElMjJwZWpqd2glMjIlM0IlN0Q=">
+            <input type="hidden" name="cur_mileage" value="12000">
             <input type="hidden" name="pay_mileage" value="3000">
             <input type="hidden" id="security_type" name="security_type" value="ITEM">
             <input type="hidden" id="inputList" name="inputList" value="YTozNzp7czo5OiJnYW1lX2NvZGUiO3M6NDoiMjQxMiI7czoxMToic2VydmVyX2NvZGUiO3M6NToiMTA1NzUiO3M6OToiZ2FtZV9uYW1lIjtzOjExOiJBdXJhS2luZ2RvbSI7czoxMToic2VydmVyX25hbWUiO3M6Njoi6riw7YOAIjtzOjEyOiJzZWFyY2hfZ29vZHMiO3M6MzoiZXRjIjtzOjExOiJzZWFyY2hfd29yZCI7TjtzOjQ6InR5cGUiO3M6NDoic2VsbCI7czoxMjoic2VhcmNoX29yZGVyIjtzOjE6IjIiO3M6MTQ6InNlYXJjaF9yZWZlcmVyIjtzOjE2OiJsaXN0X3NlYXJjaC5odG1sIjtzOjExOiJ0cmFkZV9zdGF0ZSI7czoxOiIxIjtzOjg6InJlZ190aW1lIjtzOjE6IjEiO3M6MTE6ImNyZWRpdF90eXBlIjtzOjE6IjEiO3M6MTA6Imdvb2RzX3R5cGUiO3M6MToiMSI7czo2OiJjb21wZW4iO047czoxMToic2VsbF9jb21wZW4iO047czo3OiJkaXNjb250IjtOO3M6Nzoib3ZlcmxhcCI7TjtzOjk6ImV4Y2VsbGVudCI7TjtzOjc6ImFtb3VudDEiO3M6MToiMSI7czo3OiJhbW91bnQyIjtzOjg6Ijk5OTk5OTk5IjtzOjc6ImFtb3VudDMiO3M6MToiMSI7czo3OiJhbW91bnQ0IjtzOjg6Ijk5OTk5OTk5IjtzOjEyOiJzZWFyY2hfdHlwZTEiO047czoxMjoic2VhcmNoX3R5cGUyIjtOO3M6MTU6Im1vbmV5X2xpc3Rfcm93cyI7TjtzOjEzOiJnZW5fbGlzdF9yb3dzIjtOO3M6MTY6InNyY2hfaXRlbV9kZXB0aDEiO047czoxNjoic3JjaF9pdGVtX2RlcHRoMiI7TjtzOjE2OiJzcmNoX2l0ZW1fZGVwdGgzIjtOO3M6MTY6InNyY2hfaXRlbV9kZXB0aDQiO047czo2OiJkaXJlY3QiO047czoxMjoiYWNjb3VudF90eXBlIjtOO3M6MTM6InB1cmNoYXNlX3R5cGUiO047czoxNzoicGF5bWVudF9leGlzdGVuY2UiO047czoxMjoibXVsdGlfYWNjZXNzIjtOO3M6MTU6InNyY2hfY2hhcl9hbGFybSI7TjtzOjk6ImJMaW5lYWdlTSI7YjowO30=">
             <input type="hidden" name="trade_kind_code" id="trade_kind_code" value="etc">
             <input type="hidden" name="code" id="code">
             <input type="hidden" name="user_without" id="user_without" value="1">
-            <input type="hidden" name="game_code" id="game_code" value="{{$game_code}}">
+            <input type="hidden" name="game_code" id="game_code" value="2412">
             <!-- ▼ 안심번호서비스 //-->
             <input type="hidden" name="user_cell_auth" id="user_cell_auth" value="1">
-            <input type="hidden" name="user_cell_num" id="user_cell_num" value="{{$user['number']}}">
+            <input type="hidden" name="user_cell_num" id="user_cell_num" value="010-2424-0956">
             <input type="hidden" name="user_safety_type" id="user_safety_type" value="2">
             <input type="hidden" name="safety_using_flag" id="safety_using_flag" value="true">
             <!-- ▼ 안심번호서비스 //-->
@@ -139,87 +89,35 @@
             <input type="hidden" id="certify_pay" name="certify_pay" value="YTo1OntzOjEwOiJjZXJ0aWZ5X2xjIjtzOjM6InBheSI7czo5OiJmb3JtX25hbWUiO3M6NzoiZnJtU2VsbCI7czoxMToic3VibWl0X3R5cGUiO3M6MToiMSI7czoxMDoidXNlcl9wcmljZSI7aTozMDAwO3M6MTA6InN1Ym1pdF91cmwiO3M6MTI1ODoiL3NlbGwvYXBwbGljYXRpb25fb2sucGhwP2xpc3Q9WVRvek56cDdjem81T2lKbllXMWxYMk52WkdVaU8zTTZORG9pTWpReE1pSTdjem94TVRvaWMyVnlkbVZ5WDJOdlpHVWlPM002TlRvaU1UQTFOelVpTzNNNk9Ub2laMkZ0WlY5dVlXMWxJanR6T2pFeE9pSkJkWEpoUzJsdVoyUnZiU0k3Y3pveE1Ub2ljMlZ5ZG1WeVgyNWhiV1VpTzNNNk5qb2k2cml3N1lPQUlqdHpPakV5T2lKelpXRnlZMmhmWjI5dlpITWlPM002TXpvaVpYUmpJanR6T2pFeE9pSnpaV0Z5WTJoZmQyOXlaQ0k3VGp0ek9qUTZJblI1Y0dVaU8zTTZORG9pYzJWc2JDSTdjem94TWpvaWMyVmhjbU5vWDI5eVpHVnlJanR6T2pFNklqSWlPM002TVRRNkluTmxZWEpqYUY5eVpXWmxjbVZ5SWp0ek9qRTJPaUpzYVhOMFgzTmxZWEpqYUM1b2RHMXNJanR6T2pFeE9pSjBjbUZrWlY5emRHRjBaU0k3Y3pveE9pSXhJanR6T2pnNkluSmxaMTkwYVcxbElqdHpPakU2SWpFaU8zTTZNVEU2SW1OeVpXUnBkRjkwZVhCbElqdHpPakU2SWpFaU8zTTZNVEE2SW1kdmIyUnpYM1I1Y0dVaU8zTTZNVG9pTVNJN2N6bzJPaUpqYjIxd1pXNGlPMDQ3Y3pveE1Ub2ljMlZzYkY5amIyMXdaVzRpTzA0N2N6bzNPaUprYVhOamIyNTBJanRPTzNNNk56b2liM1psY214aGNDSTdUanR6T2prNkltVjRZMlZzYkdWdWRDSTdUanR6T2pjNkltRnRiM1Z1ZERFaU8zTTZNVG9pTVNJN2N6bzNPaUpoYlc5MWJuUXlJanR6T2pnNklqazVPVGs1T1RrNUlqdHpPamM2SW1GdGIzVnVkRE1pTzNNNk1Ub2lNU0k3Y3pvM09pSmhiVzkxYm5RMElqdHpPamc2SWprNU9UazVPVGs1SWp0ek9qRXlPaUp6WldGeVkyaGZkSGx3WlRFaU8wNDdjem94TWpvaWMyVmhjbU5vWDNSNWNHVXlJanRPTzNNNk1UVTZJbTF2Ym1WNVgyeHBjM1JmY205M2N5STdUanR6T2pFek9pSm5aVzVmYkdsemRGOXliM2R6SWp0T08zTTZNVFk2SW5OeVkyaGZhWFJsYlY5a1pYQjBhREVpTzA0N2N6b3hOam9pYzNKamFGOXBkR1Z0WDJSbGNIUm9NaUk3VGp0ek9qRTJPaUp6Y21Ob1gybDBaVzFmWkdWd2RHZ3pJanRPTzNNNk1UWTZJbk55WTJoZmFYUmxiVjlrWlhCMGFEUWlPMDQ3Y3pvMk9pSmthWEpsWTNRaU8wNDdjem94TWpvaVlXTmpiM1Z1ZEY5MGVYQmxJanRPTzNNNk1UTTZJbkIxY21Ob1lYTmxYM1I1Y0dVaU8wNDdjem94TnpvaWNHRjViV1Z1ZEY5bGVHbHpkR1Z1WTJVaU8wNDdjem94TWpvaWJYVnNkR2xmWVdOalpYTnpJanRPTzNNNk1UVTZJbk55WTJoZlkyaGhjbDloYkdGeWJTSTdUanR6T2prNkltSk1hVzVsWVdkbFRTSTdZam93TzMwPSI7fQ==">
             <!-- ▼ 물품정보 //-->
             <div class="g_subtitle">물품정보</div>
-            @if($user_goods_type == 'general')
-                <table class="g_blue_table">
-                    <colgroup>
-                        <col width="160">
-                        <col width="250">
-                        <col width="160">
-                        <col>
-                    </colgroup>
-                    <tr>
-                        <th>카테고리</th>
-                        <td colspan="3">{{$category}}</td>
-                    </tr>
-                    <tr>
-                        <th>물품제목</th>
-                        <td colspan="3" class="table_goods_subject"> {{$user_title}}
+            <table class="g_blue_table">
+                <colgroup>
+                    <col width="160">
+                    <col width="250">
+                    <col width="160">
+                    <col>
+                </colgroup>
+                <tr>
+                    <th>카테고리</th>
+                    <td colspan="3">AuraKingdom > 기타 > 기타</td>
+                </tr>
+                <tr>
+                    <th>물품제목</th>
+                    <td colspan="3" class="table_goods_subject"> 기타 팝니다.
                         <!-- 퀵 아이콘 -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>거래번호</th>
-                        <td>#{{$orderNo}}</td>
-                        <th>등록일시</th>
-                        <td>{{date("Y-m-d H:i:s",strtotime($created_at ?? ''))}}</td>
-                    </tr>
-                    <tr>
-                        <th>구매금액</th>
-                        <td colspan="3"><span class="trade_money1"></span> 원</td>
-                    </tr>
-                </table>
-            @endif
-            @if($user_goods_type == 'division')
-                <table class="g_blue_table">
-                    <colgroup>
-                        <col width="160">
-                        <col width="250">
-                        <col width="160">
-                        <col>
-                    </colgroup>
-                    <tbody><tr>
-                        <th>카테고리</th>
-                        <td colspan="3">{{$category}}</td>
-                    </tr>
-                    <tr>
-                        <th>물품제목</th>
-                        <td colspan="3" class="table_goods_subject">
-                            {{$user_title}}
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>거래번호</th>
-                        <td>#{{$orderNo}}</td>
-                        <th>등록일시</th>
-                        <td>{{date("Y-m-d H:i:s",strtotime($created_at ?? ''))}}</td>
-                    </tr>
-                    <tr>
-                        <th>최소구매수량</th>
-                        <td>{{number_format($user_quantity_min)}} {{$goods_label}}</td>
-                        <th>최대구매수량</th>
-                        <td>{{number_format($user_quantity_max)}} {{$goods_label}}</td>
-                    </tr>
-                    <tr>
-                        <th>구매수량</th>
-                        <td>
-                            <input type="text" id="buy_quantity" name="buy_quantity" class="g_text buy_quantity" value="0"> 번 (<span id="spnQuantity_Unit">{{$user_division_unit}}</span> x
-                            <span id="spnQuantity"></span>번 =
-                            <span id="spnQuantity_total"></span> {{$goods_label}})
-                        </td>
-                        <th>단위금액</th>
-                        <td>{{$user_division_unit}}당 {{number_format($user_division_price)}}원</td>
-                    </tr>
-                    <tr>
-                        <th>복수구매할인</th>
-                        <td>- <span id="discount_money"></span> 원 ({{$discount_quantity_cnt * $discount_quantity}}{{$goods_label}} 당 {{$discount_price}}원 할인)</td>
-                        <th>예상결제금액</th>
-                        <td><span class="trade_money1">33,750</span> 원</td>
-                    </tr>
-                    </tbody>
-                </table>
-            @endif
-                <!-- ▲ 물품정보 //-->
+                    </td>
+                </tr>
+                <tr>
+                    <th>거래번호</th>
+                    <td>#2021101408177351</td>
+                    <th>등록일시</th>
+                    <td>2021-10-14 14:41:55</td>
+                </tr>
+                <tr>
+                    <th>구매금액</th>
+                    <td colspan="3"><span class="trade_money1">3,000</span> 원</td>
+                </tr>
+            </table>
+            <!-- ▲ 물품정보 //-->
             <!-- ▼ 개인정보 //-->
             <style>
                 .SafetyNumber_plus {
@@ -243,7 +141,7 @@
                     <col/> </colgroup>
                 <tr>
                     <th>이름</th>
-                    <td>{{$user['name']}}</td>
+                    <td>구모서</td>
                 </tr>
                 <tr>
                     <th>구매자 캐릭터명</th>
@@ -256,9 +154,9 @@
                 <tr>
                     <th>연락처</th>
                     <td> <span id="spnUserPhone">
-                {{$user['home']}}                </span> (
+                070-3595-6151                </span> (
                         <label>
-                            <input type="checkbox" class="g_checkbox" name="user_cell_check" id="user_cell_check" value="on" checked> 자택번호안내</label> ) / <span id="spnUserCell">{{$user['number']}}</span> <a href="javascript:_window.open('private_edit', '/user/contact_edit.html?check=true', 496, 350);" class="btn_white1 after">연락처 수정</a> </td>
+                            <input type="checkbox" class="g_checkbox" name="user_cell_check" id="user_cell_check" value="on" checked> 자택번호안내</label> ) / <span id="spnUserCell">010-2424-0956</span> <a href="javascript:_window.open('private_edit', '/user/contact_edit.html?check=true', 496, 350);" class="btn_white1 after">연락처 수정</a> </td>
                 </tr>
                 <tr class="SafetyNumber">
                     <th>안심번호</th>
@@ -339,19 +237,25 @@
                     <col>
                 </colgroup>
                 <tr>
-                    <th> <span>구매금액</span> <span class="price_font" id="trade_money">{{number_format($user_price)}}</span> <span class="won">원</span> </th>
-                    <th></th>
-                    <th> <span>총 결제금액</span> <span id="pay_mileage" class="price_font f_red1">{{number_format($user_price)}}</span> <span class="won">원</span> </th>
+                    <th> <span>구매금액</span> <span class="price_font" id="trade_money">3,000</span> <span class="won">원</span> </th>
+                    <th class="bd_cell">
+                        <div class="sale_price"> <span>쿠폰할인</span> <span class="price_font" id="use_coupon_price">0</span> <span class="won">원</span> </div>
+                    </th>
+                    <th> <span>총 결제금액</span> <span id="pay_mileage" class="price_font f_red1">3,000</span> <span class="won">원</span> </th>
                 </tr>
                 <tr>
                     <td> </td>
                     <td class="bd_cell">
+                        <ul class="my_coupon">
+                            <li> 보유쿠폰 <span class="f_red1 f_bold">0</span>개 <a href="javascript:_window.open('coupon_select', '/payment/coupon/select.html?struct=g_trade_info&info=YSUzQTYlM0ElN0JzJTNBOCUzQSUyMnRyYWRlX2lkJTIyJTNCcyUzQTE2JTNBJTIyMjAyMTEwMTQwODE3NzM1MSUyMiUzQnMlM0ExMCUzQSUyMnRyYWRlX3R5cGUlMjIlM0JzJTNBNCUzQSUyMnNlbGwlMjIlM0JzJTNBOSUzQSUyMmdhbWVfY29kZSUyMiUzQnMlM0E0JTNBJTIyMjQxMiUyMiUzQnMlM0E5JTNBJTIyZ2FtZV90ZXh0JTIyJTNCcyUzQTExJTNBJTIyQXVyYUtpbmdkb20lMjIlM0JzJTNBMTElM0ElMjJ0cmFkZV9tb25leSUyMiUzQnMlM0E0JTNBJTIyMzAwMCUyMiUzQnMlM0E5JTNBJTIyc2VsbGVyX2lkJTIyJTNCcyUzQTYlM0ElMjJwZWpqd2glMjIlM0IlN0Q=', 660, 530);" class="btn_white1" id="coupon_btn">쿠폰확인</a> </li>
+                        </ul>
                     </td>
                     <td>
                         <dl class="my_mileage"> <dt>내 마일리지</dt>
-                            <dd id="span_cur_mile">{{number_format($user['mileage'])}} 원</dd> <dt>사용할 마일리지</dt>
+                            <dd id="span_cur_mile">12,000 원</dd> <dt>게임 마일리지</dt>
+                            <dd id="span_game_mile">0 원</dd> <dt>사용할 마일리지</dt>
                             <dd>
-                                <input type="text" class="g_text" id="use_mileage" name="use_mileage" value="{{number_format($user_price)}}" readonly disabled>원 </dd>
+                                <input type="text" class="g_text" id="use_mileage" name="use_mileage" value="3,000" readonly disabled>원 </dd>
                         </dl>
                     </td>
                 </tr>
@@ -366,6 +270,14 @@
                     <td>
                         <label for="rd_mileage">
                             <input type="radio" name="payment_type" class="g_radio" value="mileage" id="rd_mileage" checked>마일리지</label>
+                        <label for="rd_samsung">
+                            <input type="radio" name="payment_type" class="g_radio" value="samsungpay" id="rd_samsung"> <img src="http://img4.itemmania.com/images/icon/icon_news.gif" width="14" height="14" alt="N"> 삼성페이 </label>
+                        <label for="rd_creditcard">
+                            <input type="radio" name="payment_type" class="g_radio" value="creditcard" id="rd_creditcard">신용카드</label>
+                        <label for="rd_mobile">
+                            <input type="radio" name="payment_type" class="g_radio" value="mobile" id="rd_mobile">휴대폰 </label>
+                        <label for="rd_tcash">
+                            <input type="radio" name="payment_type" class="g_radio" value="tcash" id="rd_tcash"> 티캐시 간편결제 </label>
                         <div id="sub_samsungpay" class="sub_samsungpay g_hidden">
                             <p> ※ 결제하실 삼성페이 결제방법을 선택해 주세요.!! </p>
                             <label>
@@ -456,13 +368,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div id="mile_check2" style="display:block">
-                                @if($user['mileage'] >= $user_price)
-                                    결제 가능한 마일리지가 충분합니다.
-                                @else
-                                    마일리지가 충분치 않습니다.
-                                @endif
-                            </div>
+                            <div id="mile_check2" style="display:block"> 결제 가능한 마일리지가 충분합니다. </div>
                         </div>
                         <div id="payment_samsungpay" class="payment g_hidden">
                             <dl class="g_list"> <dt>* 이용안내</dt>
