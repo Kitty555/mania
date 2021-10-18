@@ -133,6 +133,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/buy/application', [\App\Http\Controllers\VBuyController::class, 'buy_application'])->name('buy_application');
 
     Route::get('/certify/payment/user_certify', [\App\Http\Controllers\VCertifyController::class, 'user_certify'])->name('user_certify');
+
+    /** Testing push for Jon */
 });
 
 /**
