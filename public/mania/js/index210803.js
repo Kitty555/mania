@@ -1,11 +1,11 @@
-// íŒë§¤ìœ í˜•
+// 판매유형
 var e_sale = {
-    'general': 'ì¼ë°˜íŒë§¤',
-    'division': 'ë¶„í• íŒë§¤',
-    'bargain': 'í¥ì •íŒë§¤'
+    'general': '일반판매',
+    'division': '분할판매',
+    'bargain': '흥정판매'
 };
 
-// íŒë§¤ìœ í˜• íƒ€ìž…ê°’
+// 판매유형 타입값
 var e_sale_type = {
     'general': 0,
     'division': 1,
@@ -13,20 +13,20 @@ var e_sale_type = {
 };
 
 var e_goods_text = {
-    '': 'ê²Œìž„ë¨¸ë‹ˆ',
-    'money': 'ê²Œìž„ë¨¸ë‹ˆ',
-    'item': 'ì•„ì´í…œ',
-    'character': 'ìºë¦­í„°',
-    'etc': 'ê¸°íƒ€'
+    '': '게임머니',
+    'money': '게임머니',
+    'item': '아이템',
+    'character': '캐릭터',
+    'etc': '기타'
 };
 
-// í˜„ìž¬ì„ íƒëœ íƒ€ìž…
+// 현재선택된 타입
 var e_select = {
     sale: 'general',
     goods: ''
 };
 
-// í˜„ìž¬ì„ íƒëœ ë‹¨ìœ„
+// 현재선택된 단위
 var g_unit = '';
 
 var e_use = {
@@ -36,7 +36,7 @@ var e_use = {
     rereg: 0
 };
 
-// í”„ë¦¬ë¯¸ì—„ ë ˆì´ì–´ í™œì„±í™”
+// 프리미엄 레이어 활성화
 var bPremiumLayer = false;
 if (history.state !== null && history.state !== undefined && history.state.back == true) {
     document.querySelector('[name="user_goods_type"]').checked = true;
@@ -123,7 +123,7 @@ function _init() {
 
                 changeTemplate();
 
-                /* â–¼ 200% ë³´ìƒ */
+                /* ▼ 200% 보상 */
                 if (g_compensation == 'Y') {
                     if (e_select.goods == 'money' || e_select.goods == 'item') {
                         $('#compensation').show();
@@ -131,7 +131,7 @@ function _init() {
                         $('#compensation').hide();
                     }
                 }
-                /* â–² 200% ë³´ìƒ */
+                /* ▲ 200% 보상 */
 
                 if (e !== undefined) {
                     var m = this;
@@ -145,7 +145,7 @@ function _init() {
 
     // gameServer.onCustomCloseBefore = function() {
     // 	if (this.gameList.selected && !this.serverList.selected) {
-    // 		alert('ì„œë²„ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.');
+    // 		alert('서버를 선택해주세요.');
     // 		return false;
     // 	}
     // 	return true;
@@ -154,11 +154,11 @@ function _init() {
     $('[name="user_goods_type"]').on('click', changeTemplate);
     // document.querySelectorAll('[name="user_goods_type"]').addEventListener('click', changeTemplate);
 
-    // ë¬¼í’ˆê¸°ë³¸ê°’ì ìš©
+    // 물품기본값적용
     document.getElementById('fixed_trade_subject').addEventListener('click', function() {
         var strFixTag = document.getElementById('trade_sign_txt').innerHTML;
         if (strFixTag.isEmpty() === true) {
-            if (confirm('ë¬¼í’ˆì œëª© ê¸°ë³¸ê°’ìœ¼ë¡œ ì„¤ì •ëœ ê°’ì´ ì—†ìŠµë‹ˆë‹¤.\në¬¼í’ˆ ì œëª© ê¸°ë³¸ê°’ì„ ì„¤ì •í•˜ì‹œê² ìŠµë‹ˆê¹Œ?')) {
+            if (confirm('물품제목 기본값으로 설정된 값이 없습니다.\n물품 제목 기본값을 설정하시겠습니까?')) {
                 _window.open('fixed_title', 'fixed_trade_subject.html', 500, 300);
             }
             this.checked = false;
@@ -172,7 +172,7 @@ function _init() {
         }
     });
 
-    /* â–¼ ìƒì„¸ì„¤ëª… ë¬¸êµ¬ì„ íƒ */
+    /* ▼ 상세설명 문구선택 */
     $("[name='text_select']").on('click', function() {
         var userTextObj = document.getElementById('user_text');
 
@@ -183,7 +183,7 @@ function _init() {
             setDefaultText();
         }
     });
-    /* â–² ìƒì„¸ì„¤ëª… ë¬¸êµ¬ì„ íƒ */
+    /* ▲ 상세설명 문구선택 */
 
     document.getElementById('d_template').addEventListener('click', function(e) {
         if (e.target.name === 'gamemoney_unit') {
@@ -203,10 +203,10 @@ function _init() {
         chargePremiumService();
         var result = chargeServiceCalc.call(this);
         if (result === true) {
-            var setVal = ['0íšŒ', '0ë¶„'];
+            var setVal = ['0회', '0분'];
             if (this.value.isEmpty() === false) {
-                setVal[0] = this.value + 'íšŒ';
-                setVal[1] = document.getElementById('rereg_time').value + 'ë¶„';
+                setVal[0] = this.value + '회';
+                setVal[1] = document.getElementById('rereg_time').value + '분';
             }
             document.getElementById('rereg_cnt').innerHTML = setVal[0];
             document.getElementById('minute').innerHTML = setVal[1];
@@ -255,10 +255,10 @@ function _init() {
             var detail = document.getElementById('user_text');
             if (detail.classList.contains('wide') == true) {
                 detail.classList.remove('wide');
-                this.innerHTML = 'íŽ¼ì³ë³´ê¸°â–¼';
+                this.innerHTML = '펼쳐보기▼';
             } else {
                 detail.classList.add('wide');
-                this.innerHTML = 'íŽ¼ì¹¨ë‹«ê¸°â–²';
+                this.innerHTML = '펼침닫기▲';
             }
         });
     }
@@ -294,10 +294,13 @@ function _init() {
 function getFreeUse() {
     var gameCode = regGameServer.gameList.getValue().code;
     ajaxRequest({
-        url: '/_include/_get_free_use.php',
-        dataType: 'JSON',
+        url: '/api/_include/_get_free_use',
+        dataType: 'xml',
         type: 'POST',
-        data: 'game_code=' + gameCode,
+        data: {
+            game_code:  gameCode,
+            api_token:a_token
+        },
         success: function(res) {
             e_use.premium = res.premium;
             e_use.quickIcon = res.quickicon;
@@ -312,7 +315,7 @@ function getFreeUse() {
 }
 
 /**
- * ì‹ ìš©ë“±ê¸‰ í˜œíƒë°›ê¸°
+ * 신용등급 혜택받기
  */
 function getCreditBenefit() {
 
@@ -324,51 +327,51 @@ function getCreditBenefit() {
             var returnData = data.split(";");
             switch (returnData[0]) {
                 case "Empty" :
-                    alert("ìž˜ëª»ëœ ì ‘ê·¼ìž…ë‹ˆë‹¤.");
+                    alert("잘못된 접근입니다.");
                     break;
                 case "CreditNo" :
-                    alert("ì‹ ìš©ë“±ê¸‰ì„ ì—…ë°ì´íŠ¸í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤. ê´€ë¦¬ìžì—ê²Œ ë¬¸ì˜í•´ ì£¼ì„¸ìš”.");
+                    alert("신용등급을 업데이트하지 못했습니다. 관리자에게 문의해 주세요.");
                     break;
                 case "CreditNo2" :
-                    alert("ì‹ ìš©ë“±ê¸‰ì„ ê°€ì ¸ì˜¤ì§€ ëª»í–ˆìŠµë‹ˆë‹¤. ê´€ë¦¬ìžì—ê²Œ ë¬¸ì˜í•´ ì£¼ì„¸ìš”.");
+                    alert("신용등급을 가져오지 못했습니다. 관리자에게 문의해 주세요.");
                     break;
                 case "Dberror" :
-                    alert("ì„œë¹„ìŠ¤ê°€ ì›í• í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ìž ì‹œ í›„ ì´ìš©í•´ì£¼ì„¸ìš”");
+                    alert("서비스가 원할하지 않습니다. 잠시 후 이용해주세요");
                     break;
                 case "Overlap" :
                     if (returnData[1] == 1) {
-                        alert("ì´ë¯¸ ë¬´ë£Œì´ìš©ê¶Œì„ ë°œê¸‰ ë°›ìœ¼ì…¨ìŠµë‹ˆë‹¤.");
+                        alert("이미 무료이용권을 발급 받으셨습니다.");
                     } else {
-                        alert("ì´ë¯¸ ì˜¥ì…˜ìž…ì°°ê¶Œì„ ë°œê¸‰ ë°›ìœ¼ì…¨ìŠµë‹ˆë‹¤");
+                        alert("이미 옥션입찰권을 발급 받으셨습니다");
                     }
                     break
                 case "Rowerror" :
-                    alert("í”„ë¦¬ë¯¸ì—„ ì´ìš©ê¶Œì„ ì§€ê¸‰í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”.");
+                    alert("프리미엄 이용권을 지급하지 못했습니다. 다시 시도해주세요.");
                     break;
                 case "Rowerror2" :
-                    alert("ë¬¼í’ˆê°•ì¡° ì´ìš©ê¶Œì„ ì§€ê¸‰í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”.");
+                    alert("물품강조 이용권을 지급하지 못했습니다. 다시 시도해주세요.");
                     break;
                 case "Rowerror3" :
-                    alert("ì˜¥ì…˜ìž…ì°°ê¶Œì„ ì§€ê¸‰í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”.");
+                    alert("옥션입찰권을 지급하지 못했습니다. 다시 시도해주세요.");
                     break;
                 case "Rowerror4" :
-                    alert("ì¶œê¸ˆ ë¬´ë£Œì´ìš©ê¶Œì„ ì§€ê¸‰í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”.");
+                    alert("출금 무료이용권을 지급하지 못했습니다. 다시 시도해주세요.");
                     break;
                 case "Success" :
-                    alert('ë¬´ë£Œì´ìš©ê¶Œì´ ë°œê¸‰ë˜ì—ˆìŠµë‹ˆë‹¤.\n[ë¬´ë£Œì´ìš©ê¶Œë³´ê¸°]ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.');
+                    alert('무료이용권이 발급되었습니다.\n[무료이용권보기]를 확인해주세요.');
                     getFreeUse();
                     break;
             }
         },
         error: function() {
-            alert("ì‹œìŠ¤í…œ ì ê²€ì¤‘ìž…ë‹ˆë‹¤. ìž ì‹œ í›„ ì´ìš©í•´ ì£¼ì„¸ìš”.");
+            alert("시스템 점검중입니다. 잠시 후 이용해 주세요.");
         }
     });
 }
 
 
 /**
- * í…œí”Œë¦¿ ë³€ê²½
+ * 템플릿 변경
  */
 function changeTemplate() {
     if (regGameServer.serverList.selected) {
@@ -380,6 +383,7 @@ function changeTemplate() {
     var gameCode = regGameServer.gameList.getValue().code;
     var serverCode = regGameServer.serverList.getValue().code;
     var integrationServer = '';
+    var last_alias  = $(".goods").find(".sel_on").text();
     if (document.getElementById('integration_server') !== null) {
         integrationServer = document.getElementById('integration_server').value;
     }
@@ -391,7 +395,7 @@ function changeTemplate() {
     fnPower();
 
     ajaxRequest({
-        url: '/sell/include/index_template.html',
+        url: '/api/sell/include/index_template',
         type: 'POST',
         data: {
             user_goods: userGoods,
@@ -399,37 +403,39 @@ function changeTemplate() {
             money: g_unit,
             game_code: gameCode,
             server_code: serverCode,
-            integration_server: integrationServer
+            integration_server: integrationServer,
+            api_token: a_token,
+            last_alias: last_alias
         },
         success: function(res) {
-            /* ë¬¼í’ˆë“±ë¡ ì•Œë¦¬ë¯¸ */
-            ajaxRequest({
-                url: '/myroom/goods_alarm/_ajax_process.php',
-                type: 'post',
-                dataType: 'json',
-                data: {
-                    'mode':'game_check',
-                    'game_code':gameCode
-                },
-                success: function(res) {
-
-                    var data = {
-                        type:userGoods,
-                        gameCode:gameCode,
-                        serverCode:serverCode
-                    };
-
-                    if(res.DAT == 'Y' && userGoods =='character')
-                    {
-                        $('#alarm_line').show();
-                        getTagList(data);
-                    }
-                    else
-                    {
-                        $('#alarm_line').hide();
-                    }
-                }
-            });
+            /* 물품등록 알리미 */
+            // ajaxRequest({
+            // 	url: '/myroom/goods_alarm/_ajax_process.php',
+            // 	type: 'post',
+            // 	dataType: 'json',
+            // 	data: {
+            // 		'mode':'game_check',
+            // 		'game_code':gameCode
+            // 	},
+            // 	success: function(res) {
+            //
+            // 		var data = {
+            // 			type:userGoods,
+            // 			gameCode:gameCode,
+            // 			serverCode:serverCode
+            // 		};
+            //
+            // 		if(res.DAT == 'Y' && userGoods =='character')
+            // 		{
+            // 			$('#alarm_line').show();
+            // 			getTagList(data);
+            // 		}
+            // 		else
+            // 		{
+            // 			$('#alarm_line').hide();
+            // 		}
+            // 	}
+            // });
 
             history.pushState({back: true}, '', location.href);
             $('#d_template').html(res);
@@ -437,17 +443,20 @@ function changeTemplate() {
             if (typeof (reRegSet) === 'function') {
                 reRegSet();
             }
+        },error:function(e){
+            console.log(e)
         }
     });
 }
 
 function setDefaultText() {
+
     var strGoods = e_goods_text[e_select.goods];
     if (e_select.goods === 'money' && g_unit.isEmpty() === false) {
         strGoods = g_unit;
     }
-
-    var defaultText = strGoods + ' íŒë‹ˆë‹¤.';
+    $("#good_type").val(strGoods);
+    var defaultText = strGoods + ' 팝니다.';
     var fixed_trade_subject = document.getElementById('fixed_trade_subject');
     var strFixTag = document.getElementById('trade_sign_txt').innerHTML;
     strFixTag += ' ';
@@ -475,12 +484,12 @@ function changeTemplateAddCheck() {
         var userGoodsType = document.querySelector('[name="user_goods_type"]:checked');
         var gameCode = regGameServer.gameList.getValue().code;
 
-        formCheck.add({name: 'game_code', msg: 'ê²Œìž„ì„ ì„ íƒí•´ì£¼ì„¸ìš”.', focus: '#searchRegGameServer'});
-        formCheck.add({name: 'server_code', msg: 'ì„œë²„ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.', focus: '#searchRegGameServer'});
-        formCheck.add({name: 'game_code_text', msg: 'ê²Œìž„ì„ ì„ íƒí•´ì£¼ì„¸ìš”.', focus: '#searchRegGameServer'});
-        formCheck.add({name: 'server_code_text', msg: 'ì„œë²„ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.', focus: '#searchRegGameServer'});
-        formCheck.add({name: 'user_goods', msg: 'ë¬¼í’ˆì¢…ë¥˜ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.', focus: '#searchRegGameServer'});
-        formCheck.add({name: 'user_goods_type', msg: 'íŒë§¤ìœ í˜•ì„ ì„ íƒí•´ì£¼ì„¸ìš”.'});
+        formCheck.add({name: 'game_code', msg: '게임을 선택해주세요.', focus: '#searchRegGameServer'});
+        formCheck.add({name: 'server_code', msg: '서버를 선택해주세요.', focus: '#searchRegGameServer'});
+        formCheck.add({name: 'game_code_text', msg: '게임을 선택해주세요.', focus: '#searchRegGameServer'});
+        formCheck.add({name: 'server_code_text', msg: '서버를 선택해주세요.', focus: '#searchRegGameServer'});
+        formCheck.add({name: 'user_goods', msg: '물품종류를 선택해주세요.', focus: '#searchRegGameServer'});
+        formCheck.add({name: 'user_goods_type', msg: '판매유형을 선택해주세요.'});
 
         if (userGoodsType.value === 'division') {
             LayerControl({
@@ -490,12 +499,12 @@ function changeTemplateAddCheck() {
                 type: 'style'
             });
 
-            formCheck.add({name: 'user_quantity_min', msg: 'ìµœì†Œ íŒë§¤ ìˆ˜ëŸ‰ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.', type: 'price', protect: true});
-            formCheck.add({name: 'user_quantity_max', msg: 'ìµœëŒ€ íŒë§¤ ìˆ˜ëŸ‰ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.', type: 'price', protect: true});
-            formCheck.add({name: 'user_division_unit', msg: 'ë¶„í• ë‹¨ìœ„ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”.', type: 'price', protect: true});
+            formCheck.add({name: 'user_quantity_min', msg: '최소 판매 수량을 입력해주세요.', type: 'price', protect: true});
+            formCheck.add({name: 'user_quantity_max', msg: '최대 판매 수량을 입력해주세요.', type: 'price', protect: true});
+            formCheck.add({name: 'user_division_unit', msg: '분할단위를 입력해 주세요.', type: 'price', protect: true});
             formCheck.add({
                 name: 'user_division_price',
-                msg: 'ê±°ëž˜ê¸ˆì•¡ì€ 100ì› ì´ìƒìœ¼ë¡œ ìž…ë ¥í•´ ì£¼ì„¸ìš”',
+                msg: '거래금액은 100원 이상으로 입력해 주세요',
                 type: 'price',
                 protect: true,
                 range: {min: 100}
@@ -503,7 +512,7 @@ function changeTemplateAddCheck() {
             formCheck.add({
                 custom: function() {
                     if (frm.user_division_price.value.numeric() % 10 > 0) {
-                        alert('ê±°ëž˜ê¸ˆì•¡ì— ì¼ì›ë‹¨ìœ„ëŠ” 0ì´ì™¸ì˜ ìˆ«ìžë¥¼ ìž…ë ¥í• ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\nê±°ëž˜ê¸ˆì•¡ì„ ë‹¤ì‹œ ê¸°ìž¬í•´ ì£¼ì„¸ìš”.\n\nì˜ˆ) 12,345(ë¶ˆê°€ëŠ¥), 12,340(ê°€ëŠ¥)');
+                        alert('거래금액에 일원단위는 0이외의 숫자를 입력할수 없습니다.\n\n거래금액을 다시 기재해 주세요.\n\n예) 12,345(불가능), 12,340(가능)');
                         frm.user_division_price.value = '';
                         frm.user_division_price.focus();
                         return false;
@@ -520,28 +529,28 @@ function changeTemplateAddCheck() {
                     var divPriceVal = divPrice.value.numeric();
 
                     if (divUnitVal > quaMinVal) {
-                        alert('ë¶„í• ë‹¨ìœ„ê°€ ìµœì†Œìˆ˜ëŸ‰ë³´ë‹¤ í½ë‹ˆë‹¤.');
+                        alert('분할단위가 최소수량보다 큽니다.');
                         quaMin.value = '';
                         quaMin.onfocus();
                         return false;
                     }
 
                     if (quaMinVal > quaMaxVal) {
-                        alert('ìµœì†Œìˆ˜ëŸ‰ì´ ìµœëŒ€ìˆ˜ëŸ‰ë³´ë‹¤ í½ë‹ˆë‹¤.');
+                        alert('최소수량이 최대수량보다 큽니다.');
                         quaMax.value = '';
                         quaMax.onfocus();
                         return false;
                     }
 
                     if (quaMinVal === quaMaxVal) {
-                        alert('ìµœì†Œìˆ˜ëŸ‰ê³¼ ìµœëŒ€ìˆ˜ëŸ‰ì´ ê°™ìŠµë‹ˆë‹¤.\nìˆ˜ëŸ‰ì„ ë‹¤ì‹œ í™•ì¸í•´ì£¼ì„¸ìš”.');
+                        alert('최소수량과 최대수량이 같습니다.\n수량을 다시 확인해주세요.');
                         quaMax.value = '';
                         quaMax.onfocus();
                         return false;
                     }
 
                     if (quaMinVal / divUnitVal * divPriceVal < 3000) {
-                        alert('ìµœì†Œ íŒë§¤ê¸ˆì•¡ì´ 3,000ì› ë¯¸ë§Œìž…ë‹ˆë‹¤.');
+                        alert('최소 판매금액이 3,000원 미만입니다.');
                         divPrice.value = '';
                         divPrice.focus();
                         return false;
@@ -553,29 +562,29 @@ function changeTemplateAddCheck() {
                         var disPrice = document.getElementById('discount_price');
 
                         if (discountQnt.value.isEmpty()) {
-                            alert('í• ì¸ì ìš© ìˆ˜ëŸ‰ì„ ìž…ë ¥í•´ ì£¼ì„¸ìš”.');
+                            alert('할인적용 수량을 입력해 주세요.');
                             discountQnt.onfocus();
                             return false;
                         }
                         if (disPrice.value.isEmpty()) {
-                            alert('í• ì¸ê¸ˆì•¡ì€ 100ì› ì´ìƒìœ¼ë¡œ ìž…ë ¥í•´ ì£¼ì„¸ìš”.');
+                            alert('할인금액은 100원 이상으로 입력해 주세요.');
                             disPrice.onfocus();
                             return false;
                         }
                         if (Math.ceil(quaMinVal / divUnitVal) > disQntCnt.value.numeric()) {
-                            alert('í• ì¸ì ìš©ì€ ' + Math.ceil(quaMinVal / divUnitVal) + 'ë²ˆ ì´ìƒ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+                            alert('할인적용은 ' + Math.ceil(quaMinVal / divUnitVal) + '번 이상 가능합니다.');
                             disQntCnt.value = Math.ceil(quaMinVal / divUnitVal);
                             disQntCnt.onfocus();
                             return false;
                         }
                         if (Math.floor(quaMaxVal / 2) < Number(disQntCnt.value.numeric() * discountQnt.value.numeric())) {
-                            alert('í• ì¸ì ìš©ì€ ' + Math.floor(quaMaxVal / quaMinVal / 2) + 'ë²ˆ ê¹Œì§€ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+                            alert('할인적용은 ' + Math.floor(quaMaxVal / quaMinVal / 2) + '번 까지 가능합니다.');
                             disQntCnt.value = '';
                             disQntCnt.onfocus();
                             return false;
                         }
                         if (divPriceVal / 2 < disPrice.value.numeric()) {
-                            alert('ìµœëŒ€ í• ì¸ê¸ˆì•¡ì„ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+                            alert('최대 할인금액을 초과하였습니다.');
                             disPrice.value = '';
                             disPrice.onfocus();
                             return false;
@@ -601,13 +610,13 @@ function changeTemplateAddCheck() {
 
         } else {
             if (userGoods.value === '' || userGoods.value === 'money') {
-                formCheck.add({name: 'user_quantity', msg: 'íŒë§¤ ìˆ˜ëŸ‰ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.', type: 'price', protect: true});
+                formCheck.add({name: 'user_quantity', msg: '판매 수량을 입력해주세요.', type: 'price', protect: true});
             }
-            formCheck.add({name: 'user_price', msg: 'íŒë§¤ ê¸ˆì•¡ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.', type: 'price', protect: true});
+            formCheck.add({name: 'user_price', msg: '판매 금액을 입력해주세요.', type: 'price', protect: true});
             formCheck.add({
                 custom: function() {
                     if (frm.user_price.value.numeric() % 10 > 0) {
-                        alert('ê±°ëž˜ê¸ˆì•¡ì— ì¼ì›ë‹¨ìœ„ëŠ” 0ì´ì™¸ì˜ ìˆ«ìžë¥¼ ìž…ë ¥í• ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\nê±°ëž˜ê¸ˆì•¡ì„ ë‹¤ì‹œ ê¸°ìž¬í•´ ì£¼ì„¸ìš”.\nì˜ˆ) 12,345(ë¶ˆê°€ëŠ¥), 12,340(ê°€ëŠ¥)');
+                        alert('거래금액에 일원단위는 0이외의 숫자를 입력할수 없습니다.\n거래금액을 다시 기재해 주세요.\n예) 12,345(불가능), 12,340(가능)');
                         frm.user_price.value = '';
                         frm.user_price.focus();
                         return false;
@@ -635,7 +644,7 @@ function changeTemplateAddCheck() {
             });
 
             document.getElementById('user_price').addEventListener('keyup', function() {
-                commissionCalcu.call(this);
+                // commissionCalcu.call(this);
             });
 
             if (userGoodsType.value === 'bargain') {
@@ -643,7 +652,7 @@ function changeTemplateAddCheck() {
                     custom: function() {
                         var userDenyUse = document.getElementById('user_deny_use');
                         if (userDenyUse.checked === true && frm.user_price_limit.value.isEmpty()) {
-                            alert('ìµœì € í¥ì • ê°€ê²© ì„¤ì •ê¸ˆì•¡ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+                            alert('최저 흥정 가격 설정금액을 입력해주세요.');
                             frm.user_price_limit.focus();
                             return false;
                         }
@@ -675,7 +684,7 @@ function changeTemplateAddCheck() {
                 custom: function() {
                     var itemInfo = document.getElementById('iteminfo_use');
                     if (itemInfo.checked === true && frm.slt_item_info.value.isEmpty() === true) {
-                        alert('ì•„ì´í…œì •ë³´ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+                        alert('아이템정보를 입력해주세요.');
                         frm.iteminfo_dept1.focus();
                         return false;
                     }
@@ -706,13 +715,13 @@ function changeTemplateAddCheck() {
                 var pName = rgItemInfo.list[0].item[this.value].p_name;
                 var items = rgItemInfo.list[0].item[this.value].items;
                 if (pName === undefined) {
-                    pName = 'ì§ì—…';
+                    pName = '직업';
                 }
                 iteminfoDept2.innerHTML = '';
 
                 var newOption = document.createElement('option');
                 newOption.value = '';
-                newOption.text = 'ì„ íƒ';
+                newOption.text = '선택';
                 iteminfoDept2.appendChild(newOption);
                 Object.keys(items).forEach(function(t) {
                     newOption = document.createElement('option');
@@ -729,7 +738,7 @@ function changeTemplateAddCheck() {
                 if (this.checked === false) {
                     var itemInfoResult = document.getElementById('item_info_result');
                     if (itemInfoResult.classList.contains('f_red1') === false) {
-                        itemInfoResult.innerHTML = 'ì•„ì´í…œ ì •ë³´ë¥¼ ì„ íƒí•˜ì‹œë©´ íŒë§¤ì— ë„ì›€ì´ ë©ë‹ˆë‹¤.';
+                        itemInfoResult.innerHTML = '아이템 정보를 선택하시면 판매에 도움이 됩니다.';
                         itemInfoResult.classList.add('f_red1');
                     }
                     iteminfoDept1.options[0].selected = true;
@@ -744,7 +753,7 @@ function changeTemplateAddCheck() {
                 custom: function() {
                     var itemInfo = document.getElementById('iteminfo_use');
                     if (itemInfo.checked === true && frm.iteminfo_use_complete.value === 'N') {
-                        alert('ì•„ì´í…œì •ë³´ ìž…ë ¥ í›„ ë“±ë¡ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+                        alert('아이템정보 입력 후 등록이 가능합니다.');
                         frm.iteminfo_use.focus();
                         return false;
                     }
@@ -776,25 +785,25 @@ function changeTemplateAddCheck() {
                     frm.character_id.disabled = false;
                 }
             });
-            formCheck.add({name: 'account_type', msg: 'ìºë¦­í„° ì¢…ë¥˜ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.'});
+            formCheck.add({name: 'account_type', msg: '캐릭터 종류를 선택해주세요.'});
             formCheck.add({
                 custom: function() {
                     var account_type = frm.account_type.value;
                     if (account_type !== '1') {
                         if (frm.purchase_type.value.isEmpty()) {
-                            alert('ìºë¦­í„° ì •ë³´ë¥¼ ëª¨ë‘ ìž…ë ¥ í›„ ë“±ë¡ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+                            alert('캐릭터 정보를 모두 입력 후 등록이 가능합니다.');
                             return false;
                         }
                         if (frm.payment_existence.value.isEmpty()) {
-                            alert('ìºë¦­í„° ì •ë³´ë¥¼ ëª¨ë‘ ìž…ë ¥ í›„ ë“±ë¡ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+                            alert('캐릭터 정보를 모두 입력 후 등록이 가능합니다.');
                             return false;
                         }
                         if (frm.multi_access.value.isEmpty()) {
-                            alert('ìºë¦­í„° ì •ë³´ë¥¼ ëª¨ë‘ ìž…ë ¥ í›„ ë“±ë¡ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+                            alert('캐릭터 정보를 모두 입력 후 등록이 가능합니다.');
                             return false;
                         }
                         if (frm.character_id.value.isEmpty()) {
-                            alert('ìºë¦­í„° ì •ë³´ë¥¼ ëª¨ë‘ ìž…ë ¥ í›„ ë“±ë¡ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+                            alert('캐릭터 정보를 모두 입력 후 등록이 가능합니다.');
                             return false;
                         }
                     }
@@ -808,18 +817,18 @@ function changeTemplateAddCheck() {
             }
 
             if (gameCode === '650') {
-                document.getElementById('sub_text').innerHTML = ' [ë°˜ë“œì‹œ ë°°í‹€íƒœê·¸ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”. ì˜ˆ) ë§¤ë‹ˆì•„#1544]';
+                document.getElementById('sub_text').innerHTML = ' [반드시 배틀태그를 입력해주세요. 예) 매니아#1544]';
             } else {
                 document.getElementById('sub_text').innerHTML = '';
             }
 
-            /* â–¼ ë˜ì „ì•¤íŒŒì´í„° í†µí•©ì„œë²„ ì²˜ë¦¬ */
+            /* ▼ 던전앤파이터 통합서버 처리 */
             var dfServer = document.getElementById('dfServer');
             var dfServerCode = document.getElementById('dfServerCode');
             var userCharacter = document.getElementById('user_character');
-            if (gameCode == '281') {
+            if (gameCode == '204') {
                 if (dfServerCode === null && document.getElementById('integration_server') === null) {
-                    var strHtml = '<div id="dfServerCode" class="df_server_code"><input type="hidden" name="df_server_code"><input type="text" class="g_text" name="df_server_code_text" id="df_server_code_text" placeholder="ì„œë²„ê²€ìƒ‰" autocomplete="off"><div class="gs_list_area" id="dfServerList"></div></div> ë¬¼í’ˆì„ ì „ë‹¬í•˜ì‹¤ ì„œë²„ |';
+                    var strHtml = '<div id="dfServerCode" class="df_server_code"><input type="hidden" name="df_server_code"><input type="text" class="g_text" name="df_server_code_text" id="df_server_code_text" placeholder="서버검색" autocomplete="off"><div class="gs_list_area" id="dfServerList"></div></div> 물품을 전달하실 서버 |';
                     document.getElementById('dfServer').innerHTML = strHtml;
                 }
 
@@ -827,7 +836,7 @@ function changeTemplateAddCheck() {
                     new ServerList(document.getElementById('dfServerList'), {
                         autoComplete: '#df_server_code_text',
                         allView: false,
-                        gameCode: '281',
+                        gameCode: '204',
                         hidden_use: {
                             code: '[name="df_server_code"]',
                             text: ''
@@ -840,47 +849,46 @@ function changeTemplateAddCheck() {
 
                 formCheck.add({
                     custom: function() {
-                        /* â–¼ ë˜ì „ì•¤íŒŒì´í„° í†µí•©ì„œë²„ ì²˜ë¦¬ */
+                        /* ▼ 던전앤파이터 통합서버 처리 */
                         if (document.getElementById('dfServerList').serverList.getValue().code.isEmpty()) {
-                            alert('ë¬¼í’ˆì„ ì „ë‹¬ í•˜ì‹¤ ì„œë²„ë¥¼ ì„ íƒ í•´ì£¼ì„¸ìš”.');
+                            alert('물품을 전달 하실 서버를 선택 해주세요.');
                             return false;
                         }
                         return true;
-                        /* â–² ë˜ì „ì•¤íŒŒì´í„° í†µí•©ì„œë²„ ì²˜ë¦¬ */
+                        /* ▲ 던전앤파이터 통합서버 처리 */
                     }
                 });
 
-                formCheck.add({name: 'user_character', msg: 'ë¬¼í’ˆì„ ì „ë‹¬ í•˜ì‹¤ ìºë¦­í„°ëª…ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.'});
+                formCheck.add({name: 'user_character', msg: '물품을 전달 하실 캐릭터명을 입력해주세요.'});
             } else {
                 dfServer.classList.add('g_hidden');
                 userCharacter.setAttribute('maxlength', 30);
             }
-            /* â–² ë˜ì „ì•¤íŒŒì´í„° í†µí•©ì„œë²„ ì²˜ë¦¬ */
+            /* ▲ 던전앤파이터 통합서버 처리 */
         }
 
-        formCheck.add({name: 'user_title', msg: 'ë¬¼í’ˆì œëª©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.'});
-        formCheck.add({name: 'user_text', msg: 'ìƒì„¸ì„¤ëª…ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.'});
+        formCheck.add({name: 'user_title', msg: '물품제목을 입력해주세요.'});
+        formCheck.add({name: 'user_text', msg: '상세설명을 입력해주세요.'});
         formCheck.add({
             custom: function() {
 
-                /* â–¼ ì—°ë½ì²˜ ì¤‘ë³µì²´í¬ */
+                /* ▼ 연락처 중복체크 */
                 var slctContact = $('#user_contactA').val();
                 var slctMobileType = $('#slctMobile_type').val();
                 var params = {
-                    user_id: $('#user_id').val(),
                     trade_flag: 'Y',
                     contact_yn: (slctContact === 'N') ? 'N' : 'Y',
                     mobile_yn: (slctMobileType === 'N') ? 'N' : 'Y'
                 };
 
                 if (params.contact_yn === 'N' && params.mobile_yn === 'N') {
-                    alert('íœ´ëŒ€í° ë˜ëŠ” ìžíƒ ì—°ë½ì²˜ ì •ë³´ë¥¼ í†µí™” ê°€ëŠ¥í•œ ë²ˆí˜¸ë¡œ ìˆ˜ì • í›„ ì´ìš© ë°”ëžë‹ˆë‹¤.');
+                    alert('휴대폰 또는 자택 연락처 정보를 통화 가능한 번호로 수정 후 이용 바랍니다.');
                     return;
                 }
 
                 if($('#tag_generator').val() != '' && $('#tag_generator').val().length < 2)
                 {
-                    alert('í‚¤ì›Œë“œëŠ” 2ê¸€ìž ì´ìƒ ìž…ë ¥í•´ì£¼ì„¸ìš”.')
+                    alert('키워드는 2글자 이상 입력해주세요.')
                     return false;
                 }
 
@@ -894,9 +902,9 @@ function changeTemplateAddCheck() {
                     params.user_mobileB = $('#user_mobileB').val();
                     params.user_mobileC = $('#user_mobileC').val();
                 }
-
+                params.api_token = a_token;
                 ajaxRequest({
-                    url: '/_include/_user_contact_restrict.php',
+                    url: '/api/_include/_user_contact_restrict',
                     type: 'POST',
                     data: params,
                     success: function(res) {
@@ -909,16 +917,17 @@ function changeTemplateAddCheck() {
                                 alert(rgResult[1]);
                         }
                     },
-                    error: function() {
-                        alert('ì„œë¹„ìŠ¤ê°€ ì›í• í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ìž ì‹œí›„ ì´ìš©í•´ ì£¼ì„¸ìš”.');
+                    error: function(e) {
+                        alert('서비스가 원할하지 않습니다. 잠시후 이용해 주세요.');
                     }
                 });
-                /* â–² ì—°ë½ì²˜ ì¤‘ë³µì²´í¬ */
+                /* ▲ 연락처 중복체크 */
 
                 return false;
             }
         });
     } catch (e) {
+        console.log("template error "+ e);
     }
 }
 
@@ -935,7 +944,7 @@ function createLayerContent(b) {
 
     var frm = document.forms.frmSell;
     var dvPopup = document.getElementById('dvPopup');
-    var strLayerURL = '/sell/include/reg_info.html';
+    var strLayerURL = '/api/sell/include/reg_info';
 
     if (b !== false) {
         var dvPremium = document.getElementById('dvPremium');
@@ -990,7 +999,7 @@ function createLayerContent(b) {
             rgData.character_id = frm.character_id.value;
             rgData.user_cell_num = frm.user_cell_num.value;
             rgData.seller_birth = frm.seller_birth.value;
-            strLayerURL = '/sell/include/reg_info_character.html';
+            strLayerURL = '/api/sell/include/reg_info_character';
         }
         rgData.user_price = frm.user_price.value;
     }
@@ -1002,7 +1011,7 @@ function createLayerContent(b) {
     if (document.getElementById('item_info_txt') !== null) {
         rgData.item_info_txt = document.getElementById('item_info_txt').innerHTML;
     }
-
+    rgData.api_token = a_token;
     ajaxRequest({
         url: strLayerURL,
         type: 'POST',
@@ -1011,52 +1020,54 @@ function createLayerContent(b) {
             $('#dvPopup').find('.cont').html(res);
             LayerControl.open({layer: dvPopup});
 
-            /** [ITM-10872] ìºë¦­í„° ê±°ëž˜ ì‹ ê·œ ì„œë¹„ìŠ¤ ì‚½ë‹ˆë‹¤ ì¶”ê°€ by 20200720 KBR */
+            /** [ITM-10872] 캐릭터 거래 신규 서비스 삽니다 추가 by 20200720 KBR */
             if (rgData.user_goods === 'character' && frm.account_type.value !== '1') {
                 document.getElementById('dvPopup').classList.add('reg_info_character');
-                document.getElementById('dvPopup').getElementsByClassName('title')[0].innerHTML = 'ì „ìžê³„ì•½ì„œ';
+                document.getElementById('dvPopup').getElementsByClassName('title')[0].innerHTML = '전자계약서';
                 document.getElementById('reg_submit').addEventListener('click', function() {
                     if ($("#user_without").val() == '6') {
-                        if (!confirm('ê³ ê°ë‹˜ì€ í˜„ìž¬ íšŒì›íƒˆí‡´ ì‹ ì²­ ì§„í–‰ì¤‘ìž…ë‹ˆë‹¤.\níŒë§¤ ë“±ë¡ ì§„í–‰ ì‹œ ì‹ ì²­í•˜ì‹  íšŒì›íƒˆí‡´ ì ‘ìˆ˜ê°€ ì² íšŒë©ë‹ˆë‹¤.\nê³„ì† ì§„í–‰ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?')) {
+                        if (!confirm('고객님은 현재 회원탈퇴 신청 진행중입니다.\n판매 등록 진행 시 신청하신 회원탈퇴 접수가 철회됩니다.\n계속 진행 하시겠습니까?')) {
                             return;
                         }
                     }
 
                     if ($("#account_type").val() != 1) {
-                        _window.open('contract', '', 650, 550);
+                        _window.open('contract', '', 360, 550);
                         frm.target = 'contract';
-                        frm.action = '/certify/payment/user_certify.html';
+                        frm.action = '/certify/payment/user_certify';
                         frm.submit();
                     } else {
                         frm.onsubmit = null;
                         frm.target = '_self';
-                        frm.action = 'index_ok.php';
+                        frm.action = '/addService';
                         frm.submit();
                     }
 
                 });
             } else {
                 document.getElementById('dvPopup').classList.remove('reg_info_character');
-                document.getElementById('dvPopup').getElementsByClassName('title')[0].innerHTML = 'ë¬¼í’ˆë“±ë¡ì •ë³´';
+                document.getElementById('dvPopup').getElementsByClassName('title')[0].innerHTML = '물품등록정보';
                 document.getElementById('reg_submit').addEventListener('click', function() {
                     if ($("#user_without").val() == '6') {
-                        if (!confirm('ê³ ê°ë‹˜ì€ í˜„ìž¬ íšŒì›íƒˆí‡´ ì‹ ì²­ ì§„í–‰ì¤‘ìž…ë‹ˆë‹¤.\níŒë§¤ ë“±ë¡ ì§„í–‰ ì‹œ ì‹ ì²­í•˜ì‹  íšŒì›íƒˆí‡´ ì ‘ìˆ˜ê°€ ì² íšŒë©ë‹ˆë‹¤.\nê³„ì† ì§„í–‰ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?')) {
+                        if (!confirm('고객님은 현재 회원탈퇴 신청 진행중입니다.\n판매 등록 진행 시 신청하신 회원탈퇴 접수가 철회됩니다.\n계속 진행 하시겠습니까?')) {
                             return;
                         }
                     }
                     frm.onsubmit = null;
-                    frm.action = 'index_ok.php';
+                    frm.action = '/addService';
                     frm.submit();
                 });
             }
             document.getElementById('cancel_submit').addEventListener('click', function() {
                 LayerControl.close({layer: dvPopup});
             });
+        },error:function(xhr){
+            console.log(xhr)
         }
     });
 }
 
-/* â–¼ ë‚˜ë§Œì˜ ê²€ìƒ‰ë©”ë‰´ ì„ íƒ */
+/* ▼ 나만의 검색메뉴 선택 */
 function fnSearchSelect(game, gname, server, sname, goods, self) {
     var strGoods;
 
@@ -1090,9 +1101,9 @@ function fnSearchSelect(game, gname, server, sname, goods, self) {
     regGameServer.changeAction = true;
     regGameServer.gameList.createList();
 }
-/* â–² ë‚˜ë§Œì˜ ê²€ìƒ‰ë©”ë‰´ ì„ íƒ */
+/* ▲ 나만의 검색메뉴 선택 */
 
-/* â–¼ ë‚˜ë§Œì˜ ê²€ìƒ‰ë©”ë‰´ ì¶”ê°€ */
+/* ▼ 나만의 검색메뉴 추가 */
 function fnSearchAdd() {
     var game_code = $('#game_code').val();
     var game_code_text = $('#game_code_text').val();
@@ -1104,39 +1115,39 @@ function fnSearchAdd() {
     var goods_code = 0;
     switch (user_goods) {
         case 'item' :
-            goods_text = "ì•„ì´í…œ";
+            goods_text = "아이템";
             goods_code = 1;
             break;
         case 'money' :
-            goods_text = "ê²Œìž„ë¨¸ë‹ˆ";
+            goods_text = "게임머니";
             goods_code = 3;
             break;
         case 'character' :
-            goods_text = "ìºë¦­í„°";
+            goods_text = "캐릭터";
             goods_code = 6;
             break;
         case 'etc' :
-            goods_text = "ê¸°íƒ€";
+            goods_text = "기타";
             goods_code = 4;
             break;
     }
 
     if (game_code == "") {
-        alert('ê²Œìž„ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.');
+        alert('게임을 선택해 주세요.');
         return;
     }
 
     if (server_code == "") {
-        alert('ì„œë²„ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”.');
+        alert('서버를 선택해 주세요.');
         return;
     }
 
     if (user_goods == "") {
-        alert('ë¬¼í’ˆíƒ€ìž…ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.');
+        alert('물품타입을 선택해 주세요.');
         return;
     }
 
-    var addMessage = confirm("ê²€ìƒ‰í•˜ì‹  ê²Œìž„ì„ ë‚˜ë§Œì˜ ê²Œìž„ì— ì¶”ê°€í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
+    var addMessage = confirm("검색하신 게임을 나만의 게임에 추가하시겠습니까?");
     if (addMessage == true) {
         var rgData = {
             type: 'sell',
@@ -1158,34 +1169,34 @@ function fnSearchAdd() {
                 "</li>";
             $('#mygame_info').append(addMygame);
 
-            alert("í•´ë‹¹ ì¹´í…Œê³ ë¦¬ê°€ ë‚˜ë§Œì˜ê²€ìƒ‰ë©”ë‰´ì— ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.");
+            alert("해당 카테고리가 나만의검색메뉴에 추가되었습니다.");
             $('.favorite_icon').addClass('on');
             _myService.getFavorite();
         });
     }
 }
-/* â–² ë‚˜ë§Œì˜ ê²€ìƒ‰ë©”ë‰´ ì¶”ê°€ */
+/* ▲ 나만의 검색메뉴 추가 */
 
-/* â–¼ ë‚˜ë§Œì˜ ê²€ìƒ‰ë©”ë‰´ ì‚­ì œ */
+/* ▼ 나만의 검색메뉴 삭제 */
 function fnSearchDel(id) {
-    var delMessage = confirm("í•´ë‹¹ ì¹´í…Œê³ ë¦¬ë¥¼ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
+    var delMessage = confirm("해당 카테고리를 삭제하시겠습니까?");
     if (delMessage == true) {
         _myService.deleteFavorite(id, function() {
             var mygame_id = "mygame_" + id;
             $('#' + mygame_id).remove();
-            alert("í•´ë‹¹ ì¹´í…Œê³ ë¦¬ê°€ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
+            alert("해당 카테고리가 삭제되었습니다.");
             $('.favorite_icon').removeClass('on');
             _myService.getFavorite();
 
             if (document.getElementById('mygame_info').children[0] === undefined) {
-                document.getElementById('mygame_info').innerHTML = '<li class="empty">ê²Œìž„ì„œë²„ ê²€ìƒ‰ í›„ ìš°ì¸¡ â˜…í‘œë¥¼ í´ë¦­í•˜ì‹œë©´ í•´ë‹¹ë¬¼í’ˆì´ ë‚˜ë§Œì˜ê²€ìƒ‰ë©”ë‰´ë¡œ ë“±ë¡ë©ë‹ˆë‹¤.</li>';
+                document.getElementById('mygame_info').innerHTML = '<li class="empty">게임서버 검색 후 우측 ★표를 클릭하시면 해당물품이 나만의검색메뉴로 등록됩니다.</li>';
             }
         });
     }
 }
-/* â–² ë‚˜ë§Œì˜ ê²€ìƒ‰ë©”ë‰´ ì‚­ì œ */
+/* ▲ 나만의 검색메뉴 삭제 */
 
-/* â–¼ ë‚˜ë§Œì˜ ê²€ìƒ‰ë©”ë‰´ ì²´í¬ */
+/* ▼ 나만의 검색메뉴 체크 */
 function mySearchListCheck() {
 
     $('.favorite_icon').removeClass('on');
@@ -1220,7 +1231,7 @@ function mySearchListCheck() {
         }
     }
 }
-/* â–² ë‚˜ë§Œì˜ ê²€ìƒ‰ë©”ë‰´ ì²´í¬ */
+/* ▲ 나만의 검색메뉴 체크 */
 
 function checkPrice() {
     var val = this.value;
@@ -1229,7 +1240,7 @@ function checkPrice() {
     }
     var last = val.substring(val.length - 1, val.length);
     if (last != '0') {
-        alert('ê±°ëž˜ê¸ˆì•¡ì— ì¼ì›ë‹¨ìœ„ëŠ” 0ì´ì™¸ì˜ ìˆ«ìžë¥¼ ìž…ë ¥í• ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\nê±°ëž˜ê¸ˆì•¡ì„ ë‹¤ì‹œ ê¸°ìž¬í•´ ì£¼ì„¸ìš”.\n\nì˜ˆ) 12,345(ë¶ˆê°€ëŠ¥), 12,340(ê°€ëŠ¥)');
+        alert('거래금액에 일원단위는 0이외의 숫자를 입력할수 없습니다.\n\n거래금액을 다시 기재해 주세요.\n\n예) 12,345(불가능), 12,340(가능)');
         this.value = '';
         this.focus();
         commissionCalcu.call(this);
@@ -1244,7 +1255,7 @@ function checkPrice() {
     }
 
     if ((arguments.length < 1 || arguments[0] !== true) && parseInt(val.replace(/[^0-9]/g, "")) < Number(nCheckPrice)) {
-        alert('ê±°ëž˜ê¸ˆì•¡ì€ ' + Number(nCheckPrice).currency() + 'ì› ì´ìƒìœ¼ë¡œ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+        alert('거래금액은 ' + Number(nCheckPrice).currency() + '원 이상으로 입력해주세요.');
         this.value = '';
         this.focus();
         return false;
@@ -1253,7 +1264,7 @@ function checkPrice() {
     return true;
 }
 
-//ìžë™ê±°ë¶€ ê¸ˆì•¡ ì²´í¬
+//자동거부 금액 체크
 function getPriceLimit() {
     var val = this.value;
     if (val.isEmpty() || val == '0') {
@@ -1273,7 +1284,7 @@ function getPriceLimit() {
 
     if (objDenyUse.val() == "1") {
         if (nPrice <= nPriceLimit) {
-            alert("ìµœì €í¥ì •ê°€ê²©ì€ ì¦‰ì‹œíŒë§¤ê¸ˆì•¡ë³´ë‹¤ ìž‘ì•„ì•¼í•©ë‹ˆë‹¤.");
+            alert("최저흥정가격은 즉시판매금액보다 작아야합니다.");
             this.value = '';
             this.focus();
             return false;
@@ -1282,20 +1293,20 @@ function getPriceLimit() {
 
     var last = val.substring($(this).val().length - 1, $(this).val().length);
     if (last != '0') {
-        alert('ê±°ëž˜ê¸ˆì•¡ì— ì¼ì›ë‹¨ìœ„ëŠ” 0ì´ì™¸ì˜ ìˆ«ìžë¥¼ ìž…ë ¥í• ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\nê±°ëž˜ê¸ˆì•¡ì„ ë‹¤ì‹œ ê¸°ìž¬í•´ ì£¼ì„¸ìš”.\n\nì˜ˆ) 12,345(ë¶ˆê°€ëŠ¥), 12,340(ê°€ëŠ¥)');
+        alert('거래금액에 일원단위는 0이외의 숫자를 입력할수 없습니다.\n\n거래금액을 다시 기재해 주세요.\n\n예) 12,345(불가능), 12,340(가능)');
         this.value = '';
         this.focus();
         return false;
     }
     if ((arguments.length < 1 || arguments[0] !== true) && parseInt(val.replace(/[^0-9]/g, "")) < 3000) {
-        alert('ê±°ëž˜ê¸ˆì•¡ì€ 3,000ì› ì´ìƒìœ¼ë¡œ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+        alert('거래금액은 3,000원 이상으로 입력해주세요.');
         this.value = '';
         this.focus();
         return false;
     }
 }
 
-/* â–¼ ìˆ˜ìˆ˜ë£Œê³„ì‚° */
+/* ▼ 수수료계산 */
 function commissionCalcu(t) {
     var comsArea = document.getElementById('coms_area');
     if (t === '2') {
@@ -1319,7 +1330,7 @@ function commissionCalcu(t) {
     var nComPrice = 0;
     var nReceivePrice = 0;
 
-    // ìµœëŒ€ ìˆ˜ìˆ˜ë£Œ ë³€ê²½
+    // 최대 수수료 변경
     var nMaxCommission = 29800;
     var dtCheckDate = new Date(2020, 4, 1, 0, 0, 0, 0);
     var dtDate = new Date();
@@ -1334,29 +1345,29 @@ function commissionCalcu(t) {
             nComPrice -= (nComPrice % 10);
         }
 
-        /* â–¼ ìµœì €/ìµœëŒ€ìˆ˜ìˆ˜ë£Œ */
+        /* ▼ 최저/최대수수료 */
         if (nComPrice < 1000) {
             nComPrice = 1000;
         } else if (nComPrice > nMaxCommission) {
             nComPrice = nMaxCommission;
         }
-        /* â–² ìµœì €/ìµœëŒ€ìˆ˜ìˆ˜ë£Œ */
+        /* ▲ 최저/최대수수료 */
 
         nReceivePrice = nPrice - nComPrice;
     }
 
-    if (t === '2') {
-        $('#commission_price2').html(nComPrice.currency());
-        $('#receive_price2').html(nReceivePrice.currency());
-    } else {
-        $('#commission_price').html(nComPrice.currency());
-        $('#receive_price').html(nReceivePrice.currency());
-    }
+    // if (t === '2') {
+    // 	$('#commission_price2').html(nComPrice.currency());
+    // 	$('#receive_price2').html(nReceivePrice.currency());
+    // } else {
+    // 	$('#commission_price').html(nComPrice.currency());
+    // 	$('#receive_price').html(nReceivePrice.currency());
+    // }
 }
 
-/* â–² ìˆ˜ìˆ˜ë£Œê³„ì‚° */
+/* ▲ 수수료계산 */
 
-/* â–¼ ë§ˆì¼ë¦¬ì§€ ê²°ì œê¸ˆì•¡ */
+/* ▼ 마일리지 결제금액 */
 function chargeServiceCalc() {
 
     var userPremiumUseHidden = document.getElementById('user_premium_use');
@@ -1395,7 +1406,7 @@ function chargeServiceCalc() {
     plusMile += (reregCount * 100);
 
     if (currentMileage < plusMile) {
-        alert('ë§ˆì¼ë¦¬ì§€ ìž”ì•¡ì´ ë¶€ì¡±í•©ë‹ˆë‹¤.');
+        alert('마일리지 잔액이 부족합니다.');
         return false;
     }
 
@@ -1405,13 +1416,13 @@ function chargeServiceCalc() {
         document.getElementById('user_charge').value = '';
     }
 
-    document.getElementById('total_charge_money').innerHTML = plusMile.currency() + 'ì›';
+    document.getElementById('total_charge_money').innerHTML = plusMile.currency() + '원';
     return true;
 }
 
-/* â–² ë§ˆì¼ë¦¬ì§€ ê²°ì œê¸ˆì•¡ */
+/* ▲ 마일리지 결제금액 */
 
-/* â–¼ ìœ ë£Œë“±ë¡ ì„œë¹„ìŠ¤ */
+/* ▼ 유료등록 서비스 */
 function fnChargeService(userCharge) {
     if (userCharge == '1') {
         document.getElementById('user_charge').value = '1';
@@ -1449,11 +1460,11 @@ function chargePremiumService() {
     }
 }
 
-/* â–² ìœ ë£Œë“±ë¡ ì„œë¹„ìŠ¤ */
+/* ▲ 유료등록 서비스 */
 
 var power_date_use, power_date;
 
-/* â–¼ íŒŒì›Œë“±ë¡ê¶Œ ì„œë¹„ìŠ¤ */
+/* ▼ 파워등록권 서비스 */
 function fnpoweruse() {
     if (this.checked === true) {
         $("#power_use").html(power_date_use);
@@ -1467,17 +1478,17 @@ function fnPower() {
     var server_code = $('#server_code').val();
 
     $("#dv_power").html("");
-    var paramsValue = "game_code=" + game_code + "&server_code=" + server_code;
-    fnAjax('/power/_AJAX_power_check.php', 'html', 'post', paramsValue, {
+    var paramsValue = "game_code=" + game_code + "&server_code=" + server_code+"&api_token="+a_token;
+    fnAjax('/api/power/_AJAX_power_check', 'html', 'post', paramsValue, {
         complete: function(request) {
 
             var returnData = request.split("|");
             if (returnData[0] == true) {
 
-                power_date = '<span class="f_blue1">ì„ íƒì‹œ ì„œë¹„ìŠ¤ ì´ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤.</span>';
-                power_date_use = '<span class="f_blue1">' + returnData[1] + ' ~ ' + returnData[2] + ' ê¹Œì§€ ë“±ë¡ ê°€ëŠ¥í•©ë‹ˆë‹¤.</span>';
+                power_date = '<span class="f_blue1">선택시 서비스 이용 가능합니다.</span>';
+                power_date_use = '<span class="f_blue1">' + returnData[1] + ' ~ ' + returnData[2] + ' 까지 등록 가능합니다.</span>';
 
-                var createDIV = '<div class="g_left"><label class="f_bold"><input type="checkbox" name="power_regist" value="y" > íŒŒì›Œ ë“±ë¡ ì‚¬ìš© </label></div>';
+                var createDIV = '<div class="g_left"><label class="f_bold"><input type="checkbox" name="power_regist" value="y" > 파워 등록 사용 </label></div>';
                 var createtxt2 = '<div class="g_left" id="power_use"></div>';
 
                 $('#dv_power').removeClass('g_hidden').append(createDIV, createtxt2);
@@ -1493,9 +1504,9 @@ function fnPower() {
     });
 }
 
-/* â–² íŒŒì›Œë“±ë¡ê¶Œ ì„œë¹„ìŠ¤ */
+/* ▲ 파워등록권 서비스 */
 
-/* â–¼ ë³µìˆ˜êµ¬ë§¤í• ì¸ */
+/* ▼ 복수구매할인 */
 function fnRevenDiscount() {
     var bCharge = $("input[name='discount_use']")[0].checked;
     if (bCharge) {
@@ -1507,7 +1518,7 @@ function fnRevenDiscount() {
         var divPrice = $('#user_division_price');
 
         if (quanMin.val().isEmpty()) {
-            alert('ìµœì†Œìˆ˜ëŸ‰ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+            alert('최소수량을 입력해주세요.');
             $("#discount_use").prop("checked", false);
             $("#reven_discount").find("input").prop("disabled", true).val("");
             quanMin.focus();
@@ -1515,7 +1526,7 @@ function fnRevenDiscount() {
         }
 
         if (quanMax.val().isEmpty()) {
-            alert('ìµœëŒ€ìˆ˜ëŸ‰ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+            alert('최대수량을 입력해주세요.');
             $("#discount_use").prop("checked", false);
             $("#reven_discount").find("input").prop("disabled", true).val("");
             quanMax.focus();
@@ -1523,7 +1534,7 @@ function fnRevenDiscount() {
         }
 
         if (divUnit.val().isEmpty()) {
-            alert('ë¶„í• ë‹¨ìœ„ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+            alert('분할단위를 입력해주세요.');
             $("#discount_use").prop("checked", false);
             $("#reven_discount").find("input").prop("disabled", true).val("");
             divUnit.focus();
@@ -1531,7 +1542,7 @@ function fnRevenDiscount() {
         }
 
         if (divPrice.val().isEmpty()) {
-            alert('íŒë§¤ê¸ˆì•¡ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+            alert('판매금액을 입력해주세요.');
             $("#discount_use").prop("checked", false);
             $("#reven_discount").find("input").prop("disabled", true).val("");
             divPrice.focus();
@@ -1555,7 +1566,7 @@ function fnRevenDiscount() {
             var user_div_price = Number(userDivPrice.replace(/[^0-9]/g, ""));
             var last = $(this).val().substring($(this).val().length - 1, $(this).val().length);
             if (discount_price > 0 && discount_price < 100) {
-                alert("í• ì¸ê¸ˆì•¡ì€ 100ì› ì´ìƒìœ¼ë¡œ ìž…ë ¥í•´ì£¼ì„¸ìš”.");
+                alert("할인금액은 100원 이상으로 입력해주세요.");
                 $(this).val('');
                 $(this).focus();
                 $(this).keyup();
@@ -1563,7 +1574,7 @@ function fnRevenDiscount() {
             }
 
             if (discount_price > user_div_price / 2) {
-                alert("ìµœëŒ€ í• ì¸ê¸ˆì•¡ì„ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.");
+                alert("최대 할인금액을 초과하였습니다.");
                 $(this).val('');
                 $(this).focus();
                 $(this).keyup();
@@ -1571,7 +1582,7 @@ function fnRevenDiscount() {
             }
 
             if (last != 0) {
-                alert("í• ì¸ê¸ˆì•¡ì€ 10ì›ë‹¨ìœ„ë¡œ ìž…ë ¥ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+                alert("할인금액은 10원단위로 입력이 가능합니다.");
                 $(this).val('');
                 $(this).focus();
                 $(this).keyup();
@@ -1587,7 +1598,7 @@ function fnRevenDiscount() {
     }
 }
 
-/* â–² ë³µìˆ˜êµ¬ë§¤í• ì¸ */
+/* ▲ 복수구매할인 */
 
 function myLastListCall() {
 
@@ -1605,7 +1616,7 @@ function myLastListCall() {
         success: function(res) {
 
             if (res.result !== 'SUCCESS') {
-                alert('ë“±ë¡í•œ ë¬¼í’ˆì„ ë¶ˆëŸ¬ì˜¤ì§€ ëª»í•˜ì˜€ìŠµë‹ˆë‹¤.');
+                alert('등록한 물품을 불러오지 못하였습니다.');
                 return;
             }
 
@@ -1614,7 +1625,7 @@ function myLastListCall() {
             var sHtml = '';
             if (len < 1) {
                 var tr = document.createElement('tr');
-                sHtml = '<tr><td colspan="5">ìµœê·¼ì— ë“±ë¡í•˜ì‹  ë¬¼í’ˆì´ ì—†ìŠµë‹ˆë‹¤.</td></tr>';
+                sHtml = '<tr><td colspan="5">최근에 등록하신 물품이 없습니다.</td></tr>';
                 tr.innerHTML = sHtml;
                 tbody.appendChild(tr);
             } else {
@@ -1623,7 +1634,7 @@ function myLastListCall() {
                     var cont = list[i];
                     var tr = document.createElement('tr');
                     var date = cont.trade_reg_date.replace(' ', '<br>');
-                    var trade_money = '<span class="f_blue3">' + cont.min_trade_money + 'ì›</span>';
+                    var trade_money = '<span class="f_blue3">' + cont.min_trade_money + '원</span>';
                     var ea_range = '';
                     if (cont.ea_range) {
                         ea_range = '<span class="f_blue3">[' + cont.ea_range + ']</span><br>';
@@ -1631,15 +1642,15 @@ function myLastListCall() {
                     if (cont.ea_trade_money != '') {
                         trade_money = cont.ea_trade_money + '<br>' + trade_money;
                     }
-                    var compen = (cont.trade_class == '4' || cont.trade_class == '5') ? '<span class="f_blue3">200% ë³´ìƒ</span>' : '-';
+                    var compen = (cont.trade_class == '4' || cont.trade_class == '5') ? '<span class="f_blue3">200% 보상</span>' : '-';
                     sHtml = '<td>' + date + '</td><td>' + cont.game_name + '<br>' + cont.server_name + '</td><td class="left">' + ea_range + '<div class="txt_ellipsis">' + cont.trade_subject + '</div></td><td class="right">' + trade_money + '</td><td>' + compen + '</td>';
                     tr.innerHTML = sHtml;
                     tbody.appendChild(tr);
                     $.data(tr, cont);
                     (function(i) {
                         tr.addEventListener('click', function() {
-                            if (!confirm('í•´ë‹¹ ë“±ë¡ì •ë³´ë¥¼ ë¶ˆëŸ¬ì˜µë‹ˆë‹¤.\n' +
-                                'ë“±ë¡ì •ë³´ëŠ” í™•ì¸ í›„ ë“±ë¡íŽ˜ì´ì§€ì—ì„œ ìˆ˜ì • ê°€ëŠ¥í•©ë‹ˆë‹¤.')) {
+                            if (!confirm('해당 등록정보를 불러옵니다.\n' +
+                                '등록정보는 확인 후 등록페이지에서 수정 가능합니다.')) {
                                 return;
                             }
                             lastListEl = this;
@@ -1679,10 +1690,10 @@ function reRegSet() {
 
     switch (data.trade_default_unit) {
         case '10000':
-            var defaultUnit = 'ë§Œ';
+            var defaultUnit = '만';
             break;
         case '100000000':
-            var defaultUnit = 'ì–µ';
+            var defaultUnit = '억';
             break;
         default  :
             var defaultUnit = '1';
@@ -1727,7 +1738,7 @@ function reRegSet() {
     lastListEl = '';
 }
 
-// ì•„ì´í…œì •ë³´ ì¶”ê°€
+// 아이템정보 추가
 function fnSltItemAdd() {
     var rgIdept = [];
     var rgIdeptTxt = [];
@@ -1742,7 +1753,7 @@ function fnSltItemAdd() {
         }
 
         if (rgIdept.length > 3) {
-            alert('ìµœëŒ€ ì„¤ì • ì •ë³´ëŠ” 4ê°œìž…ë‹ˆë‹¤.');
+            alert('최대 설정 정보는 4개입니다.');
             return;
         }
     }
@@ -1750,7 +1761,7 @@ function fnSltItemAdd() {
     var idept1 = document.getElementById('iteminfo_dept1');
     var idept2 = document.getElementById('iteminfo_dept2');
     if (idept1.value.isEmpty() === true || idept2.value.isEmpty() === true) {
-        alert('ì•„ì´í…œ ì •ë³´ë¥¼ ì„ íƒí•˜ì„¸ìš”');
+        alert('아이템 정보를 선택하세요');
         return;
     }
 
@@ -1772,7 +1783,7 @@ function fnSltItemAdd() {
     itemInfoResult.innerHTML = rgIdeptTxt.join(',');
 }
 
-// ì•„ì´í…œì •ë³´ ì‚­ì œ
+// 아이템정보 삭제
 function fnSltItemRm(idept) {
     var rgIdeptTxt = [];
     var itemInfo = document.getElementById('slt_item_info');
@@ -1790,7 +1801,7 @@ function fnSltItemRm(idept) {
     itemInfoResult.innerHTML = rgIdeptTxt.join(',');
     if (i < 2) {
         itemInfoResult.classList.add('f_red1');
-        itemInfoResult.innerHTML = 'ì•„ì´í…œ ì •ë³´ë¥¼ ì„ íƒí•˜ì‹œë©´ íŒë§¤ì— ë„ì›€ì´ ë©ë‹ˆë‹¤.';
+        itemInfoResult.innerHTML = '아이템 정보를 선택하시면 판매에 도움이 됩니다.';
     }
 }
 
@@ -1800,8 +1811,10 @@ var itemDetailSetting = {
     checkItemData: function() {
         if (this.detailItemInfo === null) {
             ajaxRequest({
-                url: '/lineagem/_ajax_item_all.php',
+                url: '/api/lineagem/_ajax_item_all',
                 dataType: 'json',
+                type:'post',
+                data:{api_token: a_token},
                 success: function(data) {
                     if (data.manage === false) {
                         return;
@@ -1834,11 +1847,11 @@ var itemDetailSetting = {
             }
 
             if (attr_enchant.isEmpty() === false) {
-                attr_enchant += 'ë‹¨';
+                attr_enchant += '단';
             }
 
             if (state.isEmpty() === false) {
-                state += 'ë°›ì€';
+                state += '받은';
             }
 
             var rgGoods = [];
@@ -1856,16 +1869,17 @@ var itemDetailSetting = {
             $('#item_can').removeClass('g_hidden');
             $('#item_suc, #item_detail_wrap, #add_detail_wrap').addClass('g_hidden');
             $('#item_info_txt').text(strGoods);
-            $('#user_title').val('(' + strGoods + ') íŒë‹ˆë‹¤.');
+            $('#user_title').val('(' + strGoods + ') 팝니다.');
 
             ajaxRequest({
-                url: '/lineagem/_ajax_item_desc.php',
+                url: '/api/lineagem/_ajax_item_desc',
                 type: 'post',
                 dataType: 'json',
                 data: {
                     category: $('#category').val(),
                     kind: $('#kind').val(),
-                    item_name: $('#item_name').val()
+                    item_name: $('#item_name').val(),
+                    api_token: a_token
                 },
                 success: function(res) {
                     if (res.FAIL === 'true') {
@@ -1910,18 +1924,18 @@ var itemDetailSetting = {
                 itemDetailSetting.changeItem('#' + nextEl, itemDetailSetting.detailItemInfo[nextEl][this.value]);
             } else if (this.id === 'item_name') {
                 var category = $('#category').val();
-                if (category != 'ìŠ¤í‚¬ë¶' && category != 'ê¸°íƒ€') {
+                if (category != '스킬북' && category != '기타') {
                     closest.next().find('select').prop('disabled', false).find('option[value="0"]').prop('selected', true);
                 }
 
-                if (category === 'ë¬´ê¸°') {
+                if (category === '무기') {
                     $('#add_detail_wrap').find('select').slice(0, 2).prop('disabled', false);
                 } else {
                     $('#add_detail_wrap').find('select').slice(0, 1).prop('disabled', false);
                 }
             } else if (this.id === 'enchant') {
                 if (closest.prev().find('select').val().isEmpty()) {
-                    alert('ì•„ì´í…œì„ ì„ íƒí•´ì£¼ì„¸ìš”.');
+                    alert('아이템을 선택해주세요.');
                     $('#enchant').prop('disabled', false).find('option[value=""]').prop('selected', true);
                     $('#add_detail_wrap > select').prop('disabled', true).find('option[value=""]').prop('selected', true);
                     return;
@@ -1932,7 +1946,7 @@ var itemDetailSetting = {
         $('#add_detail_wrap select').on('change', function() {
             var closest = $(this).closest('li');
             if (this.id === 'attr_enchant' && closest.prev().find('select').val().isEmpty()) {
-                alert('ì†ì„±ì„ ì„ íƒí•´ì£¼ì„¸ìš”.');
+                alert('속성을 선택해주세요.');
                 $('#attr_enchant').find('option[value=""]').prop('selected', true);
                 return;
             }
@@ -1955,7 +1969,7 @@ var itemDetailSetting = {
         var manage = this.detailItemInfo.manage;
         var rgEnchnt = [];
 
-        $('#category').find('option:eq(0)').text('ì„ íƒí•˜ì„¸ìš”');
+        $('#category').find('option:eq(0)').text('선택하세요');
         itemDetailSetting.changeItem('#category', this.detailItemInfo.category);
 
         for (var i = manage.enchant_min; i <= manage.enchant_max; i++) {
@@ -1965,7 +1979,7 @@ var itemDetailSetting = {
 
         rgEnchnt = [];
         for (var i = manage.attr_enchant_min; i <= manage.attr_enchant_max; i++) {
-            rgEnchnt.push('<option value="' + i + '">' + i + 'ë‹¨</option>');
+            rgEnchnt.push('<option value="' + i + '">' + i + '단</option>');
         }
         $('#attr_enchant').append(rgEnchnt.join(''));
 
@@ -1995,11 +2009,11 @@ var itemDetailSetting = {
         if (use === false) {
             $('#item_detail_srh').addClass('g_hidden');
             $('#item_guide_txt, .item_detail_opts').removeClass('g_hidden');
-            $('#user_title, #user_text').prop('readonly', false).val(e_goods_text[e_select.goods] + ' íŒë‹ˆë‹¤.');
+            $('#user_title, #user_text').prop('readonly', false).val(e_goods_text[e_select.goods] + ' 팝니다.');
         } else {
             $('#item_detail_srh').removeClass('g_hidden');
             $('#item_guide_txt, .item_detail_opts').addClass('g_hidden');
-            $('#user_title, #user_text').prop('readonly', 'readonly').val(e_goods_text[e_select.goods] + ' íŒë‹ˆë‹¤.');
+            $('#user_title, #user_text').prop('readonly', 'readonly').val(e_goods_text[e_select.goods] + ' 팝니다.');
         }
     },
     itemSelectCheck: function() {
@@ -2014,24 +2028,24 @@ var itemDetailSetting = {
             var attr_enchant = $('#attr_enchant').val();
 
             if (category.isEmpty()) {
-                alert('ë¶„ë¥˜ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.');
+                alert('분류를 선택해주세요.');
                 return false;
             }
             if (kind.isEmpty()) {
-                alert('ì¢…ë¥˜ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.');
+                alert('종류를 선택해주세요.');
                 return false;
             }
             if (item_name.isEmpty()) {
-                alert('ì•„ì´í…œì„ ì„ íƒí•´ì£¼ì„¸ìš”.');
+                alert('아이템을 선택해주세요.');
                 return false;
             }
             if ($('#enchant').prop('disabled') === false && enchant.isEmpty()) {
-                alert('ì¸ì±ˆíŠ¸ ìƒíƒœë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.');
+                alert('인챈트 상태를 선택해주세요.');
                 return false;
             }
 
             if ($('#attr_enchant').prop('disabled') === false && attribute.isEmpty() === false && attr_enchant.isEmpty() === true) {
-                alert('ì†ì„± ì¸ì±ˆíŠ¸ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.');
+                alert('속성 인챈트를 선택해주세요.');
                 return false;
             }
         }
@@ -2041,10 +2055,11 @@ var itemDetailSetting = {
 
 function SafetyNumber(){
     ajaxRequest({
-        url: '/_include/_SafetyNumber_Category_Check_AJAX.html',
+        url: '/api/_include/_SafetyNumber_Category_Check_AJAX',
         type: 'post',
         data: {
             gamecode: $('#game_code').val(),
+            api_token:a_token
         },
         success: function(res) {
             if (res === 'true') {
@@ -2055,13 +2070,16 @@ function SafetyNumber(){
                 $('.SafetyNumber').show();
             }
 
+        },
+        error:function(e){
+            console.log(e)
         }
     });
 }
 
-//ITM-11901 ë¬¼í’ˆë“±ë¡ì•Œë¦¬ë¯¸ ë“±ë¡ë°©ì‹ ì¶”ê°€
+//ITM-11901 물품등록알리미 등록방식 추가
 function getTagList(data){
-    /* ë¬¼í’ˆë“±ë¡ ì•Œë¦¬ë¯¸ */
+    /* 물품등록 알리미 */
     ajaxRequest({
         url: '/myroom/goods_alarm/_ajax_process.php',
         type: 'post',
@@ -2078,7 +2096,7 @@ function getTagList(data){
             {
                 if(res.DAT.length == 0 || res.DAT == undefined)
                 {
-                    $('.tag_list').append('<span class="no_keyword">ë“±ë¡ëœ ì•Œë¦¼í‚¤ì›Œë“œê°€ ì—†ìŠµë‹ˆë‹¤.</span>');
+                    $('.tag_list').append('<span class="no_keyword">등록된 알림키워드가 없습니다.</span>');
                     tagList = []
                 }
                 else
@@ -2094,7 +2112,7 @@ function getTagList(data){
                         $('.tag_list').append('<span class="tag" data-text="'+tagList[i]+'">#'+tagList[i]+'</span>');
                     }
 
-                    $('.tag_list').append('<button id="tag_more" class="btn_white1" type="button">ë”ë³´ê¸°</button>');
+                    $('.tag_list').append('<button id="tag_more" class="btn_white1" type="button">더보기</button>');
 
                     $('#tag_more').click(function(){
                         $(this).remove();
@@ -2121,9 +2139,9 @@ function getTagList(data){
                 alert(res.MSG)
             }
         },
+
     });
 }
-
 function tagAction(){
     $('.tag').click(function(){
         if($('input[name="noti_keyword"]').val() != $(this).attr('data-text'))

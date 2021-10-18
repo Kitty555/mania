@@ -1,3 +1,18 @@
+@php
+    $category = '> > 기타';
+    if(!empty($game['game'])){
+        $category = $game['game']." > ";
+    }
+    if(!empty($server['game'])){
+        $category .= $server['game']." > ";
+    }
+    if(!empty($good_type)){
+        $category .= $good_type;
+    }
+    $price = 0;
+    if($user_goods_type != 'division')
+        $price = $user_price;
+@endphp
 @extends('layouts-mania.app')
 
 @section('head_attach')
@@ -11,13 +26,13 @@
 
 @section('foot_attach')
     <script type="text/javascript" src="/mania/_js/_jquery3.js?v=190220"></script>
-    <script type="text/javascript" src="/mania/_js/_comm.min.js?v=21100516"></script>
+    <script type="text/javascript" src="/mania/_js/_comm.js?v=21100516"></script>
     <script type="text/javascript" src="/mania/_js/_gs_control_200924.min.js?v=21100816"></script>
     <script type="text/javascript" src="/mania/_js/_common_initialize_new.min.js?v=21050316"></script>
     <script type='text/javascript' src='/mania/sell/js/view.js?v=200528'></script>
     <script type='text/javascript'>
-        g_trade_info.sale = 'general';
-        g_trade_info.trade_money = 3000;
+        g_trade_info.sale = '{{$user_goods_type}}';
+        g_trade_info.trade_money = {{$price}};
         function __init() {
             g_trade_info.goods='';
         }
@@ -63,23 +78,23 @@
                     <col /> </colgroup>
                 <tr>
                     <th>카테고리</th>
-                    <td colspan="3">AuraKingdom > 기타 > 기타</td>
+                    <td colspan="3">{{$category}}</td>
                 </tr>
                 <tr>
                     <th>물품제목</th>
-                    <td colspan="3"> 기타 팝니다.
+                    <td colspan="3">{{$user_title}}
                         <!-- 퀵 아이콘 -->
                     </td>
                 </tr>
                 <tr>
                     <th>거래번호</th>
-                    <td>#2021101408177351</td>
+                    <td>#{{$orderNo}}</td>
                     <th>등록일시</th>
-                    <td>2021-10-14 14:41:55</td>
+                    <td>{{date("Y-m-d H:i:s",strtotime($created_at))}}</td>
                 </tr>
                 <tr>
                     <th>구매금액</th>
-                    <td colspan='3'>3,000원</td>
+                    <td colspan='3'>{{number_format($price)}}원</td>
                 </tr>
             </table>
         </form>
@@ -91,7 +106,11 @@
         <div class="certify_info">
             <div class="seller_info"> <span class="credit_mark platinum">P</span> <strong class="platinum_txt">플래티넘 회원</strong> (거래점수 : 883점) </div>
             <dl class="add_info"> <dt>인증상태</dt>
-                <dd> <span class='cert_state'>우수인증</span><span class='cert_state on'>휴대폰</span><span class='cert_state'>이메일</span><span class='cert_state on'>출금계좌</span> </dd>
+                <dd>
+                    <span class='cert_state @if($user['mobile_verified'] == 1 && !empty($user['email_verified_at']) && $user['bank_verified'] == 1) on @endif'>우수인증</span>
+                    <span class="cert_state @if($user['mobile_verified'] == 1) on @endif">휴대폰</span>
+                    <span class="cert_state @if(!empty($user['email_verified_at'])) on @endif">이메일</span>
+                    <span class="cert_state @if($user['bank_verified'] ==1 ) on @endif">출금계좌</span>
             </dl>
         </div>
         <div class="g_subtitle">거래 사기 실시간 조회 서비스</div>
@@ -102,12 +121,19 @@
                 <input type="text" name="srh_txt" id="srh_txt" class="g_text" placeholder="휴대폰번호/계좌번호"> <a href="javascript:;" data-type="direct" class="srh_btn">조회</a> </div>
         </div>
         <div class="g_btn_wrap">
-            <a href="application.html?id=2021101408177351&continue=YTozNzp7czo5OiJnYW1lX2NvZGUiO3M6NDoiMjQxMiI7czoxMToic2VydmVyX2NvZGUiO3M6NToiMTA1NzUiO3M6OToiZ2FtZV9uYW1lIjtzOjExOiJBdXJhS2luZ2RvbSI7czoxMToic2VydmVyX25hbWUiO3M6Njoi6riw7YOAIjtzOjEyOiJzZWFyY2hfZ29vZHMiO3M6MzoiZXRjIjtzOjExOiJzZWFyY2hfd29yZCI7TjtzOjQ6InR5cGUiO3M6NDoic2VsbCI7czoxMjoic2VhcmNoX29yZGVyIjtzOjE6IjIiO3M6MTQ6InNlYXJjaF9yZWZlcmVyIjtzOjE2OiJsaXN0X3NlYXJjaC5odG1sIjtzOjExOiJ0cmFkZV9zdGF0ZSI7czoxOiIxIjtzOjg6InJlZ190aW1lIjtzOjE6IjEiO3M6MTE6ImNyZWRpdF90eXBlIjtzOjE6IjEiO3M6MTA6Imdvb2RzX3R5cGUiO3M6MToiMSI7czo2OiJjb21wZW4iO047czoxMToic2VsbF9jb21wZW4iO047czo3OiJkaXNjb250IjtOO3M6Nzoib3ZlcmxhcCI7TjtzOjk6ImV4Y2VsbGVudCI7TjtzOjc6ImFtb3VudDEiO3M6MToiMSI7czo3OiJhbW91bnQyIjtzOjg6Ijk5OTk5OTk5IjtzOjc6ImFtb3VudDMiO3M6MToiMSI7czo3OiJhbW91bnQ0IjtzOjg6Ijk5OTk5OTk5IjtzOjEyOiJzZWFyY2hfdHlwZTEiO047czoxMjoic2VhcmNoX3R5cGUyIjtOO3M6MTU6Im1vbmV5X2xpc3Rfcm93cyI7TjtzOjEzOiJnZW5fbGlzdF9yb3dzIjtOO3M6MTY6InNyY2hfaXRlbV9kZXB0aDEiO047czoxNjoic3JjaF9pdGVtX2RlcHRoMiI7TjtzOjE2OiJzcmNoX2l0ZW1fZGVwdGgzIjtOO3M6MTY6InNyY2hfaXRlbV9kZXB0aDQiO047czo2OiJkaXJlY3QiO047czoxMjoiYWNjb3VudF90eXBlIjtOO3M6MTM6InB1cmNoYXNlX3R5cGUiO047czoxNzoicGF5bWVudF9leGlzdGVuY2UiO047czoxMjoibXVsdGlfYWNjZXNzIjtOO3M6MTU6InNyY2hfY2hhcl9hbGFybSI7TjtzOjk6ImJMaW5lYWdlTSI7YjowO30="><img src="http://img2.itemmania.com/new_images/btn/btn_buy.gif" width="137" height="46" alt="구매신청"></a>
+            @if($user_goods_type == 'general')
+                <a href="/sell/application?id={{$orderNo}}"><img src="http://img2.itemmania.com/new_images/btn/btn_buy.gif" width="137" height="46" alt="구매신청"></a>
+            @endif
+            @if($user_goods_type == 'bargain')
+                    <a href="/sell/application?id=2021101809261877&amp;"><img src="http://img2.itemmania.com/images/btn/btn_direct_buy.gif" width="128" height="37" alt="즉시구매"></a>
+                    &nbsp;&nbsp;&nbsp;
+                    <img src="http://img2.itemmania.com/images/btn/btn_bargain.gif" width="128" height="37" alt="흥정신청" class="g_button" onclick="g_nodeSleep.enable($('#dvPopup'));">
+             @endif
         </div>
         <!-- ▼ 상세설명 //-->
         <div class="g_subtitle"> 상세설명 <a href="javascript:;" class="wideview" id="wideview">펼쳐보기▼</a> </div>
         <div class="detail_info" id="detail_info">
-            <div class="detail_text"> 기타&nbsp;팝니다.
+            <div class="detail_text"> {{$user_text}}
                 <br> </div>
         </div>
         <!-- ▲ 상세설명 //-->

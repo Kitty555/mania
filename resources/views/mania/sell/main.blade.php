@@ -1,3 +1,21 @@
+@php
+
+    $mobile_a = $mobile_b = $mobile_c = '';
+    $home_a = $home_b = $home_c = '';
+    $home_array = $number_array = array();
+    if(!empty($user->number)){
+        $number_array = explode('-',$user->number);
+        $mobile_a = $number_array[0];
+        $mobile_b = $number_array[1];
+        $mobile_c = $number_array[2];
+    }
+    if(!empty($user->home)){
+        $home_array = explode('-',$user->home);
+        $home_a = $home_array[0];
+        $home_b = $home_array[1];
+        $home_c = $home_array[2];
+    }
+@endphp
 @extends('layouts-mania.app')
 
 @section('head_attach')
@@ -11,7 +29,7 @@
 
 @section('foot_attach')
     <script type="text/javascript" src="/mania/_js/_jquery3.js?v=190220"></script>
-    <script type="text/javascript" src="/mania/_js/_comm.min.js?v=21100516"></script>
+    <script type="text/javascript" src="/mania/_js/_comm.js?v=21100516"></script>
     <script type="text/javascript" src="/mania/_js/_gs_control_200924.min.js?v=21100816"></script>
     <script type="text/javascript" src="/mania/_js/_common_initialize_new.min.js?v=21050316"></script>
     <script type="text/javascript" src="/mania/js/index210803.js"></script>
@@ -56,26 +74,28 @@
                     <li class="select">판매등록</li>
                 </ul>
             </div>
-            <form name="frmSell" id="frmSell" method="post" enctype="multipart/form-data" action="index_ok.php">
-                <input type="hidden" name="game_code" id="game_code" value="">
+            <form name="frmSell" id="frmSell" method="post" enctype="multipart/form-data" action="/addService">
+                @csrf
+                <input type="hidden" name="game_code" id="game_code">
                 <input type="hidden" name="game_code_text" id="game_code_text">
-                <input type="hidden" name="server_code" id="server_code" value="">
+                <input type="hidden" name="server_code" id="server_code">
                 <input type="hidden" name="server_code_text" id="server_code_text">
-                <input type="hidden" name="user_goods" id="user_goods" value="">
+                <input type="hidden" name="user_goods" id="user_goods">
                 <input type="hidden" id="security_service_userinfo" name="security_service_userinfo" value="N">
                 <input type="hidden" id="security_type" name="security_type" value="none">
                 <input type="hidden" name="user_premium_use" id="user_premium_use">
                 <input type="hidden" name="user_quick_icon_use" id="user_quick_icon_use">
                 <input type="hidden" name="user_charge" id="user_charge">
                 <input type="hidden" id="certify_pay" name="certify_pay" value="YTo0OntzOjEwOiJjZXJ0aWZ5X2xjIjtzOjg6ImNvbnRyYWN0IjtzOjk6ImZvcm1fbmFtZSI7czo3OiJmcm1TZWxsIjtzOjExOiJzdWJtaXRfdHlwZSI7czoxOiIxIjtzOjEwOiJzdWJtaXRfdXJsIjtzOjE4OiIvc2VsbC9pbmRleF9vay5waHAiO30=">
-                <input type="hidden" name="seller_birth" id="seller_birth" value="1980.02.18">
+                <input type="hidden" name="seller_birth" id="seller_birth" value="{{date("Y.m.d",strtotime($user->birthday))}}">
                 <!-- 안심번호 -->
                 <input type="hidden" name="safety_using_flag" id="safety_using_flag">
-                <input type="hidden" name="user_cell_auth" id="user_cell_auth" value="1">
-                <input type="hidden" name="user_cell_num" id="user_cell_num" value="010-2424-0956">
+                <input type="hidden" name="user_cell_auth" id="user_cell_auth" value="{{$user->mobile_verified}}">
+                <input type="hidden" name="user_cell_num" id="user_cell_num" value="{{$user->number}}">
                 <input type="hidden" name="user_safety_type" id="user_safety_type">
                 <input type="hidden" name="user_phone_check" id="user_phone_check" value="true">
-                <input type="hidden" name="user_without" id="user_without" value="1">
+                <input type="hidden" name="user_without" id="user_without" value="{{$user->state}}">
+                <input type="hidden" name="good_type" id="good_type" />
                 <!-- 안심번호 -->
                 <div class="g_subtitle first">물품정보</div>
                 <table class="g_blue_table">
@@ -117,26 +137,13 @@
                                         <div class="popular_game" data-popular="true">
                                             <div class="popular_game_title">인기게임</div>
                                             <ul class="popular_list">
-                                                <li data-pgame="4714">
-                                                    <em class="top_rank">1</em>디아블로2:레저렉션                                </li>
-                                                <li data-pgame="4696">
-                                                    <em class="top_rank">2</em>오딘:발할라라이징                                </li>
-                                                <li data-pgame="2696">
-                                                    <em class="top_rank">3</em>로스트아크                                </li>
-                                                <li data-pgame="138">
-                                                    <em>4</em>메이플스토리                                </li>
-                                                <li data-pgame="281">
-                                                    <em>5</em>던전앤파이터                                </li>
-                                                <li data-pgame="4685">
-                                                    <em>6</em>블레이드앤소울2                                </li>
-                                                <li data-pgame="3449">
-                                                    <em>7</em>리니지M                                </li>
-                                                <li data-pgame="546">
-                                                    <em>8</em>아이온                                </li>
-                                                <li data-pgame="4326">
-                                                    <em>9</em>리니지2M                                </li>
-                                                <li data-pgame="4322">
-                                                    <em>10</em>바람의나라:연                                </li>
+                                                @if(!empty($popular))
+                                                    @foreach($popular as $item)
+                                                        <li data-pgame="{{$item["game_code"]}}">
+                                                            <em class="top_rank">{{$item['order']}}</em>{{$item["game"]["game"]}}
+                                                        </li>
+                                                    @endforeach
+                                                @endif
                                             </ul>
                                         </div>
                                     </div>
@@ -409,7 +416,7 @@
                         <strong class="total_charge_money f_red1" id="total_charge_money">0원</strong>
                         <div>
                             (내 사용가능한 마일리지 :
-                            <strong id="txtCurrentMileage" class="f_red1">12,000원</strong>)
+                            <strong id="txtCurrentMileage" class="f_red1">{{number_format($user->mileage)}}원</strong>)
                         </div>
                     </div>
                 </div>
@@ -417,14 +424,13 @@
                     .SafetyNumber_plus {display:none;}
                 </style>
                 <!-- ▼ 연락처 중복 //-->
-                <input type="hidden" name="user_id" id="user_id" value="dlwkd1640">
-                <input type="hidden" name="user_contactA" id="user_contactA" value="070">
-                <input type="hidden" name="user_contactB" id="user_contactB" value="3595">
-                <input type="hidden" name="user_contactC" id="user_contactC" value="6151">
+                <input type="hidden" name="user_contactA" id="user_contactA" value="{{$home_a}}">
+                <input type="hidden" name="user_contactB" id="user_contactB" value="{{$home_b}}">
+                <input type="hidden" name="user_contactC" id="user_contactC" value="{{$home_c}}">
                 <input type="hidden" name="slctMobile_type" id="slctMobile_type" value="3">
-                <input type="hidden" name="user_mobileA" id="user_mobileA" value="010">
-                <input type="hidden" name="user_mobileB" id="user_mobileB" value="2424">
-                <input type="hidden" name="user_mobileC" id="user_mobileC" value="0956"><!-- ▲ 연락처 중복 //-->
+                <input type="hidden" name="user_mobileA" id="user_mobileA" value="{{$mobile_a}}">
+                <input type="hidden" name="user_mobileB" id="user_mobileB" value="{{$mobile_b}}">
+                <input type="hidden" name="user_mobileC" id="user_mobileC" value="{{$mobile_c}}"><!-- ▲ 연락처 중복 //-->
 
                 <div class="g_subtitle">내 거래정보</div>
                 <table class="g_blue_table private_area">
@@ -434,7 +440,7 @@
                     </colgroup>
                     <tr>
                         <th>이름</th>
-                        <td>구모서</td>
+                        <td>{{$user->name}}</td>
                     </tr>
                     <tr>
                         <th>연락처</th>
@@ -442,7 +448,7 @@
                 <span id="spnUserPhone">
                 070-3595-6151                </span>
                             ( <label><input type="checkbox" class="g_checkbox" name="user_cell_check" id="chk_user_cell_check" value="on" checked> 자택번호안내</label> ) /
-                            <span id="spnUserCell">010-2424-0956</span>
+                            <span id="spnUserCell">{{$user->number}}</span>
                             <a href="javascript:_window.open('private_edit', '/user/contact_edit.html?check=true', 496, 350);" class="btn_white1 after">연락처 수정</a>
                         </td>
                     </tr>
@@ -508,11 +514,14 @@
                         <th>우수인증</th>
                         <td>
                             <div class="excellent_txt">
-                                우수인증 회원이 아닙니다.                </div>
+                                @if(empty($user->email_verified_at) || $user->bank_verified == 0 || $user->mobile_verified == 0)
+                                    우수인증 회원이 아닙니다.
+                                @endif
+                            </div>
                             <ul class="excellent">
-                                <li class="cert_state on">휴대폰</li>
-                                <li class="cert_state">이메일</li>
-                                <li class="cert_state on">출금계좌</li>
+                                <li class="cert_state @if($user->mobile_verified == 1) on @endif">휴대폰</li>
+                                <li class="cert_state @if(!empty($user->email_verified_at)) on @endif">이메일</li>
+                                <li class="cert_state @if($user->bank_verified ==1 ) on @endif">출금계좌</li>
                             </ul>
                             <a href="javascript:_window.open('excellent_guide','/popup/excellent_guide.html',520, 440);" class="guide_txt">우수인증회원이란?</a>
                         </td>
@@ -555,7 +564,7 @@
                 <div class="f_blue3 middle_text">프리미엄 물품 등록을 하시면 물품 리스트 상단에 판매 물품 노출이 가능합니다.<br/>빠른 거래를 원하신다면 프리미엄 등록서비스를 이용하시기 바랍니다.
                 </div>
                 <div class="f_blue3 mile_area">(내 사용가능한 마일리지 :
-                    <span id="pop_txtCurrentMileage" class="f_org1">12,000</span> 원)
+                    <span id="pop_txtCurrentMileage" class="f_org1">{{number_format($user->mileage)}}</span> 원)
                 </div>
                 <div class="dvpremium">
                     <div class="g_left">

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MItem;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
 
 class VMyRoomController extends BaseController
 {
     public function __construct()
     {
-
+        parent::__construct();
     }
 
     /**
@@ -52,9 +52,16 @@ class VMyRoomController extends BaseController
         return view('mania.myroom.sell_regist');
     }
 
-    public function sell_regist_view()
+    public function sell_regist_view(Request $request)
     {
-        return view('mania.myroom.sell_regist_view');
+        $id = $request->id;
+        $game = MItem::with(['user','game','server'])->where("orderNo",$id)->where("userId",$this->user->id)->first();
+
+        if(empty($game)){
+            echo '<script>alert("잘못된 요청입니다.");window.history.back()</script>';
+            return;
+        }
+        return view('mania.myroom.sell_regist_view',$game);
     }
 
     public function sell_re_reg()

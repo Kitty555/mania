@@ -1,10 +1,3 @@
-/*
- * @title		íŒë§¤ë¬¼í’ˆ í™•ì¸
- * @author		ì´ì£¼ì›
- * @date		2007.10.19
- * @update		ìˆ˜ì •ë‚ ì§œ(ìˆ˜ì •ìž)
- * @description
- */
 
 var e_sale = {
     'general': 0,
@@ -29,7 +22,7 @@ var g_trade_info = {
 var checker = null;
 
 function _init() {
-    /* â–¼ í¥ì • ê±°ëž˜ì‹œ */
+    /* ▼ 흥정 거래시 */
     var frm = $('#frmbaRequest');
 
     if (frm.length > 0) {
@@ -38,12 +31,12 @@ function _init() {
             inputObj: frm.find('input[name="ba_money"]'),
             strType: 'price',
             protect: true,
-            message: 'í¥ì •ì‹ ì²­ê¸ˆì•¡ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”'
+            message: '흥정신청금액을 입력해주세요'
         });
         checker.add({
             custom: function() {
                 if ($('#user_without').val() == 6) {
-                    if (!confirm('ê³ ê°ë‹˜ì€ í˜„ìž¬ íšŒì›íƒˆí‡´ ì‹ ì²­ ì§„í–‰ì¤‘ìž…ë‹ˆë‹¤.\nêµ¬ë§¤ ì‹ ì²­ ì§„í–‰ ì‹œ ì‹ ì²­í•˜ì‹  íšŒì›íƒˆí‡´ ì ‘ìˆ˜ê°€ ì² íšŒë©ë‹ˆë‹¤.\nê³„ì† ì§„í–‰ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?')) {
+                    if (!confirm('고객님은 현재 회원탈퇴 신청 진행중입니다.\n구매 신청 진행 시 신청하신 회원탈퇴 접수가 철회됩니다.\n계속 진행 하시겠습니까?')) {
                         return;
                     }
                 }
@@ -51,29 +44,29 @@ function _init() {
                 var ba_money = $(this).find('input[name="ba_money"]').val();
                 ba_money = ba_money.replace(/[,]+/g, '');
                 if (Number(ba_money) < 3000) {
-                    alert('í¥ì •ì‹ ì²­ê¸ˆì•¡ì„ 3,000ì› ì´ìƒ ìž…ë ¥í•´ ì£¼ì„¸ìš”.');
+                    alert('흥정신청금액을 3,000원 이상 입력해 주세요.');
                     $(this).find('input[name="ba_money"]').val('').focus();
                     return;
                 }
 
                 if (ba_money < parseInt($(this).find('input[name="ba_deny_money"]').val())) {
-                    alert('ìµœì†Œ í¥ì •ê°€ëŠ¥ ê¸ˆì•¡ë³´ë‹¤ í° ê¸ˆì•¡ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+                    alert('최소 흥정가능 금액보다 큰 금액을 입력해주세요.');
                     $(this).find('input[name="ba_money"]').val('').focus();
                     return;
                 }
 
-                /* â–¼ ë˜ì „ì•¤íŒŒì´í„° í†µí•©ì„œë²„ ì²˜ë¦¬ */
+                /* ▼ 던전앤파이터 통합서버 처리 */
                 if ($('#dfServer').length > 0) {
                     if (document.getElementById('dfServerList').serverList.getValue().code.isEmpty()) {
-                        alert('ë¬¼í’ˆì„ ì „ë‹¬ ë°›ìœ¼ì‹¤ ì„œë²„ë¥¼ ì„ íƒ í•´ì£¼ì„¸ìš”.');
+                        alert('물품을 전달 받으실 서버를 선택 해주세요.');
                         return false;
                     }
                 }
-                /* â–² ë˜ì „ì•¤íŒŒì´í„° í†µí•©ì„œë²„ ì²˜ë¦¬ */
+                /* ▲ 던전앤파이터 통합서버 처리 */
 
                 if($('#trade_kind').val() != 6){
                     if ($('#user_character').val().isEmpty()) {
-                        alert('ë¬¼í’ˆì„ ì „ë‹¬ ë°›ìœ¼ì‹¤ ìºë¦­í„°ëª…ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+                        alert('물품을 전달 받으실 캐릭터명을 입력해주세요.');
                         $('#user_character').focus();
                         return false;
                     }
@@ -105,7 +98,7 @@ function _init() {
                         var rgResult = res.split('|');
                         switch (rgResult[0]) {
                             case 'S':
-                                if (!confirm('í¥ì •ê±°ëž˜ë¥¼ ì‹ ì²­í•˜ê² ìŠµë‹ˆê¹Œ?')) {
+                                if (!confirm('흥정거래를 신청하겠습니까?')) {
                                     return;
                                 }
                                 $('#frmbaRequest').off('submit').submit();
@@ -115,16 +108,15 @@ function _init() {
                         }
                     },
                     error: function() {
-                        alert('ì„œë¹„ìŠ¤ê°€ ì›í• í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ìž ì‹œí›„ ì´ìš©í•´ ì£¼ì„¸ìš”.');
+                        alert('서비스가 원할하지 않습니다. 잠시후 이용해 주세요.');
                     }
                 });
-                /* â–² ì—°ë½ì²˜ ì¤‘ë³µì²´í¬ */
+                /* ▲ 연락처 중복체크 */
             }
         });
 
         frm.find('input[name="ba_money"]').bind('blur', checkBaMoney);
-
-        /* â–¼ ë˜ì „ì•¤íŒŒì´í„° í†µí•©ì„œë²„ ì²˜ë¦¬ */
+        /* ▼ 던전앤파이터 통합서버 처리 */
         var userCharacter = document.getElementById('user_character');
         if ($('#dfServer').length > 0) {
             var dfServerCode = document.querySelector('[name="df_server_code"]').value;
@@ -141,9 +133,9 @@ function _init() {
 
             userCharacter.setAttribute('maxlength', 27);
         }
-        /* â–² ë˜ì „ì•¤íŒŒì´í„° í†µí•©ì„œë²„ ì²˜ë¦¬ */
+        /* ▲ 던전앤파이터 통합서버 처리 */
     }
-    /* â–² í¥ì • ê±°ëž˜ì‹œ */
+    /* ▲ 흥정 거래시 */
 
     $('#trade_fraud').find('a').click(function() {
         $('#fraud_result').find('.result').attr('class', 'result');
@@ -163,7 +155,7 @@ function _init() {
             },
             success: function(res) {
                 if (res.result == 'SUCCESS') {
-                    // res.data : Y - í”¼í•´ì‚¬ë¡€ ìžˆìŒ / N - ì—†ìŒ
+                    // res.data : Y - 피해사례 있음 / N - 없음
                     if (res.data == 'Y') {
                         $('#fraud_result').find('.result').addClass('warn');
                     } else {
@@ -175,7 +167,7 @@ function _init() {
                 }
             },
             error: function(res) {
-                alert('ì„œë²„ì™€ì˜ ì ‘ì†ì´ ì›í™œí•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.\nìž ì‹œí›„ ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”.');
+                alert('서버와의 접속이 원활하지 않습니다.\n잠시후 다시 시도해주세요.');
                 return;
             }
         });
@@ -185,10 +177,10 @@ function _init() {
         var detail = document.getElementById('detail_info');
         if (detail.classList.contains('wide') == true) {
             detail.classList.remove('wide');
-            this.innerHTML = 'íŽ¼ì³ë³´ê¸°â–¼';
+            this.innerHTML = '펼쳐보기▼';
         } else {
             detail.classList.add('wide');
-            this.innerHTML = 'íŽ¼ì¹¨ë‹«ê¸°â–²';
+            this.innerHTML = '닫기▼';
         }
     });
 
@@ -216,20 +208,20 @@ function checkBaMoney() {
 
     var last = ba_money.substring(ba_money.length - 2, ba_money.length);
     if (last != '00') {
-        alert('í¥ì •ì‹ ì²­ê¸ˆì•¡ì— ì‹­ì›ë‹¨ìœ„ì™€ ì¼ì›ë‹¨ìœ„ëŠ” 0ì´ì™¸ì˜ ìˆ«ìžë¥¼ ìž…ë ¥í• ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\ní¥ì •ì‹ ì²­ê¸ˆì•¡ì„ ë‹¤ì‹œ ê¸°ìž¬í•´ ì£¼ì„¸ìš”.\n\nì˜ˆ) 12,345(ë¶ˆê°€ëŠ¥), 12,300(ê°€ëŠ¥)');
+        alert('흥정신청금액에 십원단위와 일원단위는 0이외의 숫자를 입력할수 없습니다.\n\n흥정신청금액을 다시 기재해 주세요.\n\n예) 12,345(불가능), 12,300(가능)');
         frm.find('input[name="ba_money"]').val('').focus();
         return false;
     }
 
     if (g_trade_info.trade_money <= ba_money) {
-        alert('ì¦‰ì‹œíŒë§¤ê¸ˆì•¡ ë³´ë‹¤ ìž‘ì€ ê¸ˆì•¡ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+        alert('즉시판매금액 보다 작은 금액을 입력해주세요.');
         frm.find('input[name="ba_money"]').val('').focus();
         return;
     }
 
     if (g_trade_info.ba_deny_money > 0) {
         if (g_trade_info.ba_deny_money > ba_money) {
-            alert('ìµœì†Œí¥ì • ê°€ëŠ¥ê¸ˆì•¡ ë³´ë‹¤ í° ê¸ˆì•¡ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+            alert('최소흥정 가능금액 보다 큰 금액을 입력해주세요.');
             frm.find('input[name="ba_money"]').val('').focus();
             return;
         }

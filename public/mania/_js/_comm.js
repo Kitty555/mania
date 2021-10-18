@@ -3253,7 +3253,7 @@ function _initialize() {
             __init()
         }
         if ("___init" in window) {
-            ___init()
+            __init()
         }
         $("input, textarea").placeholder()
     } catch (a) {
@@ -3267,4 +3267,4 @@ function _initialize() {
 function login() {
     var a = encodeURIComponent(document.URL);
     window.open(SSL_DOMAIN + "/portal/user/login_form.html?returnUrl=" + a, "login", "height=564,width=330, status=no,toolbar=no,menubar=no,location=no,fullscreen=no,scrollbars=no,resizable=no,titlebar=no")
-};
+}

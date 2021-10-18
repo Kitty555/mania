@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/forms', Forms::class)->name('forms');
     Route::get('/modals', Modals::class)->name('modals');
     Route::get('/typography', Typography::class)->name('typography');
-
+    Route::post('/addService', [\App\Http\Controllers\ManiaController::class, 'addService'])->name('addService');
     /**
      * By Jong
      */
@@ -108,6 +108,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/buy/application', [\App\Http\Controllers\VBuyController::class, 'buy_application'])->name('buy_application');
 
     Route::get('/certify/payment/user_certify', [\App\Http\Controllers\VCertifyController::class, 'user_certify'])->name('user_certify');
+    Route::get('/logout', [\App\Http\Controllers\ManiaController::class,'logout'])->name('logout');
 });
 
 /**

@@ -659,7 +659,7 @@
             if(_gamedata.json === null && _serverdata.json === null && _gamedata.state === null) {
                 _gamedata.state = false;
                 ajaxRequest({
-                    url: "/_json/gameserverlist.json",
+                    url: "/api/json/gameserverlist.json",
                     dataType: "json",
                     cache: false,
                     success: function(o) {

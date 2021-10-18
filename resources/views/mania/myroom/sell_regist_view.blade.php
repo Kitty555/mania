@@ -1,3 +1,24 @@
+@php
+
+    $selltype = '일반';
+    if(!empty($user_goods_type) && $user_goods_type == 'division'){
+        $selltype = '분할';
+    }
+    if(!empty($user_goods_type) && $user_goods_type == 'bargain'){
+        $selltype = '할인';
+    }
+
+    $category = '> > 기타';
+    if(!empty($game['game'])){
+        $category = $game['game']." > ";
+    }
+    if(!empty($server['game'])){
+        $category .= $server['game']." > ";
+    }
+    if(!empty($good_type)){
+        $category .= $good_type;
+    }
+@endphp
 @extends('layouts-mania.app')
 
 @section('head_attach')
@@ -68,30 +89,30 @@
                 <col/> </colgroup>
             <tr>
                 <th>카테고리</th>
-                <td colspan="3">DC언체인드 > 기타 > 기타</td>
+                <td colspan="3">{{$category}}</td>
             </tr>
             <tr>
                 <th>물품제목</th>
                 <td colspan="3">
-                    <!-- 퀵 아이콘 -->기타 팝니다. </td>
+                    {{$user_title}} </td>
             </tr>
             <tr>
                 <th>거래번호</th>
-                <td>#2021101311629153</td>
+                <td>#{{$orderNo}}</td>
                 <th>등록일시</th>
-                <td>2021-10-13 21:29</td>
+                <td>{{date("Y-m-d H:i:s",strtotime($created_at))}}</td>
             </tr>
             <tr>
                 <th>거래유형</th>
-                <td colspan="3">일반</td>
+                <td colspan="3">{{$selltype}}</td>
             </tr>
             <tr>
                 <th>판매금액</th>
-                <td colspan="3">3,000원</td>
+                <td colspan="3">{{number_format($user_price ?? '0')}}원</td>
             </tr>
             <tr>
                 <th>판매자 캐릭터명</th>
-                <td colspan="3">홍길동</td>
+                <td colspan="3">{{$user_character}}</td>
             </tr>
         </table>
         <!-- ▲ 물품정보 //-->
@@ -104,15 +125,10 @@
             </colgroup>
             <tr>
                 <th>이름</th>
-                <td>이장훈</td>
+                <td>{{$user['name']}}</td>
             <tr>
                 <th>연락처</th>
-                <td> 자택번호없음 / 010-4797-3690 <span class='f_blue3 f_bold'>(SMS수신)</span> </td>
-            </tr>
-            <tr>
-                <th>거래알림</th>
-                <td>
-                    <input type='checkbox' disabled='disabled' class='g_checkbox' /> 모바일앱 거래관련 push 알림 <a href="javascript:_window.open('push_guide', '/sell/guide/apppush.html', 650, 1000)" class="guide_txt">앱 PUSH알림이란?</a> </td>
+                <td> @if(empty($user["home"])){{'자택번호없음'}}@else{{$user['home']}}@endif / {{$user['number']}} <span class='f_blue3 f_bold'>(SMS수신)</span> </td>
             </tr>
         </table>
         <!-- ▲ 내 개인정보 //-->
@@ -122,27 +138,27 @@
             <div class="g_subtitle"> 거래 진행 상황 </div>
             <div class="trade_progress_content">
                 <div class="guide_wrap">
-                    <div class="guide_set active"> <span class="SpGroup sell_regist_icon"></span> <span class="state">판매등록</span>
+                    <div class="guide_set @if($status == 0){{'active'}} @endif"> <span class="SpGroup sell_regist_icon"></span> <span class="state">판매등록</span>
                         <p>판매할 물품을 등록해놓은
                             <br/>[거래대기] 상태입니다.
                             <br/>구매신청이 들어올때까지
                             <br/>기다려주세요.</p>
                     </div>
-                    <div class="guide_set"> <span class="SpGroup pay_wait_icon"></span> <span class="state">입금대기</span>
+                    <div class="guide_set @if($status == 1){{'active'}} @endif"> <span class="SpGroup pay_wait_icon"></span> <span class="state">입금대기</span>
                         <p>구매자가 구매신청 후
                             <br/>입금을 준비하고 있습니다.
                             <br/>입금완료 후, 판매중 상태가
                             <br/>되면 거래를 시작해주세요.</p> <i class="SpGroup arr_mini"></i> </div>
-                    <div class="guide_set"> <span class="SpGroup sell_ing_icon"></span> <span class="state">판매중</span>
+                    <div class="guide_set @if($status == 2){{'active'}} @endif"> <span class="SpGroup sell_ing_icon"></span> <span class="state">판매중</span>
                         <p>현재 구매자와 거래중입니다.
                             <br/>구매자와 반드시 전화통화로
                             <br/>거래할 캐릭터명을 확인 후
                             <br/>물품을 건네시기 바랍니다. </p> <i class="SpGroup arr_mini"></i> </div>
-                    <div class="guide_set"> <span class="SpGroup trade_icon"></span> <span class="state">인계완료</span>
+                    <div class="guide_set @if($status == 3){{'active'}} @endif"> <span class="SpGroup trade_icon"></span> <span class="state">인계완료</span>
                         <p>거래종료 예정입니다.
                             <br/>구매자가 인수할때까지
                             <br/>기다려주세요.</p> <i class="SpGroup arr_mini"></i> </div>
-                    <div class="guide_set"> <span class="SpGroup sell_complete_icon"></span> <span class="state">판매완료</span>
+                    <div class="guide_set @if($status == 4){{'active'}} @endif"> <span class="SpGroup sell_complete_icon"></span> <span class="state">판매완료</span>
                         <p>거래가 정상적으로
                             <br/>종료되었습니다.
                             <br/>문제 발생 시
@@ -161,7 +177,7 @@
         <!-- ▼ 상세설명 //-->
         <div class="g_subtitle">상세설명</div>
         <div class="detail_info">
-            <div class="detail_text"> 기타&#160;팝니다. </div>
+            <div class="detail_text"> {{$user_text}} </div>
         </div>
         <!-- ▲ 상세설명 //-->
         <div class="g_right">
@@ -176,7 +192,7 @@
 
 @section('foot_attach')
     <script type="text/javascript" src="/mania/_js/_jquery3.js?v=190220"></script>
-    <script type="text/javascript" src="/mania/_js/_comm.min.js?v=21100516"></script>
+    <script type="text/javascript" src="/mania/_js/_comm.js"></script>
     <script type="text/javascript" src="/mania/_js/_gs_control_200924.min.js?v=21100816"></script>
     <script type="text/javascript" src="/mania/_js/_common_initialize_new.min.js?v=21050316"></script>
     <script type="text/javascript" src="/mania/js/sell_regist.js?v=190426"></script>

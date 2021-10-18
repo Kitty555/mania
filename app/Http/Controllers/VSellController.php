@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MItem;
+use App\Models\MPopularCharacter;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 
 class VSellController extends BaseController
 {
     public function __construct()
     {
-
+        parent::__construct();
     }
 
     /**
@@ -19,22 +21,47 @@ class VSellController extends BaseController
      */
     public function index()
     {
-        return view('mania.sell.main');
+
+        $popular = MPopularCharacter::with('game')->get()->toArray();
+        return view('mania.sell.main',[
+            'popular'=>$popular,
+            'user'=>$this->user
+        ]);
     }
 
-    public function index_view()
+    public function index_view(Request $request)
     {
-        return view('mania.sell.index_view');
+        $orderNo=  $request->orderNo;
+        $item = MItem::with(['game','server'])->where('userId',$this->user->id)->where('orderNo',$orderNo)->first();
+        if($item == null) $item = array();
+        return view('mania.sell.index_view',$item);
     }
 
-    public function sell_view()
+    public function sell_view(Request $request)
     {
-        return view('mania.sell.sell_view');
+        $orderNo = $request->id;
+
+        $game = MItem::with(['game','server','user'])->where('orderNo',$orderNo)->where("userId","!=",$this->user->id)->first();
+        if(empty($game)){
+            echo '<script>alert("잘못된 접근입니다.");window.history.back();</script>';
+            return;
+        }
+        return view('mania.sell.sell_view',$game);
     }
 
-    public function sell_application()
+    public function sell_application(Request $request)
     {
-        return view('mania.sell.sell_application');
+        $id = $request->id;
+        $game = MItem::with(['game','server','user'])
+            ->where('orderNo',$id)
+            ->where('userId',"!=",$this->user->id)
+            ->where('status',0)
+            ->where('type','sell')->first();
+        if(empty($game)){
+            echo '<script>alert("정상적인 경로를 이용해주세요.");window.history.back();</script>';
+            return;
+        }
+        return view('mania.sell.sell_application',$game);
     }
 
     /**
