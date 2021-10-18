@@ -1,4 +1,16 @@
+
 (function(j, l, f) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        statusCode: {
+            401: function(){
+                alert("로그아웃상태이므로 요청을 수락할수 없습니다.")
+                // Redirec the to the login page.
+            }
+        }
+    });
     var b = Object.prototype.toString.call(j.operamini) == "[object OperaMini]";
     var a = "placeholder" in l.createElement("input") && !b;
     var g = "placeholder" in l.createElement("textarea") && !b;
@@ -7,7 +19,7 @@
     var c = f.propHooks;
     var o;
     var n;
-    if(a && g) {
+    if (a && g) {
         n = m.placeholder = function() {
             return this
         };
@@ -27,7 +39,7 @@
             get: function(r) {
                 var q = f(r);
                 var s = q.data("placeholder-password");
-                if(s) {
+                if (s) {
                     return s[0].value
                 }
                 return q.data("placeholder-enabled") && q.hasClass("placeholder") ? "" : r.value
@@ -35,19 +47,19 @@
             set: function(r, t) {
                 var q = f(r);
                 var s = q.data("placeholder-password");
-                if(s) {
+                if (s) {
                     return s[0].value = t
                 }
-                if(!q.data("placeholder-enabled")) {
+                if (!q.data("placeholder-enabled")) {
                     return r.value = t
                 }
-                if(t == "") {
+                if (t == "") {
                     r.value = t;
-                    if(r != p()) {
+                    if (r != p()) {
                         h.call(r)
                     }
                 } else {
-                    if(q.hasClass("placeholder")) {
+                    if (q.hasClass("placeholder")) {
                         d.call(r, true, t) || (r.value = t)
                     } else {
                         r.value = t
@@ -56,11 +68,11 @@
                 return q
             }
         };
-        if(!a) {
+        if (!a) {
             e.input = o;
             c.value = o
         }
-        if(!g) {
+        if (!g) {
             e.textarea = o;
             c.value = o
         }
@@ -83,7 +95,7 @@
         var q = {};
         var s = /^jQuery\d+$/;
         f.each(r.attributes, function(u, t) {
-            if(t.specified && !s.test(t.name)) {
+            if (t.specified && !s.test(t.name)) {
                 q[t.name] = t.value
             }
         });
@@ -93,10 +105,10 @@
     function d(r, s) {
         var q = this;
         var t = f(q);
-        if(q.value == t.attr("placeholder") && t.hasClass("placeholder")) {
-            if(t.data("placeholder-password")) {
+        if (q.value == t.attr("placeholder") && t.hasClass("placeholder")) {
+            if (t.data("placeholder-password")) {
                 t = t.hide().next().show().attr("id", t.removeAttr("id").data("placeholder-id"));
-                if(r === true) {
+                if (r === true) {
                     return t[0].value = s
                 }
                 t.focus()
@@ -113,14 +125,14 @@
         var q = this;
         var t = f(q);
         var s = this.id;
-        if(q.value == "") {
-            if(q.type == "password") {
-                if(!t.data("placeholder-textinput")) {
+        if (q.value == "") {
+            if (q.type == "password") {
+                if (!t.data("placeholder-textinput")) {
                     try {
                         u = t.clone().attr({
                             type: "text"
                         })
-                    } catch(r) {
+                    } catch (r) {
                         u = f("<input>").attr(f.extend(k(this), {
                             type: "text"
                         }))
@@ -146,7 +158,7 @@
     function p() {
         try {
             return l.activeElement
-        } catch(q) {}
+        } catch (q) {}
     }
 }(this, document, jQuery));
 (function() {
@@ -154,7 +166,7 @@
         return new RegExp("(^| )" + d + "( |$)")
     };
     var c = function(g, f, e) {
-        for(var d = 0; d < g.length; d++) {
+        for (var d = 0; d < g.length; d++) {
             f.call(e, g[d])
         }
     };
@@ -165,7 +177,7 @@
     b.prototype = {
         add: function() {
             c(arguments, function(d) {
-                if(!this.contains(d)) {
+                if (!this.contains(d)) {
                     this.element.className += this.element.className.length > 0 ? " " + d : d
                 }
             }, this)
@@ -185,27 +197,27 @@
             this.remove(e), this.add(d)
         }
     };
-    if(!("classList" in Element.prototype)) {
+    if (!("classList" in Element.prototype)) {
         Object.defineProperty(Element.prototype, "classList", {
             get: function() {
                 return new b(this)
             }
         })
     }
-    if(window.DOMTokenList && DOMTokenList.prototype.replace === null) {
+    if (window.DOMTokenList && DOMTokenList.prototype.replace === null) {
         DOMTokenList.prototype.replace = b.prototype.replace
     }
-    if(!Element.prototype.matches) {
+    if (!Element.prototype.matches) {
         Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector
     }
-    if(!Element.prototype.closest) {
+    if (!Element.prototype.closest) {
         Element.prototype.closest = function(e) {
             var d = this;
-            if(!document.documentElement.contains(d)) {
+            if (!document.documentElement.contains(d)) {
                 return null
             }
             do {
-                if(d.matches(e)) {
+                if (d.matches(e)) {
                     return d
                 }
                 d = d.parentElement || d.parentNode
@@ -221,7 +233,7 @@
         n.filestyle.opts = g || {};
         var l = f.length;
         var c = n.filestyle.opts;
-        for(var k = 0; k < l; k++) {
+        for (var k = 0; k < l; k++) {
             var e = document.createElement("div");
             e.className = "g_screenshot";
             n.appendChild(e);
@@ -236,10 +248,10 @@
             e.appendChild(b);
             var d = document.createElement("span");
             d.className = "tmp_btn";
-            d.innerHTML = "ì°¾ì•„ë³´ê¸°";
+            d.innerHTML = "찾아보기";
             b.appendChild(d);
             b.appendChild(f[k]);
-            if(c.btn === true) {
+            if (c.btn === true) {
                 var m = document.createElement("div");
                 m.className = "ad_btn";
                 e.appendChild(m);
@@ -253,27 +265,27 @@
                 m.appendChild(h)
             }
         }
-        if(c.btn === true) {
+        if (c.btn === true) {
             document.addEventListener("change", function(s) {
-                if(s.target.name === f[0].name) {
+                if (s.target.name === f[0].name) {
                     var o = s.target.parentNode;
-                    while(o.classList.contains("g_screenshot") === false) {
+                    while (o.classList.contains("g_screenshot") === false) {
                         o = o.parentNode
                     }
-                    if(s.target.files === undefined) {
+                    if (s.target.files === undefined) {
                         o.querySelector('[type="text"]').value = s.target.value
                     } else {
                         var r = s.target.files[0];
-                        if(r) {
+                        if (r) {
                             var q = r.type.toLowerCase();
-                            if(q.indexOf("jpg") === -1 && q.indexOf("jpeg") === -1) {
-                                alert("JPG íŒŒì¼ë§Œ ì²¨ë¶€ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+                            if (q.indexOf("jpg") === -1 && q.indexOf("jpeg") === -1) {
+                                alert("JPG 파일만 첨부 가능합니다.");
                                 s.target.value = "";
                                 o.querySelector('[type="text"]').value = s.target.value;
                                 return
                             }
-                            if(r.size > 300000) {
-                                alert("300kb ì´í•˜ì˜ ì´ë¯¸ì§€ë§Œ ë“±ë¡í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.");
+                            if (r.size > 300000) {
+                                alert("300kb 이하의 이미지만 등록할 수 있습니다.");
                                 s.target.value = "";
                                 o.querySelector('[type="text"]').value = s.target.value;
                                 return
@@ -284,16 +296,16 @@
                 }
             });
             document.addEventListener("click", function(u) {
-                if(u.target.className === "screen_del") {
+                if (u.target.className === "screen_del") {
                     var s = n.querySelectorAll(".g_screenshot");
-                    if(s.length < 1) {
+                    if (s.length < 1) {
                         return
                     }
                     var q = u.target.parentNode;
-                    while(q.classList.contains("g_screenshot") === false) {
+                    while (q.classList.contains("g_screenshot") === false) {
                         q = q.parentNode
                     }
-                    if(s.length == 1) {
+                    if (s.length == 1) {
                         q.querySelector('[type="text"]').value = "";
                         q.querySelector('[type="file"]').value = "";
                         return
@@ -301,14 +313,14 @@
                     var o = Array.prototype.indexOf.call(s, q);
                     var t = n.querySelector(".screen_add").cloneNode(true);
                     n.removeChild(s[o]);
-                    if(o === 0) {
+                    if (o === 0) {
                         n.querySelectorAll(".ad_btn")[0].appendChild(t)
                     }
                 }
-                if(u.target.className === "screen_add") {
+                if (u.target.className === "screen_add") {
                     var w = c.remain || 0;
-                    if(w + n.querySelectorAll(".g_screenshot").length >= c.limit) {
-                        alert("ìµœëŒ€ " + c.limit + "ê°œ ê¹Œì§€ ë“±ë¡ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+                    if (w + n.querySelectorAll(".g_screenshot").length >= c.limit) {
+                        alert("최대 " + c.limit + "개 까지 등록 가능합니다.");
                         return
                     }
                     var v = e.cloneNode(true);
@@ -325,7 +337,7 @@
 (function() {
     var a = function(d, e) {
         var p = d[0].parentElement;
-        while(p.classList.contains("screenshot_wrap") === false) {
+        while (p.classList.contains("screenshot_wrap") === false) {
             p = p.parentNode
         }
         p.filestyle = this;
@@ -333,35 +345,35 @@
         p.classList.add("screenshot_wrap2");
         var b = p.filestyle.opts;
         var m = b.count || 10;
-        if(m > 5) {
+        if (m > 5) {
             var s = document.createElement("div");
             s.className = "view_info";
-            if(d.length > 5) {
+            if (d.length > 5) {
                 p.classList.add("on");
-                s.innerHTML = "ë‹«ê¸° â–²"
+                s.innerHTML = "닫기 ▲"
             } else {
-                s.innerHTML = "ì´ë¯¸ì§€ ì¶”ê°€ ë“±ë¡ â–¼"
+                s.innerHTML = "이미지 추가 등록 ▼"
             }
             p.parentElement.appendChild(s);
             s.addEventListener("click", function() {
-                if(p.classList.contains("on") === true) {
+                if (p.classList.contains("on") === true) {
                     p.classList.remove("on");
-                    this.innerHTML = "ì´ë¯¸ì§€ ì¶”ê°€ ë“±ë¡ â–¼"
+                    this.innerHTML = "이미지 추가 등록 ▼"
                 } else {
                     p.classList.add("on");
-                    this.innerHTML = "ë‹«ê¸° â–²"
+                    this.innerHTML = "닫기 ▲"
                 }
             })
         }
-        for(var k = 0; k < m; k++) {
+        for (var k = 0; k < m; k++) {
             var g = d[k];
-            if(g === undefined) {
+            if (g === undefined) {
                 g = d[0].cloneNode();
                 g.removeAttribute("data-seq");
                 g.removeAttribute("data-img");
                 p.appendChild(g)
             }
-            if(g.parentElement.classList.contains("g_screenshot2") === true) {
+            if (g.parentElement.classList.contains("g_screenshot2") === true) {
                 var c = g.parentElement
             } else {
                 var c = document.createElement("div");
@@ -384,7 +396,7 @@
             f.appendChild(l);
             f.appendChild(n);
             var h = g.getAttribute("data-img");
-            if(h !== null) {
+            if (h !== null) {
                 c.classList.add("active");
                 var q = h.split("/");
                 q = q[q.length - 1].split(".");
@@ -396,20 +408,20 @@
                 r.style.display = "none"
             }
             f.addEventListener("click", function(o) {
-                if(o.target.className !== "screen_del") {
+                if (o.target.className !== "screen_del") {
                     this.previousElementSibling.click()
                 }
             })
         }
         document.addEventListener("change", function(y) {
-            if(y.target.name === d[0].name) {
-                if(y.target.value !== "") {
+            if (y.target.name === d[0].name) {
+                if (y.target.value !== "") {
                     var o = y.target.parentNode;
-                    while(o.classList.contains("g_screenshot2") === false) {
+                    while (o.classList.contains("g_screenshot2") === false) {
                         o = o.parentNode
                     }
                     var A = y.target.getAttribute("data-seq");
-                    if(A !== null) {
+                    if (A !== null) {
                         var B = document.createElement("input");
                         B.type = "hidden";
                         B.name = "screen_del[]";
@@ -425,20 +437,20 @@
                     D = D[D.length - 1].split(".");
                     var u = D[0];
                     var E = "." + D[1];
-                    if(y.target.files !== undefined) {
+                    if (y.target.files !== undefined) {
                         var x = y.target.files[0];
-                        if(x) {
+                        if (x) {
                             var w = x.type.toLowerCase();
-                            if(w.indexOf("jpg") === -1 && w.indexOf("jpeg") === -1) {
-                                alert("JPG íŒŒì¼ë§Œ ì²¨ë¶€ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+                            if (w.indexOf("jpg") === -1 && w.indexOf("jpeg") === -1) {
+                                alert("JPG 파일만 첨부 가능합니다.");
                                 y.target.value = "";
                                 v.innerHTML = "";
                                 z.innerHTML = "";
                                 o.classList.remove("active");
                                 return
                             }
-                            if(x.size > 300000) {
-                                alert("300kb ì´í•˜ì˜ ì´ë¯¸ì§€ë§Œ ë“±ë¡í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.");
+                            if (x.size > 300000) {
+                                alert("300kb 이하의 이미지만 등록할 수 있습니다.");
                                 y.target.value = "";
                                 v.innerHTML = "";
                                 z.innerHTML = "";
@@ -455,14 +467,14 @@
             }
         });
         document.addEventListener("click", function(y) {
-            if(y.target.className === "screen_del") {
+            if (y.target.className === "screen_del") {
                 var u = y.target.parentElement;
-                while(u.classList.contains("g_screenshot2") === false) {
+                while (u.classList.contains("g_screenshot2") === false) {
                     u = u.parentElement
                 }
                 var o = u.querySelector('[type="file"]');
                 var B = o.getAttribute("data-seq");
-                if(B !== null) {
+                if (B !== null) {
                     var C = document.createElement("input");
                     C.type = "hidden";
                     C.name = "screen_del[]";
@@ -480,10 +492,10 @@
                 o.value = "";
                 u.classList.remove("active")
             }
-            if(y.target.className === "screen_add") {
+            if (y.target.className === "screen_add") {
                 var w = b.remain || 0;
-                if(w + p.querySelectorAll(".g_screenshot").length >= b.limit) {
-                    alert("ìµœëŒ€ " + b.limit + "ê°œ ê¹Œì§€ ë“±ë¡ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+                if (w + p.querySelectorAll(".g_screenshot").length >= b.limit) {
+                    alert("최대 " + b.limit + "개 까지 등록 가능합니다.");
                     return
                 }
                 var z = c.cloneNode(true);
@@ -514,23 +526,23 @@ var getBrowserData = function() {
     var e = {};
     var b = e.uaString = a.userAgent;
     var c = b.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*([\d\.]+)/i) || [];
-    if(c[1]) {
+    if (c[1]) {
         c[1] = c[1].toLowerCase()
     }
     var g = c[1] === "chrome";
-    if(g) {
+    if (g) {
         g = b.match(/\bOPR\/([\d\.]+)/)
     }
-    if(/trident/i.test(c[1])) {
+    if (/trident/i.test(c[1])) {
         var h = /\brv[ :]+([\d\.]+)/g.exec(b) || [];
         e.name = "msie";
         e.version = h[1]
     } else {
-        if(g) {
+        if (g) {
             e.name = "opera";
             e.version = g[1]
         } else {
-            if(c[1] === "safari") {
+            if (c[1] === "safari") {
                 var j = b.match(/version\/([\d\.]+)/i);
                 e.name = "safari";
                 e.version = j[1]
@@ -541,12 +553,12 @@ var getBrowserData = function() {
         }
     }
     var k = [];
-    if(e.version) {
+    if (e.version) {
         var f = e.version.match(/(\d+)/g) || [];
-        for(var d = 0; d < f.length; d++) {
+        for (var d = 0; d < f.length; d++) {
             k.push(f[d])
         }
-        if(k.length > 0) {
+        if (k.length > 0) {
             e.majorVersion = k[0]
         }
     }
@@ -580,7 +592,7 @@ $.extend(_event, {
     relatedTarget: function(b) {
         b = this.event(b);
         var a;
-        switch(b.type) {
+        switch (b.type) {
             case "mouseover":
                 a = b.fromElement;
                 break;
@@ -594,7 +606,7 @@ $.extend(_event, {
     },
     isLeftClick: function(a) {
         a = this.event(a);
-        return(((a.which) && (a.which === 1)) || ((a.button) && (a.button === 1)))
+        return (((a.which) && (a.which === 1)) || ((a.button) && (a.button === 1)))
     },
     pointer: function(a) {
         a = this.event(a);
@@ -613,7 +625,7 @@ $.extend(_event, {
     },
     stopPropagation: function(a) {
         a = this.event(a);
-        if(a.stopPropagation) {
+        if (a.stopPropagation) {
             a.stopPropagation()
         } else {
             a.cancelBubble = true
@@ -623,8 +635,8 @@ $.extend(_event, {
         a = this.event(a);
         try {
             (a.which) ? a.which: a.keyCode = 0
-        } catch(b) {}
-        if(a.preventDefault) {
+        } catch (b) {}
+        if (a.preventDefault) {
             a.preventDefault()
         } else {
             a.returnValue = false
@@ -632,10 +644,10 @@ $.extend(_event, {
     },
     keycode: function(a) {
         a = this.event(a);
-        if(!a) {
+        if (!a) {
             return -1
         }
-        return(a.which) ? a.which : a.keyCode
+        return (a.which) ? a.which : a.keyCode
     },
     stop: function(a) {
         _event.preventDefault(a);
@@ -659,16 +671,16 @@ $.extend(String.prototype, {
         return this.replace(/\s*$/g, "")
     },
     isEmpty: function() {
-        return(this === null || this.trim() === "") ? true : false
+        return (this === null || this.trim() === "") ? true : false
     },
     isHangul: function() {
         var d = 0,
             a = "";
         var c = this.length;
-        for(var b = 0; b < c; b++) {
+        for (var b = 0; b < c; b++) {
             d = parseInt(this.charCodeAt(b));
             a = this.substr(b, 1).toUpperCase();
-            if((a < "0" || a > "9") && (a < "A" || a > "Z") && ((d > 255) || (d < 0))) {
+            if ((a < "0" || a > "9") && (a < "A" || a > "Z") && ((d > 255) || (d < 0))) {
                 return true
             }
         }
@@ -676,12 +688,12 @@ $.extend(String.prototype, {
     },
     isDate: function() {
         var b = this.replace(/[^0-9]/, "");
-        if(b.length === 8) {
+        if (b.length === 8) {
             var c = Number(b.substring(0, 4));
             var e = Number(b.substring(4, 6));
             var a = Number(b.substring(6, 8))
         } else {
-            if(b.length === 6) {
+            if (b.length === 6) {
                 var c = Number("19" + b.substring(0, 2));
                 var e = Number(b.substring(2, 4));
                 var a = Number(b.substring(4, 6))
@@ -690,10 +702,10 @@ $.extend(String.prototype, {
             }
         }
         var d = new Array(31, ((((c % 4 === 0) && (c % 100 !== 0)) || (c % 400 === 0)) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
-        if(e < 1 || e > 12) {
+        if (e < 1 || e > 12) {
             return false
         }
-        if(a < 1 || a > d[e - 1]) {
+        if (a < 1 || a > d[e - 1]) {
             return false
         }
         return true
@@ -707,17 +719,17 @@ $.extend(String.prototype, {
             h = 32,
             f = 127;
         var a = Array(4, 4, 4, 6, 6, 10, 8, 4, 5, 5, 6, 6, 4, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 8, 6, 8, 6, 12, 8, 8, 9, 8, 8, 7, 9, 8, 3, 6, 8, 7, 11, 9, 9, 8, 9, 8, 8, 8, 8, 8, 10, 8, 8, 8, 6, 11, 6, 6, 6, 4, 7, 7, 7, 7, 7, 3, 7, 7, 3, 3, 6, 3, 11, 7, 7, 7, 7, 4, 7, 3, 7, 6, 10, 7, 7, 7, 6, 6, 6, 9, 6);
-        for(i = 0; i < b; i++) {
+        for (i = 0; i < b; i++) {
             c = this.substring(i, (i + 1));
             k = c.charCodeAt(0);
-            if(k < h) {
+            if (k < h) {
                 g = d
             } else {
-                if(k <= f) {
+                if (k <= f) {
                     idx = k - h;
                     g = a[idx]
                 } else {
-                    if(k > f) {
+                    if (k > f) {
                         g = l
                     }
                 }
@@ -727,28 +739,28 @@ $.extend(String.prototype, {
         return j
     },
     getByte: function() {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             return 0
         }
         var d = 0;
         var b = new String(this);
         var c = b.length;
-        for(var a = 0; a < c; a++) {
+        for (var a = 0; a < c; a++) {
             d += (escape(b.charAt(a)).length > 4) ? 2 : 1
         }
         return d
     },
     subbyte: function(a) {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             return ""
         }
         var f = 0;
         var b = 0;
         var d = new String(this);
         var e = d.length;
-        for(var c = 0; c < e; c++) {
+        for (var c = 0; c < e; c++) {
             b = (escape(d.charAt(c)).length > 4) ? 2 : 1;
-            if((f + b) > a) {
+            if ((f + b) > a) {
                 return this.substring(0, c)
             }
             f += b
@@ -757,18 +769,18 @@ $.extend(String.prototype, {
     },
     toQueryParams: function(b) {
         var a = this.trim().match(/([^?#]*)(#.*)?$/);
-        if(!a) {
+        if (!a) {
             return {}
         }
         return a[1].split(b || "&").inject({}, function(e, f) {
-            if((f = f.split("="))[0]) {
+            if ((f = f.split("="))[0]) {
                 var c = decodeURIComponent(f.shift());
                 var d = f.length > 1 ? f.join("=") : f[0];
-                if(d !== undefined) {
+                if (d !== undefined) {
                     d = decodeURIComponent(d)
                 }
-                if(c in e) {
-                    if(!$.isArray(e[c])) {
+                if (c in e) {
+                    if (!$.isArray(e[c])) {
                         e[c] = [e[c]]
                     }
                     e[c].push(d)
@@ -787,11 +799,11 @@ $.extend(String.prototype, {
             d = (e % c),
             a = (e - c + 1);
         d = (d === 0) ? c : d;
-        if(e <= c || c < 1) {
+        if (e <= c || c < 1) {
             return number
         }
         b = number.substring(0, d);
-        while(d <= a) {
+        while (d <= a) {
             b += "," + number.substring(d, d + 3);
             d += c
         }
@@ -802,14 +814,14 @@ $.extend(String.prototype, {
     },
     koreanToNumber: function() {
         var a = 1;
-        switch(String(this)) {
-            case "ë§Œ":
+        switch (String(this)) {
+            case "만":
                 a = 10000;
                 break;
-            case "ì–µ":
+            case "억":
                 a = 100000000;
                 break;
-            case "ì¡°":
+            case "조":
                 a = 1000000000000;
                 break
         }
@@ -818,7 +830,7 @@ $.extend(String.prototype, {
 });
 $.extend(Array.prototype, {
     inject: function(a, d, c) {
-        for(var b = 0; b < this.length; b++) {
+        for (var b = 0; b < this.length; b++) {
             a = d(a, this[b], b)
         }
         return a
@@ -826,7 +838,7 @@ $.extend(Array.prototype, {
 });
 $.extend(Date.prototype, {
     getDayName: function(a) {
-        var c = new Array("ì¼", "ì›”", "í™”", "ìˆ˜", "ëª©", "ê¸ˆ", "í† ");
+        var c = new Array("일", "월", "화", "수", "목", "금", "토");
         var b = (arguments.length === 1) ? a : this.getDay();
         return c[b]
     },
@@ -845,28 +857,28 @@ $.extend(Number.prototype, {
             d = (e % c),
             a = (e - c + 1);
         d = (d === 0) ? c : d;
-        if(e <= c || c < 1) {
+        if (e <= c || c < 1) {
             return number
         }
         b = number.substring(0, d);
-        while(d <= a) {
+        while (d <= a) {
             b += "," + number.substring(d, d + 3);
             d += c
         }
         return b
     },
     korean: function() {
-        var j = new Array("", "ì¼", "ì´", "ì‚¼", "ì‚¬", "ì˜¤", "ìœ¡", "ì¹ ", "íŒ”", "êµ¬");
-        var g = new Array("", "ì‹­", "ë°±", "ì²œ");
-        var b = new Array("", "ë§Œ", "ì–µ", "ì¡°", "ê²½", "í•´", "ìž", "ì–‘", "êµ¬", "ê°„", "ì •ìž¬ê·¹");
+        var j = new Array("", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구");
+        var g = new Array("", "십", "백", "천");
+        var b = new Array("", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정재극");
         var d = String(this).trim();
         var c = Math.floor(d.length / 4);
         var f = (d.length % 4) - 1;
         var e = 0,
             a = 0;
         var h = "";
-        for(; c >= 0; c--) {
-            for(; f >= 0; f--) {
+        for (; c >= 0; c--) {
+            for (; f >= 0; f--) {
                 a = Number(d.charAt(e));
                 h += (a === 1 && f !== 0) ? "" : j[a];
                 h += (a === 0) ? "" : g[f];
@@ -875,7 +887,7 @@ $.extend(Number.prototype, {
             f = 3;
             h += (a === 0 && Number(d.substring(e - 4, e)) === 0) ? "" : b[c] + " "
         }
-        if(h.substring(h.length - 1, h.length) === " ") {
+        if (h.substring(h.length - 1, h.length) === " ") {
             h = h.substring(0, h.length - 1)
         }
         return h
@@ -898,14 +910,14 @@ $.extend(_http, {
         var b = f.substring(f.indexOf("?") + 1, f.length);
         var a = "";
         var d = b.toQueryParams();
-        for(var e in d) {
+        for (var e in d) {
             d[e] = encodeURIComponent(d[e]);
             a += e + "=" + d[e] + "&"
         }
-        if(!a.isEmpty()) {
+        if (!a.isEmpty()) {
             a = a.substring(0, a.length - 1)
         }
-        if(!c.isEmpty()) {
+        if (!c.isEmpty()) {
             c += "?"
         }
         return c + a
@@ -915,14 +927,14 @@ $.extend(_http, {
         var b = f.substring(f.indexOf("?") + 1, f.length);
         var a = "";
         var d = b.toQueryParams();
-        for(var e in d) {
+        for (var e in d) {
             d[e] = decodeURIComponent(d[e]);
             a += e + "=" + d[e] + "&"
         }
-        if(!a.isEmpty()) {
+        if (!a.isEmpty()) {
             a = a.substring(0, a.length - 1)
         }
-        if(!c.isEmpty()) {
+        if (!c.isEmpty()) {
             c += "?"
         }
         return c + a
@@ -932,11 +944,11 @@ var _object = {};
 $.extend(_object, {
     count: 0,
     find: function(a) {
-        return(_BROWSER.name() === "explorer") ? document[a] : window[a]
+        return (_BROWSER.name() === "explorer") ? document[a] : window[a]
     },
     flash: function(b, a, c, j, d, g, l, h) {
         var k = null;
-        if(h === null) {
+        if (h === null) {
             h = false
         }
         var f = {
@@ -944,10 +956,10 @@ $.extend(_object, {
             bgcolor: "#FFF"
         };
         d = (arguments[4]) ? d.toQueryParams() : {};
-        for(k in d) {
+        for (k in d) {
             f[k] = d[k]
         }
-        if(_BROWSER.name === "explorer") {
+        if (_BROWSER.name === "explorer") {
             strHTML = '<object id="' + b + '"';
             strHTML += ' type="application/x-shockwave-flash"';
             strHTML += ' classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"';
@@ -959,7 +971,7 @@ $.extend(_object, {
             strHTML += '<param name="allowScriptAccess" value="sameDomain" />';
             strHTML += '<param name="allowscale" value="false" />';
             strHTML += '<param name="swliveconnect" value="false" />';
-            for(k in f) {
+            for (k in f) {
                 strHTML += '<param name="' + k + '" value="' + f[k] + '" />'
             }
             strHTML += '<p><img src="' + g + '" width="' + c + '" height="' + j + '" alt="' + l + '" /></p>';
@@ -971,15 +983,15 @@ $.extend(_object, {
             strHTML += ' menu="false" width="' + c + '" height="' + j + '"';
             strHTML += ' quality="high" allowScriptAccess="sameDomain"';
             strHTML += ' swliveconnect="false" allowscale="false"';
-            for(k in f) {
+            for (k in f) {
                 strHTML += " " + k + '="' + f[k] + '"'
             }
             strHTML += " />";
             window[b] = document.getElementById(b)
         }
         _object.count++;
-        if(_object.count === 1) {
-            if(typeof window.onbeforeunload === "function") {
+        if (_object.count === 1) {
+            if (typeof window.onbeforeunload === "function") {
                 var e = window.onbeforeunload;
                 window.onbeforeunload = function() {
                     _object.prepunload.call(_object);
@@ -991,13 +1003,13 @@ $.extend(_object, {
                 }
             }
         }
-        if(h === true) {
+        if (h === true) {
             return strHTML
         }
         document.writeln(strHTML)
     },
     prepunload: function() {
-        if(typeof window.unload === "function") {
+        if (typeof window.unload === "function") {
             var a = window.onunload;
             window.onunload = function() {
                 _object.clean();
@@ -1008,14 +1020,14 @@ $.extend(_object, {
         }
     },
     clean: function() {
-        if(window.opera || !document.all) {
+        if (window.opera || !document.all) {
             return
         }
         var c = document.getElementsByTagName("OBJECT");
-        for(var b = 0; b < c.length; b++) {
+        for (var b = 0; b < c.length; b++) {
             c[b].style.display = "none";
-            for(var a in c[b]) {
-                if(typeof c[b][a] === "function") {
+            for (var a in c[b]) {
+                if (typeof c[b][a] === "function") {
                     c[b][a] = function() {}
                 }
             }
@@ -1025,13 +1037,13 @@ $.extend(_object, {
 var _gui = {};
 _gui = {
     getXY: function() {
-        if($(this).parent() === null || $(this).css("display") === "none") {
+        if ($(this).parent() === null || $(this).css("display") === "none") {
             return false
         }
         var a = null,
             c = [],
             b;
-        if(document.getBoxObjectFor) {
+        if (document.getBoxObjectFor) {
             b = document.getBoxObjectFor(this);
             c = [b.x, b.y]
         } else {
@@ -1044,27 +1056,27 @@ _gui = {
     },
     setXY: function(b, e) {
         var d = this.getXY();
-        if(!d) {
+        if (!d) {
             return false
         }
         var a = $(this).css("position");
-        if(!a || a === "static") {
+        if (!a || a === "static") {
             $(this).css("position", "relative")
         }
         var c = {
             x: parseFloat($(this).css("left"), 10),
             y: parseFloat($(this).css("top"), 10)
         };
-        if(isNaN(c.x)) {
+        if (isNaN(c.x)) {
             c.x = 0
         }
-        if(isNaN(c.y)) {
+        if (isNaN(c.y)) {
             c.y = 0
         }
-        if(b !== null) {
+        if (b !== null) {
             $(this).css("left", (b - d.x + c.x) + "px")
         }
-        if(e !== null) {
+        if (e !== null) {
             $(this).css("top", (e - d.y + c.y) + "px")
         }
         return true
@@ -1083,13 +1095,13 @@ _gui = {
 };
 var _selectbox = {};
 _selectbox.convertAll = function(c) {
-    if(arguments.length < 1) {
+    if (arguments.length < 1) {
         var c = $("body")
     }
     var d = null;
     var b = c.find("SELECT");
-    for(var a = 0; a < b.length; a++) {
-        if(!$(b[a]).hasClass("g_hidden")) {
+    for (var a = 0; a < b.length; a++) {
+        if (!$(b[a]).hasClass("g_hidden")) {
             continue
         }
         d = $("<DIV />");
@@ -1100,7 +1112,7 @@ _selectbox.convertAll = function(c) {
 };
 $.extend(_selectbox, {
     initialize: function(c) {
-        if(c.tagName !== "SELECT") {
+        if (c.tagName !== "SELECT") {
             return
         }
         var f = this;
@@ -1112,7 +1124,7 @@ $.extend(_selectbox, {
         $(this).addClass("g_selectbox").attr("id", $(c).attr("id")).click(function() {
             f.fnClick()
         });
-        if(c.className.isEmpty() === false) {
+        if (c.className.isEmpty() === false) {
             $(this).addClass(c.className)
         }
         this.nodeInput = b.appendTo($(this));
@@ -1124,25 +1136,25 @@ $.extend(_selectbox, {
         $.extend(this.nodeList, _gui);
         var a = "";
         var g = $(c).find("option");
-        for(var e = 0; e < g.length; e++) {
+        for (var e = 0; e < g.length; e++) {
             a = $(g[e]).text();
             var d = $(g[e]).attr("selected");
-            if(d === true || d === "selected") {
+            if (d === true || d === "selected") {
                 this.nodeSelect = this.addOption($(this), null, $(g[e]).attr("value"), a)
             } else {
                 this.addOption($(this), null, $(g[e]).attr("value"), a)
             }
         }
-        if(this.nodeSelect === undefined && this.nodeList.children().length > 0) {
+        if (this.nodeSelect === undefined && this.nodeList.children().length > 0) {
             this.nodeSelect = this.nodeList.children().first();
             this.setText(this.nodeSelect.text())
         }
-        if(this.nodeSelect !== undefined) {
+        if (this.nodeSelect !== undefined) {
             this.setText(this.nodeSelect.text());
             this.setValue(this.nodeSelect.attr("value"));
             this.nodeSelect.addClass("over")
         }
-        if("onchange" in c) {
+        if ("onchange" in c) {
             this.OnUpdate = c.onchange;
             c.onchange = null
         }
@@ -1160,7 +1172,7 @@ $.extend(_selectbox, {
     },
     setValue: function(a) {
         this.nodeInput.val(a);
-        if("OnUpdate" in this && this.OnUpdate) {
+        if ("OnUpdate" in this && this.OnUpdate) {
             this.OnUpdate(a)
         }
     },
@@ -1175,22 +1187,22 @@ $.extend(_selectbox, {
             c = b.getWidth(),
             a = this.nWidth;
         this.nodeList.css("width", a);
-        if(a < c) {
+        if (a < c) {
             this.nWidth = c + this.widthMargin + 32;
             $(d).css("width", (this.nWidth).toString() + "px");
             this.nodeList.css("width", (this.nWidth).toString() + "px")
         }
         var e = $("<div />").attr("value", g).text(b);
-        if(h === null || this.nodeList.children().length < 1 || this.nodeList.children().length < h) {
+        if (h === null || this.nodeList.children().length < 1 || this.nodeList.children().length < h) {
             this.nodeList.append(e)
         } else {
-            if(h === 0) {
+            if (h === 0) {
                 this.nodeList.prepend(e)
             } else {
                 this.nodeList.append(e)
             }
         }
-        if(this.mode === "open" && this.getLength() === this.view_count) {
+        if (this.mode === "open" && this.getLength() === this.view_count) {
             this.nodeList.css("height", ($.extend(this.nodeList.childNodes[0], _gui).getBound().height * this.view_count + 9) + "px");
             this.nodeList.css("overflow", "auto")
         }
@@ -1212,7 +1224,7 @@ $.extend(_selectbox, {
         }
     },
     fnClick: function() {
-        if(this.mode === "open") {
+        if (this.mode === "open") {
             this.close()
         } else {
             this.open();
@@ -1223,8 +1235,8 @@ $.extend(_selectbox, {
     fnOptionSelect: function(d) {
         var b = this.nodeList.getElements("DIV");
         var c = b.length;
-        for(var a = 0; a < c; a++) {
-            if(b[a].value === d) {
+        for (var a = 0; a < c; a++) {
+            if (b[a].value === d) {
                 b[a].onclick();
                 return
             }
@@ -1240,7 +1252,7 @@ $.extend(_selectbox, {
     },
     fnMouseover: function(a) {
         $(a).addClass("select");
-        if("OnMouseOver" in this) {
+        if ("OnMouseOver" in this) {
             this.OnMouseOver($(a))
         }
     },
@@ -1248,30 +1260,30 @@ $.extend(_selectbox, {
         $(a).removeClass("select")
     },
     _blur: function(c) {
-        if(this.mode === "close") {
+        if (this.mode === "close") {
             return
         }
         var b = _event.pointer(c);
         var a = this.getBound();
         var d = this.nodeList.getBound();
-        if((b.x >= a.x && b.x <= (a.x + a.width) && b.y >= a.y && b.y <= (a.y + a.height)) || (b.x >= d.x && b.x <= (d.x + d.width) && b.y >= d.y && b.y <= (d.y + d.height))) {
+        if ((b.x >= a.x && b.x <= (a.x + a.width) && b.y >= a.y && b.y <= (a.y + a.height)) || (b.x >= d.x && b.x <= (d.x + d.width) && b.y >= d.y && b.y <= (d.y + d.height))) {
             return
         }
         this.close()
     },
     open: function(c) {
         var b = this;
-        if(this.mode !== "open") {
+        if (this.mode !== "open") {
             this.mode = "open";
             this.nodeList.show();
-            if(this.getLength() > this.view_count) {
+            if (this.getLength() > this.view_count) {
                 this.nodeList.css("height", ($.extend(this.nodeList.children().eq(0), _gui).getBound().height * this.view_count + 9) + "px");
                 this.nodeList.css("overflow", "auto")
             }
             var a = this.getBound();
             this.nodeList.setXY(a.x, a.y + a.offsetHeight)
         }
-        if(!this.tmpBind) {
+        if (!this.tmpBind) {
             this.tmpBind = this._blur
         }
         $(document).on("click", function(d) {
@@ -1280,16 +1292,16 @@ $.extend(_selectbox, {
         $(window).on("resize", function(d) {
             b.tmpBind(d)
         });
-        if("OnOpen" in this) {
+        if ("OnOpen" in this) {
             this.OnOpen(c)
         }
     },
     close: function(a) {
-        if(this.mode !== "close") {
+        if (this.mode !== "close") {
             this.mode = "close";
             this.nodeList.hide()
         }
-        if(!this.tmpBind) {
+        if (!this.tmpBind) {
             this.tmpBind = this._blur
         }
         $(document).off("click", function(b) {
@@ -1298,17 +1310,17 @@ $.extend(_selectbox, {
         $(window).off("resize", function(b) {
             g_this.tmpBind(b)
         });
-        if("onClose" in this && a !== "default") {
+        if ("onClose" in this && a !== "default") {
             this.onClose()
         }
     }
 });
 
 function getXmlDocument(a, f, b) {
-    if(window.ActiveXObject === undefined) {
+    if (window.ActiveXObject === undefined) {
         return a
     }
-    if(typeof(a.hasOwnProperty) !== "undefined" && a.selectNodes) {
+    if (typeof(a.hasOwnProperty) !== "undefined" && a.selectNodes) {
         return a
     }
     try {
@@ -1316,7 +1328,7 @@ function getXmlDocument(a, f, b) {
         d.async = false;
         d.loadXML(b.responseText);
         a = d
-    } catch(c) {}
+    } catch (c) {}
     return a
 }
 
@@ -1335,27 +1347,27 @@ function fnAjax(d, c, e, a, f, b) {
 
 function ajaxRequest(j) {
     var j = j || {};
-    if(!j.url) {
+    if (!j.url) {
         return
     }
     var g = j.url;
-    if((j.cache !== undefined && typeof(j.cache) !== "boolean") || (j.type && j.type.toUpperCase() === "POST" && j.cache === false)) {
+    if ((j.cache !== undefined && typeof(j.cache) !== "boolean") || (j.type && j.type.toUpperCase() === "POST" && j.cache === false)) {
         var f = j.cache;
         var n = new Date();
         var b = n.getMonth() + 1;
         var h = n.getDate();
         var k = Math.floor(n.getHours() / f) * f;
-        if(("" + b).length === 1) {
+        if (("" + b).length === 1) {
             b = "0" + b
         }
-        if(("" + h).length === 1) {
+        if (("" + h).length === 1) {
             h = "0" + h
         }
-        if(("" + k).length === 1) {
+        if (("" + k).length === 1) {
             k = "0" + k
         }
         var a = ("" + n.getFullYear()) + b + h + (k);
-        if(g.indexOf("?") === -1) {
+        if (g.indexOf("?") === -1) {
             g += "?"
         }
         g += "_=" + a;
@@ -1370,25 +1382,25 @@ function ajaxRequest(j) {
             cache: (j.cache === undefined) ? false : j.cache,
             async: (j.async === undefined) ? true : j.async,
             success: function(c, m, d) {
-                if(c && j.dataType === "xml") {
+                if (c && j.dataType === "xml") {
                     c = getXmlDocument(c, m, d)
                 }
-                if(j.success) {
+                if (j.success) {
                     j.success.call(l, c)
                 }
             },
             error: function(c) {
-                if(j.error) {
+                if (j.error) {
                     j.error.call(l, c)
                 }
             },
             complete: function(c) {
-                if(j.complete) {
+                if (j.complete) {
                     j.complete.call(l, c)
                 }
             }
         };
-    if(j.timeout) {
+    if (j.timeout) {
         e.timeout = j.timeout
     }
     return $.ajax(e)
@@ -1402,7 +1414,7 @@ $.extend(_cookie, {
         var j = (e > 3) ? g[3] : null;
         var f = (e > 4) ? g[4] : null;
         var a = (e > 5) ? g[5] : false;
-        if(d) {
+        if (d) {
             var c = new Date();
             c.setTime(c.getTime() + parseInt(d * 24 * 60 * 60 * 1000))
         }
@@ -1421,16 +1433,16 @@ $.extend(_cookie, {
         c += "=";
         var b = 0,
             d, a;
-        while(b <= document.cookie.length) {
+        while (b <= document.cookie.length) {
             d = b + c.length;
-            if(document.cookie.substring(b, d) === c) {
-                if((a = document.cookie.indexOf(";", d)) === -1) {
+            if (document.cookie.substring(b, d) === c) {
+                if ((a = document.cookie.indexOf(";", d)) === -1) {
                     a = document.cookie.length
                 }
                 return unescape(document.cookie.substring(d, a))
             }
             b = document.cookie.indexOf(" ", b) + 1;
-            if(b === 0) {
+            if (b === 0) {
                 break
             }
         }
@@ -1441,12 +1453,12 @@ $.extend(_cookie, {
         var e = document.cookie.split(";");
         var c;
         var d = 0;
-        for(var b = 0; b < e.length; b++) {
-            if(e[b] === "") {
+        for (var b = 0; b < e.length; b++) {
+            if (e[b] === "") {
                 continue
             }
             c = e[b].split("=");
-            if(c[0] !== "") {
+            if (c[0] !== "") {
                 a[d++] = c[0]
             }
         }
@@ -1457,12 +1469,12 @@ $.extend(_cookie, {
         c.setDate(c.getDate() - 1);
         var d = document.cookie.split(";");
         var b;
-        for(var a = 0; a < d.length; a++) {
-            if(d[a] === "") {
+        for (var a = 0; a < d.length; a++) {
+            if (d[a] === "") {
                 continue
             }
             b = d[a].split("=");
-            if(b[0] !== "") {
+            if (b[0] !== "") {
                 document.cookie = b[0] + "=; expires=" + c.toGMTString() + ";"
             }
         }
@@ -1475,7 +1487,7 @@ var _xml = {};
 $.extend(_xml, {
     getElement: function(d, b, a) {
         var c = null;
-        if(!(c = d.getElementsByTagName(b).item(a))) {
+        if (!(c = d.getElementsByTagName(b).item(a))) {
             b = b.replace("xsl:", "");
             c = d.getElementsByTagName(b)[a]
         }
@@ -1487,7 +1499,7 @@ $.extend(_xml, {
     },
     getElements: function(c, a) {
         var b = null;
-        if(!(b = c.getElementsByTagName(a).item(0))) {
+        if (!(b = c.getElementsByTagName(a).item(0))) {
             a = a.replace("xsl:", "");
             return c.getElementsByTagName(a)
         }
@@ -1500,32 +1512,32 @@ $.extend(_xslt, {
         try {
             var c = transformToHtmlText(a, b);
             f.append(c)
-        } catch(d) {}
+        } catch (d) {}
         return f.children().length
     }
 });
 
 function transformToHtmlText(n, l) {
-    if(typeof(XSLTProcessor) !== "undefined") {
+    if (typeof(XSLTProcessor) !== "undefined") {
         var h = new XSLTProcessor();
         h.importStylesheet(l);
         var d = h.transformToFragment(n, document);
-        if(typeof(GetXmlStringFromXmlDoc) !== "undefined") {
+        if (typeof(GetXmlStringFromXmlDoc) !== "undefined") {
             return GetXmlStringFromXmlDoc(d)
         }
         var m = new XMLSerializer();
         var g = m.serializeToString(d);
         return g
     }
-    if(typeof(n.transformNode) !== "undefined") {
+    if (typeof(n.transformNode) !== "undefined") {
         return n.transformNode(l)
     }
     var c = null;
     try {
         c = new ActiveXObject("Msxml2.XSLTemplate")
-    } catch(k) {}
+    } catch (k) {}
     try {
-        if(c) {
+        if (c) {
             var b = c;
             var f = new ActiveXObject("Msxml2.FreeThreadedDOMDocument");
             f.loadXML(l.xml);
@@ -1535,18 +1547,18 @@ function transformToHtmlText(n, l) {
             a.transform();
             return a.output
         }
-    } catch(j) {
+    } catch (j) {
         return null
     }
 }
 var _jaso = {};
 $.extend(_jaso, {
     hangul: {
-        cho: Array("ã„±", "ã„²", "ã„´", "ã„·", "ã„¸", "ã„¹", "ã…", "ã…‚", "ã…ƒ", "ã……", "ã…†", "ã…‡", "ã…ˆ", "ã…‰", "ã…Š", "ã…‹", "ã…Œ", "ã…", "ã…Ž"),
-        jung: Array("ã…", "ã…", "ã…‘", "ã…’", "ã…“", "ã…”", "ã…•", "ã…–", "ã…—", "ã…˜", "ã…™", "ã…š", "ã…›", "ã…œ", "ã…", "ã…ž", "ã…Ÿ", "ã… ", "ã…¡", "ã…¢", "ã…£"),
-        jong: Array("", "ã„±", "ã„²", "ã„³", "ã„´", "ã„µ", "ã„¶", "ã„·", "ã„¹", "ã„º", "ã„»", "ã„¼", "ã„½", "ã„¾", "ã„¿", "ã…€", "ã…", "ã…‚", "ã…„", "ã……", "ã…†", "ã…‡", "ã…ˆ", "ã…Š", "ã…‹", "ã…Œ", "ã…", "ã…Ž"),
-        _jung: Array("ã…", "", "", "", "ã…“", "ã…”", "", "", "ã…—", "", "", "", "", "ã…œ", "", "", "", "", "ã…¡", "ã…¢", "ã…£"),
-        _jong: Array("", "ã„±", "", "", "ã„´", "", "", "ã…", "ã„¹", "", "", "", "", "", "", "", "", "ã…‚", "", "", "ã…†", "ã…‡", "", "", "", "", "", "")
+        cho: Array("ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"),
+        jung: Array("ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"),
+        jong: Array("", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"),
+        _jung: Array("ㅏ", "", "", "", "ㅓ", "ㅔ", "", "", "ㅗ", "", "", "", "", "ㅜ", "", "", "", "", "ㅡ", "ㅢ", "ㅣ"),
+        _jong: Array("", "ㄱ", "", "", "ㄴ", "", "", "ㅁ", "ㄹ", "", "", "", "", "", "", "", "", "ㅂ", "", "", "ㅆ", "ㅇ", "", "", "", "", "", "")
     },
     hangulJASO: function(h) {
         var l = [12593, 12594, 12596, 12599, 12600, 12601, 12609, 12610, 12611, 12613, 12614, 12615, 12616, 12617, 12618, 12619, 12620, 12621, 12622];
@@ -1554,9 +1566,9 @@ $.extend(_jaso, {
         var e = [0, 12593, 12594, 12595, 12596, 12597, 12598, 12599, 12601, 12602, 12603, 12604, 12605, 12606, 12607, 12608, 12609, 12610, 12612, 12613, 12614, 12615, 12616, 12618, 12619, 12620, 12621, 12622];
         var k = new Array();
         var c = new Array();
-        for(var b = 0; b < h.length; b++) {
+        for (var b = 0; b < h.length; b++) {
             k[b] = h.charCodeAt(b);
-            if(k[b] >= 44032 && k[b] <= 55203) {
+            if (k[b] >= 44032 && k[b] <= 55203) {
                 var d, a, f;
                 var g = k[b] - 44032;
                 f = g % 28;
@@ -1564,7 +1576,7 @@ $.extend(_jaso, {
                 d = (((g - f) / 28) - a) / 21;
                 c.push(String.fromCharCode(l[parseInt(d)]));
                 c.push(String.fromCharCode(j[parseInt(a)]));
-                if(f !== 0) {
+                if (f !== 0) {
                     c.push(String.fromCharCode(e[parseInt(f)]))
                 }
             } else {
@@ -1578,7 +1590,7 @@ $.extend(_jaso, {
             k = 0;
         var f = t.substring(0, t.length - 1);
         var g = Array();
-        if(!String(t.charAt(t.length - 1)).isHangul()) {
+        if (!String(t.charAt(t.length - 1)).isHangul()) {
             g[0] = t;
             return g
         }
@@ -1588,19 +1600,19 @@ $.extend(_jaso, {
         m = d % 28;
         s = ((d - m) / 28) % 21;
         p = parseInt(((d - m) / 28) / 21);
-        if(p < 0) {
+        if (p < 0) {
             var u = this.hangul.cho.length;
             var n = this.hangul._jung.length;
             var a = this.hangul._jong.length;
-            for(var o = 0; o < u; o++) {
-                if(this.hangul.cho[o] === b) {
+            for (var o = 0; o < u; o++) {
+                if (this.hangul.cho[o] === b) {
                     c = true;
-                    for(var r = 0; r < n; r++) {
-                        if(this.hangul.jung[r] === "") {
+                    for (var r = 0; r < n; r++) {
+                        if (this.hangul.jung[r] === "") {
                             continue
                         }
-                        for(var l = 0; l < a; l++) {
-                            if(l !== 0 && this.hangul._jong[l] === "") {
+                        for (var l = 0; l < a; l++) {
+                            if (l !== 0 && this.hangul._jong[l] === "") {
                                 continue
                             }
                             g[k++] = f + String.fromCharCode(44032 + o * 588 + r * 28 + l)
@@ -1608,7 +1620,7 @@ $.extend(_jaso, {
                     }
                 }
             }
-            if(!c) {
+            if (!c) {
                 g[0] = f
             }
             try {
@@ -1619,7 +1631,7 @@ $.extend(_jaso, {
         }
         g[0] = f + String.fromCharCode(44032 + p * 588 + s * 28 + m);
         var h = this.hangul.jong.length;
-        for(var q = 1; q < h && m === 0; q++) {
+        for (var q = 1; q < h && m === 0; q++) {
             g[q] = f + String.fromCharCode(44032 + p * 588 + s * 28 + q)
         }
         try {
@@ -1632,10 +1644,10 @@ $.extend(_jaso, {
         var d = 0,
             a = "";
         var c = this.length;
-        for(var b = 0; b < c; b++) {
+        for (var b = 0; b < c; b++) {
             d = parseInt(this.charCodeAt(b));
             a = this.substr(b, 1).toUpperCase();
-            if((a < "0" || a > "9") && (a < "A" || a > "Z") && ((d > 255) || (d < 0))) {
+            if ((a < "0" || a > "9") && (a < "A" || a > "Z") && ((d > 255) || (d < 0))) {
                 return true
             }
         }
@@ -1656,12 +1668,12 @@ $.extend(_jaso, {
     b.prototype = {
         send: function() {
             var c = this.check();
-            if(!c) {
+            if (!c) {
                 return false
             }
-            if("OnSubmit" in this && this.OnSubmit) {
+            if ("OnSubmit" in this && this.OnSubmit) {
                 c = this.OnSubmit.call(this.objForm);
-                if(!c) {
+                if (!c) {
                     return false
                 }
             }
@@ -1669,41 +1681,41 @@ $.extend(_jaso, {
         },
         send_manual: function() {
             var c = this.check();
-            if(!c) {
+            if (!c) {
                 return
             }
-            if("OnSubmit" in this && this.OnSubmit) {
+            if ("OnSubmit" in this && this.OnSubmit) {
                 c = this.OnSubmit.call(this.objForm);
-                if(!c) {
+                if (!c) {
                     return
                 }
             }
             this.objForm.submit()
         },
         check: function() {
-            if(this.rgItem.length < 1) {
+            if (this.rgItem.length < 1) {
                 return true
             }
             var c = true;
             var f = this.rgItem.length;
             try {
-                for(var e = 0; e < f; e++) {
-                    if("custom" in this.rgItem[e]) {
+                for (var e = 0; e < f; e++) {
+                    if ("custom" in this.rgItem[e]) {
                         var g = ("name" in this.rgItem[e]) ? this.objForm[this.rgItem[e].name] : this.objForm;
-                        if(!this.rgItem[e].custom.call(g, g.value)) {
+                        if (!this.rgItem[e].custom.call(g, g.value)) {
                             c = false;
                             break
                         }
                     } else {
                         c = this.handCheck(this.rgItem[e]);
-                        if(!c) {
+                        if (!c) {
                             this.showAlert(this.rgItem[e]);
                             break
                         }
                     }
                 }
-            } catch(d) {
-                if(_DEBUG === true) {
+            } catch (d) {
+                if (_DEBUG === true) {
                     d.print()
                 }
                 c = false
@@ -1711,11 +1723,11 @@ $.extend(_jaso, {
             return c
         },
         add: function(c) {
-            if(!("custom" in c) && !c.name) {
+            if (!("custom" in c) && !c.name) {
                 return
             }
             this.rgItem.push(c);
-            if(("protect" in c) && c.protect && (c.type in a.protect)) {
+            if (("protect" in c) && c.protect && (c.type in a.protect)) {
                 a.protect[c.type].call(a.protect, this.objForm[c.name])
             }
         },
@@ -1725,11 +1737,11 @@ $.extend(_jaso, {
         handCheck: function(l) {
             var m = true;
             var d = this.objForm[l.name];
-            if(d[0] && (d[0].type === "radio" || d[0].type === "checkbox")) {
+            if (d[0] && (d[0].type === "radio" || d[0].type === "checkbox")) {
                 m = false;
                 var g = d.length;
-                for(var e = 0; e < g; e++) {
-                    if(d[e].checked === true && d[e].value.isEmpty() === false) {
+                for (var e = 0; e < g; e++) {
+                    if (d[e].checked === true && d[e].value.isEmpty() === false) {
                         m = true;
                         break
                     }
@@ -1737,40 +1749,40 @@ $.extend(_jaso, {
             } else {
                 var c = d.value.trim();
                 var h = a.validator.string;
-                if(l.type) {
+                if (l.type) {
                     h = a.validator[l.type]
                 }
                 var f = null,
                     j = null;
-                if("range" in l) {
+                if ("range" in l) {
                     f = ("min" in l.range) ? l.range.min : 0.1;
                     j = ("max" in l.range) ? l.range.max : null
                 } else {
                     f = 0.1
                 }
-                if(!h.call(a.validator, c, f, j)) {
+                if (!h.call(a.validator, c, f, j)) {
                     m = false
                 }
             }
-            if(m === false && l.alert === true) {
+            if (m === false && l.alert === true) {
                 this.showAlert(l)
             }
             return m
         },
         showAlert: function(f) {
             var e = this.objForm[f.name];
-            if(e.length !== undefined) {
+            if (e.length !== undefined) {
                 e = e[0]
             }
             var d = e.tagName.toUpperCase();
             var c = e.type.toUpperCase();
-            if("msg" in f) {
+            if ("msg" in f) {
                 alert(f.msg)
             }
-            if(f.focus) {
+            if (f.focus) {
                 this.objForm.querySelector(f.focus).focus()
             } else {
-                if(("name" in f) && (c === "TEXT" || c === "PASSWORD" || d === "TEXTAREA")) {
+                if (("name" in f) && (c === "TEXT" || c === "PASSWORD" || d === "TEXTAREA")) {
                     e.value = "";
                     e.focus()
                 }
@@ -1781,20 +1793,20 @@ $.extend(_jaso, {
     var a = {
         validator: {
             number: function(e, d, c) {
-                if(e.isEmpty()) {
+                if (e.isEmpty()) {
                     return false
                 }
                 e = Number(e);
-                if(isNaN(e)) {
+                if (isNaN(e)) {
                     return false
                 }
-                if((d && isNaN(d)) || (c && isNaN(c))) {
+                if ((d && isNaN(d)) || (c && isNaN(c))) {
                     return false
                 }
-                if(d && (e < d)) {
+                if (d && (e < d)) {
                     return false
                 }
-                if(c && (e > c)) {
+                if (c && (e > c)) {
                     return false
                 }
                 return true
@@ -1804,19 +1816,19 @@ $.extend(_jaso, {
                 return this.number(e, d, c)
             },
             string: function(e, d, c) {
-                if(e.isEmpty()) {
+                if (e.isEmpty()) {
                     return false
                 }
-                if(d && (e.length < d)) {
+                if (d && (e.length < d)) {
                     return false
                 }
-                if(c && (e.length > c)) {
+                if (c && (e.length > c)) {
                     return false
                 }
                 return true
             },
             hangul: function(e, d, c) {
-                if(!this.string(e, d, c)) {
+                if (!this.string(e, d, c)) {
                     return false
                 }
                 return e.isHangul()
@@ -1826,28 +1838,28 @@ $.extend(_jaso, {
                 return c.test(d)
             },
             url: function(d) {
-                if(this.domain(d)) {
+                if (this.domain(d)) {
                     return true
                 }
                 var c = d.lastIndexOf("/");
-                if(c > -1) {
+                if (c > -1) {
                     return this.domain(d.substring(0, c))
                 }
                 return false
             },
             userid: function(c) {
                 c = c.replace(/[^a-zA-Z0-9]/g, "");
-                if(!isNaN(c.substring(0, 1))) {
+                if (!isNaN(c.substring(0, 1))) {
                     return false
                 }
-                if(!isNaN(c)) {
+                if (!isNaN(c)) {
                     return false
                 }
                 return this.string(c, 4, 12)
             },
             password: function(c) {
                 var d = /(?=.*\d)(?=.*[a-zA-Z])/;
-                if(!d.test(c)) {
+                if (!d.test(c)) {
                     return false
                 }
                 return this.string(c, 10, 16)
@@ -1855,12 +1867,12 @@ $.extend(_jaso, {
             four_string: function(f) {
                 var e = f.length;
                 var c = 0;
-                if(e < 3) {
+                if (e < 3) {
                     return false
                 }
-                for(var d = 0; d < e; d++) {
-                    if(d !== 0 && f.substring(d - 1, d) === f.substring(d, d + 1)) {
-                        if(c >= 2) {
+                for (var d = 0; d < e; d++) {
+                    if (d !== 0 && f.substring(d - 1, d) === f.substring(d, d + 1)) {
+                        if (c >= 2) {
                             return false
                         }
                         c++
@@ -1883,24 +1895,24 @@ $.extend(_jaso, {
             functionkey: [8, 9, 13, 16, 17, 18, 20, 21, 22, 25, 27, 32, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 96],
             functioncheck: function(f) {
                 var d = this.functionkey.length;
-                for(var e = 0; e < d; e++) {
-                    if(this.functionkey[e] === f) {
+                for (var e = 0; e < d; e++) {
+                    if (this.functionkey[e] === f) {
                         return true
                     }
                 }
                 return false
             },
             set: function(c, e, f, d) {
-                if(!d) {
+                if (!d) {
                     var d = f
                 }
-                if(e) {
+                if (e) {
                     c.onkeydown = e
                 }
-                if(f) {
+                if (f) {
                     c.onkeyup = f
                 }
-                if(d) {
+                if (d) {
                     c.onblur = d
                 }
             },
@@ -1908,17 +1920,17 @@ $.extend(_jaso, {
                 c.style.imeMode = "disabled";
                 this.set(c, function(f) {
                     var d = f.keyCode;
-                    if(a.protect.functioncheck(d)) {
+                    if (a.protect.functioncheck(d)) {
                         return true
                     }
-                    if((d >= 48 && d <= 57) || (d >= 96 && d <= 105)) {
+                    if ((d >= 48 && d <= 57) || (d >= 96 && d <= 105)) {
                         return true
                     }
                     f.returnValue = "";
                     return false
                 }, function(g) {
                     var f = new RegExp("[^0-9]", "g");
-                    if(a.protect.value_test($(this), f) === false) {
+                    if (a.protect.value_test($(this), f) === false) {
                         var d = $(this).val().replace(/[^0-9]/g, "");
                         $(this).val(d)
                     }
@@ -1928,17 +1940,17 @@ $.extend(_jaso, {
                 c.style.imeMode = "disabled";
                 this.set(c, function(f) {
                     var d = f.keyCode;
-                    if(a.protect.functioncheck(d)) {
+                    if (a.protect.functioncheck(d)) {
                         return true
                     }
-                    if((d >= 48 && d <= 57) || (d >= 96 && d <= 105)) {
+                    if ((d >= 48 && d <= 57) || (d >= 96 && d <= 105)) {
                         return true
                     }
                     f.returnValue = "";
                     return false
                 }, function(g) {
                     var f = new RegExp("[^0-9]", "g");
-                    if(a.protect.value_test($(this), f) === false) {
+                    if (a.protect.value_test($(this), f) === false) {
                         var d = $(this).val().replace(/[^0-9]/g, "");
                         $(this).val(d)
                     }
@@ -1948,18 +1960,18 @@ $.extend(_jaso, {
                 c.style.imeMode = "disabled";
                 this.set(c, function(f) {
                     var d = f.keyCode;
-                    if(a.protect.functioncheck(d)) {
+                    if (a.protect.functioncheck(d)) {
                         return true
                     }
-                    if((d >= 48 && d <= 57) || (d >= 96 && d <= 105)) {
+                    if ((d >= 48 && d <= 57) || (d >= 96 && d <= 105)) {
                         return true
                     }
                     f.returnValue = "";
                     return false
                 }, function(f) {
                     var d = this.value.numeric().currency();
-                    if(this.value !== d) {
-                        if($(this).attr("maxlength") && d.length > $(this).attr("maxlength")) {
+                    if (this.value !== d) {
+                        if ($(this).attr("maxlength") && d.length > $(this).attr("maxlength")) {
                             var g = d.length - parseInt($(this).attr("maxLength"));
                             d = d.substring(0, d.length - g);
                             d = d.replace(/[^0-9]/g, "");
@@ -1967,7 +1979,7 @@ $.extend(_jaso, {
                         }
                         $(this).val(d)
                     }
-                    if($(this).val() === "0") {
+                    if ($(this).val() === "0") {
                         $(this).val("")
                     }
                 })
@@ -1976,16 +1988,16 @@ $.extend(_jaso, {
                 c.style.imeMode = "active";
                 this.set(c, function(f) {
                     var d = f.keyCode;
-                    if(a.protect.functioncheck(d)) {
+                    if (a.protect.functioncheck(d)) {
                         return true
                     }
-                    if(d === 229) {
+                    if (d === 229) {
                         return true
                     }
                     f.returnValue = "";
                     return false
                 }, null, function(f) {
-                    var d = ($(this).val().isEmpty()) ? "" : $(this).val().replace(/[^ê°€-íž£]/g, "");
+                    var d = ($(this).val().isEmpty()) ? "" : $(this).val().replace(/[^가-힣]/g, "");
                     $(this).val(d)
                 })
             },
@@ -1993,17 +2005,17 @@ $.extend(_jaso, {
                 c.style.imeMode = "disabled";
                 this.set(c, function(f) {
                     var d = f.keyCode;
-                    if(a.protect.functioncheck(d)) {
+                    if (a.protect.functioncheck(d)) {
                         return true
                     }
-                    if((d >= 48 && d <= 57) || (d >= 65 && d <= 90) || (d >= 97 && d <= 122)) {
+                    if ((d >= 48 && d <= 57) || (d >= 65 && d <= 90) || (d >= 97 && d <= 122)) {
                         return true
                     }
                     f.returnValue = "";
                     return false
                 }, function(g) {
                     var f = new RegExp("[^a-zA-Z0-9]", "g");
-                    if(a.protect.value_test($(this), f) === false) {
+                    if (a.protect.value_test($(this), f) === false) {
                         var d = $(this).val().replace(f, "");
                         $(this).val(d)
                     }
@@ -2013,24 +2025,24 @@ $.extend(_jaso, {
                 c.style.imeMode = "disabled";
                 this.set(c, function(f) {
                     var d = f.keyCode;
-                    if(a.protect.functioncheck(d)) {
+                    if (a.protect.functioncheck(d)) {
                         return true
                     }
-                    if((d >= 65 && d <= 90) || (d >= 97 && d <= 122)) {
+                    if ((d >= 65 && d <= 90) || (d >= 97 && d <= 122)) {
                         return true
                     }
                     f.returnValue = "";
                     return false
                 }, function(g) {
                     var f = new RegExp("[^a-zA-Z]", "g");
-                    if(a.protect.value_test($(this), f) === false) {
+                    if (a.protect.value_test($(this), f) === false) {
                         var d = $(this).val().replace(f, "");
                         $(this).val(d)
                     }
                 })
             },
             value_test: function(c, d) {
-                if(d.test($(c).val()) === true) {
+                if (d.test($(c).val()) === true) {
                     return false
                 }
                 return true
@@ -2057,12 +2069,12 @@ $.extend(_form_checker.prototype, {
     },
     send: function() {
         var a = this.check();
-        if(!a) {
+        if (!a) {
             return false
         }
-        if("OnSubmit" in this && this.OnSubmit) {
+        if ("OnSubmit" in this && this.OnSubmit) {
             a = this.OnSubmit.call(this.objForm);
-            if(!a) {
+            if (!a) {
                 return false
             }
         }
@@ -2070,42 +2082,42 @@ $.extend(_form_checker.prototype, {
     },
     send_manual: function() {
         var a = this.check();
-        if(!a) {
+        if (!a) {
             return
         }
-        if("OnSubmit" in this && this.OnSubmit) {
+        if ("OnSubmit" in this && this.OnSubmit) {
             a = this.OnSubmit.call(this.objForm);
-            if(!a) {
+            if (!a) {
                 return
             }
         }
         this.objForm.submit()
     },
     check: function() {
-        if(this.rgItem.length < 1) {
+        if (this.rgItem.length < 1) {
             return true
         }
         var result = true,
             strType = "",
             strValue = "",
             length = this.rgItem.length;
-        for(var i = 0; i < length; i++) {
-            if("inputObj" in this.rgItem[i]) {
+        for (var i = 0; i < length; i++) {
+            if ("inputObj" in this.rgItem[i]) {
                 tag = this.rgItem[i].inputObj.get(0).tagName.toUpperCase();
                 strType = this.rgItem[i].inputObj.attr("type");
                 strValue = this.rgItem[i].inputObj.val().trim()
             }
             try {
-                if("custom" in this.rgItem[i]) {
+                if ("custom" in this.rgItem[i]) {
                     var obj = ("inputObj" in this.rgItem[i]) ? this.rgItem[i].inputObj : this.objForm;
-                    if(!this.rgItem[i].custom.call(obj, strValue)) {
+                    if (!this.rgItem[i].custom.call(obj, strValue)) {
                         result = false;
                         break
                     }
                 } else {
-                    if(strType === "radio" || strType === "checkbox") {
+                    if (strType === "radio" || strType === "checkbox") {
                         var checkObj = this.rgItem[i].inputObj.filter(":checked");
-                        if(checkObj.val().isEmpty()) {
+                        if (checkObj.val().isEmpty()) {
                             result = false;
                             break
                         }
@@ -2113,31 +2125,31 @@ $.extend(_form_checker.prototype, {
                         var fnValidator = eval("_form.validator." + this.rgItem[i].strType);
                         var min = null,
                             max = null;
-                        if("range" in this.rgItem[i]) {
+                        if ("range" in this.rgItem[i]) {
                             min = ("min" in this.rgItem[i].range) ? this.rgItem[i].range.min : 0.1;
                             max = ("max" in this.rgItem[i].range) ? this.rgItem[i].range.max : null
                         } else {
                             min = 0.1
                         }
-                        if(!fnValidator.call(_form.validator, strValue, min, max)) {
+                        if (!fnValidator.call(_form.validator, strValue, min, max)) {
                             result = false;
                             break
                         }
                     }
                 }
-            } catch(error) {
-                if(_DEBUG === true) {
+            } catch (error) {
+                if (_DEBUG === true) {
                     error.print()
                 }
                 result = false;
                 break
             }
         }
-        if(!result) {
-            if("message" in this.rgItem[i]) {
+        if (!result) {
+            if ("message" in this.rgItem[i]) {
                 alert(this.rgItem[i].message)
             }
-            if(("inputObj" in this.rgItem[i]) && (strType === "text" || strType === "password" || tag === "TEXTAREA")) {
+            if (("inputObj" in this.rgItem[i]) && (strType === "text" || strType === "password" || tag === "TEXTAREA")) {
                 this.rgItem[i].inputObj.val("");
                 this.rgItem[i].inputObj.focus()
             }
@@ -2146,11 +2158,11 @@ $.extend(_form_checker.prototype, {
         return true
     },
     add: function(objItem) {
-        if(!("custom" in objItem) && !objItem.inputObj) {
+        if (!("custom" in objItem) && !objItem.inputObj) {
             return
         }
         this.rgItem.push(objItem);
-        if(("protect" in objItem) && objItem.protect && (objItem.strType in _form.protect)) {
+        if (("protect" in objItem) && objItem.protect && (objItem.strType in _form.protect)) {
             eval("_form.protect." + objItem.strType).call(_form.protect, (objItem.inputObj))
         }
     },
@@ -2162,20 +2174,20 @@ var _form = {};
 _form.validator = {};
 $.extend(_form.validator, {
     number: function(c, b, a) {
-        if(c.isEmpty()) {
+        if (c.isEmpty()) {
             return false
         }
         c = Number(c);
-        if(isNaN(c)) {
+        if (isNaN(c)) {
             return false
         }
-        if((b && isNaN(b)) || (a && isNaN(a))) {
+        if ((b && isNaN(b)) || (a && isNaN(a))) {
             return false
         }
-        if(b && (c < b)) {
+        if (b && (c < b)) {
             return false
         }
-        if(a && (c > a)) {
+        if (a && (c > a)) {
             return false
         }
         return true
@@ -2185,19 +2197,19 @@ $.extend(_form.validator, {
         return this.number(c, b, a)
     },
     string: function(c, b, a) {
-        if(c.isEmpty()) {
+        if (c.isEmpty()) {
             return false
         }
-        if(b && (c.length < b)) {
+        if (b && (c.length < b)) {
             return false
         }
-        if(a && (c.length > a)) {
+        if (a && (c.length > a)) {
             return false
         }
         return true
     },
     hangul: function(c, b, a) {
-        if(!this.string(c, b, a)) {
+        if (!this.string(c, b, a)) {
             return false
         }
         return c.isHangul()
@@ -2207,28 +2219,28 @@ $.extend(_form.validator, {
         return a.test(b)
     },
     url: function(b) {
-        if(this.domain(b)) {
+        if (this.domain(b)) {
             return true
         }
         var a = b.lastIndexOf("/");
-        if(a > -1) {
+        if (a > -1) {
             return this.domain(b.substring(0, a))
         }
         return false
     },
     userid: function(a) {
         a = a.replace(/[^a-zA-Z0-9]/g, "");
-        if(!isNaN(a.substring(0, 1))) {
+        if (!isNaN(a.substring(0, 1))) {
             return false
         }
-        if(!isNaN(a)) {
+        if (!isNaN(a)) {
             return false
         }
         return this.string(a, 4, 12)
     },
     password: function(a) {
         var b = /(?=.*\d)(?=.*[a-zA-Z])/;
-        if(!b.test(a)) {
+        if (!b.test(a)) {
             return false
         }
         return this.string(a, 10, 16)
@@ -2236,12 +2248,12 @@ $.extend(_form.validator, {
     four_string: function(d) {
         var c = d.length;
         var a = 0;
-        if(c < 3) {
+        if (c < 3) {
             return false
         }
-        for(var b = 0; b < c; b++) {
-            if(b !== 0 && d.substring(b - 1, b) === d.substring(b, b + 1)) {
-                if(a >= 2) {
+        for (var b = 0; b < c; b++) {
+            if (b !== 0 && d.substring(b - 1, b) === d.substring(b, b + 1)) {
+                if (a >= 2) {
                     return false
                 }
                 a++
@@ -2261,24 +2273,24 @@ $.extend(_form.protect, {
     functionkey: [8, 9, 13, 16, 17, 18, 20, 21, 22, 25, 27, 32, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 96],
     functioncheck: function(a) {
         var c = this.functionkey.length;
-        for(var b = 0; b < c; b++) {
-            if(this.functionkey[b] === a) {
+        for (var b = 0; b < c; b++) {
+            if (this.functionkey[b] === a) {
                 return true
             }
         }
         return false
     },
     set: function(a, c, d, b) {
-        if(!b) {
+        if (!b) {
             b = d
         }
-        if(c) {
+        if (c) {
             a.bind("keydown", c)
         }
-        if(d) {
+        if (d) {
             a.bind("keyup", d)
         }
-        if(b) {
+        if (b) {
             a.bind("blur", b)
         }
     },
@@ -2286,17 +2298,17 @@ $.extend(_form.protect, {
         a.css("ime-mode", "disabled");
         this.set(a, function(c) {
             var b = c.keyCode;
-            if(_form.protect.functioncheck(b)) {
+            if (_form.protect.functioncheck(b)) {
                 return true
             }
-            if((b >= 48 && b <= 57) || (b >= 96 && b <= 105)) {
+            if ((b >= 48 && b <= 57) || (b >= 96 && b <= 105)) {
                 return true
             }
             c.returnValue = "";
             return false
         }, function(d) {
             var c = new RegExp("[^0-9]", "g");
-            if(_form.protect.value_test($(this), c) === false) {
+            if (_form.protect.value_test($(this), c) === false) {
                 var b = $(this).val().replace(/[^0-9]/g, "");
                 $(this).val(b)
             }
@@ -2306,18 +2318,18 @@ $.extend(_form.protect, {
         a.css("ime-mode", "disabled");
         this.set(a, function(c) {
             var b = c.keyCode;
-            if(_form.protect.functioncheck(b)) {
+            if (_form.protect.functioncheck(b)) {
                 return true
             }
-            if((b >= 48 && b <= 57) || (b >= 96 && b <= 105)) {
+            if ((b >= 48 && b <= 57) || (b >= 96 && b <= 105)) {
                 return true
             }
             c.returnValue = "";
             return false
         }, function(c) {
             var b = Number($(this).val().replace(/[^0-9]/g, "")).currency();
-            if($(this).val() !== b) {
-                if($(this).attr("maxlength") && b.length > $(this).attr("maxlength")) {
+            if ($(this).val() !== b) {
+                if ($(this).attr("maxlength") && b.length > $(this).attr("maxlength")) {
                     var d = b.length - parseInt($(this).attr("maxLength"));
                     b = b.substring(0, b.length - d);
                     b = b.replace(/[^0-9]/g, "");
@@ -2325,7 +2337,7 @@ $.extend(_form.protect, {
                 }
                 $(this).val(b)
             }
-            if($(this).val() === "0") {
+            if ($(this).val() === "0") {
                 $(this).val("")
             }
         })
@@ -2334,16 +2346,16 @@ $.extend(_form.protect, {
         a.css("ime-mode", "active");
         this.set(a, function(c) {
             var b = c.keyCode;
-            if(_form.protect.functioncheck(b)) {
+            if (_form.protect.functioncheck(b)) {
                 return true
             }
-            if(b === 229) {
+            if (b === 229) {
                 return true
             }
             c.returnValue = "";
             return false
         }, null, function(c) {
-            var b = ($(this).val().isEmpty()) ? "" : $(this).val().replace(/[^ê°€-íž£]/g, "");
+            var b = ($(this).val().isEmpty()) ? "" : $(this).val().replace(/[^가-힣]/g, "");
             $(this).val(b)
         })
     },
@@ -2351,17 +2363,17 @@ $.extend(_form.protect, {
         a.css("ime-mode", "disabled");
         this.set(a, function(c) {
             var b = c.keyCode;
-            if(_form.protect.functioncheck(b)) {
+            if (_form.protect.functioncheck(b)) {
                 return true
             }
-            if((b >= 48 && b <= 57) || (b >= 65 && b <= 90) || (b >= 97 && b <= 122)) {
+            if ((b >= 48 && b <= 57) || (b >= 65 && b <= 90) || (b >= 97 && b <= 122)) {
                 return true
             }
             c.returnValue = "";
             return false
         }, function(d) {
             var c = new RegExp("[^a-zA-Z0-9]", "g");
-            if(_form.protect.value_test($(this), c) === false) {
+            if (_form.protect.value_test($(this), c) === false) {
                 var b = $(this).val().replace(c, "");
                 $(this).val(b)
             }
@@ -2371,31 +2383,31 @@ $.extend(_form.protect, {
         a.css("ime-mode", "disabled");
         this.set(a, function(c) {
             var b = c.keyCode;
-            if(_form.protect.functioncheck(b)) {
+            if (_form.protect.functioncheck(b)) {
                 return true
             }
-            if((b >= 65 && b <= 90) || (b >= 97 && b <= 122)) {
+            if ((b >= 65 && b <= 90) || (b >= 97 && b <= 122)) {
                 return true
             }
             c.returnValue = "";
             return false
         }, function(d) {
             var c = new RegExp("[^a-zA-Z]", "g");
-            if(_form.protect.value_test($(this), c) === false) {
+            if (_form.protect.value_test($(this), c) === false) {
                 var b = $(this).val().replace(c, "");
                 $(this).val(b)
             }
         })
     },
     value_test: function(a, b) {
-        if(b.test($(a).val()) === true) {
+        if (b.test($(a).val()) === true) {
             return false
         }
         return true
     }
 });
 _form.addValues = function(a, f) {
-    if(!a || !f) {
+    if (!a || !f) {
         return
     }
     var b = null;
@@ -2407,8 +2419,8 @@ _form.addValues = function(a, f) {
             b.setAttribute("value", g);
             a.append(b)
         })
-    } catch(d) {
-        for(var c in f) {
+    } catch (d) {
+        for (var c in f) {
             b = document.createElement("INPUT");
             b.setAttribute("type", "hidden");
             b.setAttribute("name", c);
@@ -2418,14 +2430,14 @@ _form.addValues = function(a, f) {
     }
 };
 _form.autotab = function(b, a, c) {
-    if($(b).attr("maxlength") > 0) {
+    if ($(b).attr("maxlength") > 0) {
         c = $(b).attr("maxlength")
     }
-    if(c < 1) {
+    if (c < 1) {
         return
     }
     $(b).bind("keyup", function() {
-        if($(this).val().length >= c) {
+        if ($(this).val().length >= c) {
             $(a).focus()
         }
     })
@@ -2434,38 +2446,38 @@ var _window = {
     agent: null,
     browser: function() {
         var b = navigator.userAgent.toLowerCase();
-        if(b.indexOf("firefox") > -1) {
+        if (b.indexOf("firefox") > -1) {
             return "F"
         } else {
-            if(b.indexOf("safari") > -1) {
-                if(b.indexOf("chrome") > -1) {
+            if (b.indexOf("safari") > -1) {
+                if (b.indexOf("chrome") > -1) {
                     return "C"
                 }
                 return "S"
             } else {
-                if(b.indexOf("msie") > -1 || b.indexOf("trident") > -1) {
-                    if(b.indexOf("trident/7") > -1) {
+                if (b.indexOf("msie") > -1 || b.indexOf("trident") > -1) {
+                    if (b.indexOf("trident/7") > -1) {
                         var c = 11
                     } else {
-                        if(b.indexOf("trident/6") > -1) {
-                            if(b.indexOf("msie 10") > -1 || b.indexOf("msie 9") > -1 || b.indexOf("msie 7") > -1) {
+                        if (b.indexOf("trident/6") > -1) {
+                            if (b.indexOf("msie 10") > -1 || b.indexOf("msie 9") > -1 || b.indexOf("msie 7") > -1) {
                                 var c = 10
                             }
                         } else {
-                            if(b.indexOf("trident/5") > -1) {
-                                if(b.indexOf("msie 9") > -1 || b.indexOf("msie 7") > -1) {
+                            if (b.indexOf("trident/5") > -1) {
+                                if (b.indexOf("msie 9") > -1 || b.indexOf("msie 7") > -1) {
                                     var c = 9
                                 }
                             } else {
-                                if(b.indexOf("trident/4") > -1) {
-                                    if(b.indexOf("msie 8") > -1 || b.indexOf("msie 7") > -1) {
+                                if (b.indexOf("trident/4") > -1) {
+                                    if (b.indexOf("msie 8") > -1 || b.indexOf("msie 7") > -1) {
                                         var c = 8
                                     }
-                                    if(b.indexOf("nt 6.1") > -1) {
+                                    if (b.indexOf("nt 6.1") > -1) {
                                         var c = "8_2"
                                     }
                                 } else {
-                                    if(b.indexOf("msie 7") > -1) {
+                                    if (b.indexOf("msie 7") > -1) {
                                         var c = 7
                                     } else {
                                         var c = 6
@@ -2484,20 +2496,20 @@ var _window = {
         var k = "width=" + c + ", height=" + g;
         k += (!j) ? "status=no, toolbar=no, menubar=no, location=no, fullscreen=no, scrollbars=yes, resizable=no, titlebar=no" : "," + j;
         var b = window.open(d, f, k);
-        if(b) {
+        if (b) {
             this.resize(c, g, b);
             b.focus();
-            if(e) {
+            if (e) {
                 return b
             }
         }
     },
     resize: function(a, b, c) {
-        if(!c) {
+        if (!c) {
             c = window
         }
         this.agent = this.browser();
-        switch(this.agent) {
+        switch (this.agent) {
             case "F":
                 a += 18;
                 b += 73;
@@ -2548,14 +2560,14 @@ var _window = {
         this.center(c, a, b)
     },
     center: function(e, b, d) {
-        if(!e) {
+        if (!e) {
             e = window
         }
         var c = {
             width: 0,
             height: 0
         };
-        if(this.agent !== null && this.agent.indexOf("I") > -1) {
+        if (this.agent !== null && this.agent.indexOf("I") > -1) {
             c.width = b;
             c.height = d;
             var a = (screen.availWidth - c.width) / 2;
@@ -2570,7 +2582,7 @@ var _window = {
         e.focus()
     },
     close: function(a) {
-        if(!a) {
+        if (!a) {
             a = window
         }
         a.close()
@@ -2580,10 +2592,10 @@ var _window = {
 function g_fnBLUR() {
     var a = null;
     var d = Array("A", "IMG", "AREA", "INPUT");
-    for(var c = 0; c < d.length; c++) {
+    for (var c = 0; c < d.length; c++) {
         a = document.getElementsByTagName(d[c]);
-        for(var b = 0; b < a.length; b++) {
-            if(d[c] === "INPUT" && (a[b].getAttribute("type") === "text" || a[b].getAttribute("type") === "password" || a[b].getAttribute("type") === "file")) {
+        for (var b = 0; b < a.length; b++) {
+            if (d[c] === "INPUT" && (a[b].getAttribute("type") === "text" || a[b].getAttribute("type") === "password" || a[b].getAttribute("type") === "file")) {
                 continue
             }
             a[b].onfocus = function() {
@@ -2599,7 +2611,7 @@ function g_fnSECURITY() {
     document.onselectstart = _DISABLE;
     document.addEventListener("mousedown", function(a) {
         a = _event.event(a);
-        if(a.button !== 2) {
+        if (a.button !== 2) {
             return true
         }
         _event.stop(a);
@@ -2610,18 +2622,18 @@ function g_fnSECURITY() {
         var b = _event.keycode(c);
         b = parseInt(b);
         var f = new Array(114, 115, 116, 117, 118, 121, 122, 8);
-        if(c.altKey || c.altLeft || c.ctrlKey || c.ctrlLeft) {
+        if (c.altKey || c.altLeft || c.ctrlKey || c.ctrlLeft) {
             try {
                 c.keyCode = 0
-            } catch(d) {}
+            } catch (d) {}
             _event.stop(c);
             return false
         }
-        for(var a = 0; a < f.length; a++) {
-            if(f[a] === b) {
+        for (var a = 0; a < f.length; a++) {
+            if (f[a] === b) {
                 try {
                     c.keyCode = 0
-                } catch(d) {}
+                } catch (d) {}
                 _event.stop(c);
                 return false
             }
@@ -2636,7 +2648,7 @@ function g_fnSECURITY2() {
     document.onselectstart = _DISABLE;
     document.addEventListener("mousedown", function(a) {
         a = _event.event(a);
-        if(a.button !== 2) {
+        if (a.button !== 2) {
             return true
         }
         _event.stop(a);
@@ -2647,18 +2659,18 @@ function g_fnSECURITY2() {
         var b = _event.keycode(c);
         b = parseInt(b);
         var f = new Array(114, 115, 116, 117, 118, 121, 122);
-        if(c.altKey || c.altLeft || c.ctrlKey || c.ctrlLeft) {
+        if (c.altKey || c.altLeft || c.ctrlKey || c.ctrlLeft) {
             try {
                 c.keyCode = 0
-            } catch(d) {}
+            } catch (d) {}
             _event.stop(c);
             return false
         }
-        for(var a = 0; a < f.length; a++) {
-            if(f[a] === b) {
+        for (var a = 0; a < f.length; a++) {
+            if (f[a] === b) {
                 try {
                     c.keyCode = 0
-                } catch(d) {}
+                } catch (d) {}
                 _event.stop(c);
                 return false
             }
@@ -2675,21 +2687,21 @@ function g_fnSECURITY2() {
             mask: true,
             type: "class"
         };
-        for(var b in c) {
+        for (var b in c) {
             d[b] = c[b]
         }
         this.options = d;
         d.layer.layerControl = this;
-        if(d.el !== null) {
+        if (d.el !== null) {
             d.el.addEventListener("click", function() {
-                if(d.mask === true) {
+                if (d.mask === true) {
                     e.classList.toggle("g_hidden");
                     document.body.classList.add("mask_on")
                 }
-                if(d.type === "class") {
+                if (d.type === "class") {
                     d.layer.classList.toggle("g_hidden")
                 } else {
-                    if(d.layer.style.display !== "block") {
+                    if (d.layer.style.display !== "block") {
                         d.layer.style.display = "block"
                     } else {
                         d.layer.style.display = "none"
@@ -2697,7 +2709,7 @@ function g_fnSECURITY2() {
                 }
             })
         }
-        if(d.close_btn !== null) {
+        if (d.close_btn !== null) {
             d.close_btn.addEventListener("click", function() {
                 a.close({
                     mask: d.mask,
@@ -2708,14 +2720,14 @@ function g_fnSECURITY2() {
     };
     a.open = function(b) {
         var c = document.getElementById("g_SLEEP");
-        if(b.mask !== false) {
+        if (b.mask !== false) {
             document.body.classList.add("mask_on");
             c.classList.remove("g_hidden");
-            if(c.style.display !== "block") {
+            if (c.style.display !== "block") {
                 c.removeAttribute("style")
             }
         }
-        if(b.type === "class") {
+        if (b.type === "class") {
             b.layer.classList.remove("g_hidden")
         } else {
             b.layer.style.display = "block"
@@ -2723,11 +2735,11 @@ function g_fnSECURITY2() {
     };
     a.close = function(b) {
         var c = document.getElementById("g_SLEEP");
-        if(b.mask !== false) {
+        if (b.mask !== false) {
             document.body.classList.remove("mask_on");
             c.classList.add("g_hidden")
         }
-        if(b.type === "class") {
+        if (b.type === "class") {
             b.layer.classList.add("g_hidden")
         } else {
             b.layer.style.display = "none"
@@ -2735,10 +2747,10 @@ function g_fnSECURITY2() {
     };
     window.LayerControl = a;
     document.addEventListener("click", function(d) {
-        if(d.target.getAttribute("data-close") === "true") {
+        if (d.target.getAttribute("data-close") === "true") {
             var b = d.target;
             var c = b.closest(".g_layer");
-            if(c !== null) {
+            if (c !== null) {
                 a.close({
                     layer: c
                 })
@@ -2751,17 +2763,18 @@ var _myService = {
     getFavorite: function(e) {
         var d = document.querySelectorAll('[data-content="tab_mygame"]');
         var a = d.length;
-        for(var b = 0; b < a; b++) {
+        for (var b = 0; b < a; b++) {
             var c = d[b].querySelector("ul");
             c.innerHTML = '<li class="empty">LOADING..</li>'
         }
         ajaxRequest({
-            url: "/_include/mySearchList.php",
+            url: "/api/mySearch",
             dataType: "xml",
             type: "get",
+            data:{api_token:a_token},
             success: function(f) {
                 _myService.mySearchXml = _xml.getElement(f, "mysearch", 0);
-                if(e) {
+                if (e) {
                     e.call(_myService)
                 } else {
                     _myService.makeFavoriteList()
@@ -2771,28 +2784,28 @@ var _myService = {
         })
     },
     makeFavoriteList: function() {
-        if(this.mySearchXml === null) {
+        if (this.mySearchXml === null) {
             this.getFavorite(this.makeFavoriteList);
             return
         }
         var m = [];
         var p = this.mySearchXml.getAttribute("result");
-        if(p === "fail") {
+        if (p === "fail") {
             var j = this.mySearchXml.getAttribute("reason");
-            if(j === "nologin") {
-                m.push('<li class="empty">ë¡œê·¸ì¸ í›„ ì´ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤.</li>')
+            if (j === "nologin") {
+                m.push('<li class="empty">로그인 후 이용 가능합니다.</li>')
             } else {
-                alert((j.isEmpty()) ? "ì„œë¹„ìŠ¤ ìž¥ì• ìž…ë‹ˆë‹¤. ìž ì‹œ í›„ ì´ìš©í•˜ì„¸ìš”." : j)
+                alert((j.isEmpty()) ? "서비스 장애입니다. 잠시 후 이용하세요." : j)
             }
         } else {
             var g = _xml.getElements(this.mySearchXml, "item");
-            if(g.length < 1) {
-                m.push('<li class="empty">ë“±ë¡ëœ ë‚˜ë§Œì˜ ê²Œìž„ì´ ì—†ìŠµë‹ˆë‹¤.<br>ë‚˜ë§Œì˜ ê²Œìž„ì„ ë“±ë¡í•˜ì‹œë©´ ë³´ë‹¤ ì‰½ê²Œ ê²€ìƒ‰ ê°€ëŠ¥í•©ë‹ˆë‹¤.<br><br><a href="/myroom/customer/search.html" class="search_add_btn">ë“±ë¡í•˜ê¸° +</a></li>')
+            if (g.length < 1) {
+                m.push('<li class="empty">등록된 나만의 게임이 없습니다.<br>나만의 게임을 등록하시면 보다 쉽게 검색 가능합니다.<br><br><a href="/myroom/customer/search.html" class="search_add_btn">등록하기 +</a></li>')
             } else {
                 var a = g.length;
-                for(var h = 0; h < a; h++) {
+                for (var h = 0; h < a; h++) {
                     var o = g[h];
-                    var d = (o.getAttribute("type") === "sell") ? "íŒë‹ˆë‹¤" : "ì‚½ë‹ˆë‹¤";
+                    var d = (o.getAttribute("type") === "sell") ? "팝니다" : "삽니다";
                     var n = o.getElementsByTagName("game")[0].childNodes[0];
                     var l = o.getElementsByTagName("server")[0].childNodes[0];
                     var b = o.getElementsByTagName("goods")[0].childNodes[0];
@@ -2806,10 +2819,10 @@ var _myService = {
         }
         var c = document.querySelectorAll('[data-content="tab_mygame"]');
         var k = c.length;
-        for(var h = 0; h < k; h++) {
+        for (var h = 0; h < k; h++) {
             var e = c[h].querySelector("ul");
             e.innerHTML = m.join("");
-            if(_myService.myGameHandler !== true) {
+            if (_myService.myGameHandler !== true) {
                 e.addEventListener("click", _myService.myGameClickHandler)
             }
         }
@@ -2818,12 +2831,12 @@ var _myService = {
         _myService.myGameHandler = true;
         var l = _myService.getGameServerEl(j.target);
         var c = _xml.getElements(_myService.mySearchXml, "item");
-        if(j.target.classList.contains("delete_btn") === true) {
+        if (j.target.classList.contains("delete_btn") === true) {
             var k = j.target.parentNode.getAttribute("data-idx");
             var h = c[k].getElementsByTagName("game")[0];
             var g = c[k].getElementsByTagName("server")[0];
-            var b = (c[k].getAttribute("type") === "sell") ? "íŒë‹ˆë‹¤" : "ì‚½ë‹ˆë‹¤";
-            if(confirm(b + " > " + h.childNodes[0].nodeValue + " > " + g.childNodes[0].nodeValue + " ê²Œìž„ì„ ë‚˜ë§Œì˜ ê²Œìž„ë¦¬ìŠ¤íŠ¸ì—ì„œ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?") === true) {
+            var b = (c[k].getAttribute("type") === "sell") ? "팝니다" : "삽니다";
+            if (confirm(b + " > " + h.childNodes[0].nodeValue + " > " + g.childNodes[0].nodeValue + " 게임을 나만의 게임리스트에서 삭제하시겠습니까?") === true) {
                 _myService.deleteFavorite(j.target.parentElement.getAttribute("data-id"), function() {
                     _myService.getFavorite()
                 })
@@ -2831,23 +2844,23 @@ var _myService = {
             return
         }
         var d = j.target;
-        while(d !== null && d.classList.contains("gs_name") === false) {
+        while (d !== null && d.classList.contains("gs_name") === false) {
             d = d.parentElement
         }
-        if(d !== null && d.className === "gs_name") {
+        if (d !== null && d.className === "gs_name") {
             var k = d.parentElement.getAttribute("data-idx");
             var h = c[k].getElementsByTagName("game")[0];
             var g = c[k].getElementsByTagName("server")[0];
-            if(l !== null) {
+            if (l !== null) {
                 var a = c[k].getElementsByTagName("goods_type")[0];
                 var f = (a.getAttribute("id") === "all") ? "money" : a.getAttribute("id");
-                if(l.formElement.querySelector('[value="' + c[k].getAttribute("type") + '"]') !== null) {
+                if (l.formElement.querySelector('[value="' + c[k].getAttribute("type") + '"]') !== null) {
                     l.formElement.querySelector('[value="' + c[k].getAttribute("type") + '"]').checked = true
                 }
                 l.changeAction = true;
                 l.gameList.gameCode = h.getAttribute("id");
                 l.serverList.serverCode = g.getAttribute("id");
-                if(l.goodsList !== undefined) {
+                if (l.goodsList !== undefined) {
                     l.goodsList.goodsCode = f
                 } else {
                     l.serverList.goodsCode = f
@@ -2863,17 +2876,17 @@ var _myService = {
             type: "POST",
             dataType: "JSON",
             success: function(c) {
-                if(c.result === "LOGIN") {
+                if (c.result === "LOGIN") {
                     alert(c.msg);
                     login();
                     return
                 }
-                if(c.result === "ERROR" && c.msg) {
+                if (c.result === "ERROR" && c.msg) {
                     alert(c.msg);
                     return
                 }
-                if(c.result === "SUCCESS") {
-                    if(b) {
+                if (c.result === "SUCCESS") {
+                    if (b) {
                         b.call(_myService, c)
                     }
                 }
@@ -2887,17 +2900,17 @@ var _myService = {
             dataType: "json",
             data: a,
             success: function(c) {
-                if(c.result === "LOGIN") {
+                if (c.result === "LOGIN") {
                     alert(c.msg);
                     login();
                     return
                 }
-                if(c.result === "ERROR" && c.msg) {
+                if (c.result === "ERROR" && c.msg) {
                     alert(c.msg);
                     return
                 }
-                if(c.result === "SUCCESS") {
-                    if(b) {
+                if (c.result === "SUCCESS") {
+                    if (b) {
                         b.call(_myService, c)
                     }
                 }
@@ -2908,17 +2921,17 @@ var _myService = {
     getLastCount: function() {
         var b = _cookie.get("userSerachListNew") || [];
         var a = 0;
-        if(b.length > 0) {
+        if (b.length > 0) {
             a = Object.keys(JSON.parse(b)).length
         }
         return a
     },
     getLastSearch: function() {
         var a = _cookie.get("userSerachListNew") || [];
-        if(a.length > 0) {
+        if (a.length > 0) {
             a = JSON.parse(a);
             a = Object.keys(a).map(function(b) {
-                if(a[b].gameName.indexOf(" > ") !== -1) {
+                if (a[b].gameName.indexOf(" > ") !== -1) {
                     var c = a[b].gameName.split(" > ");
                     a[b].gameName = c[0].trim();
                     a[b].serverName = c[1].trim()
@@ -2936,19 +2949,19 @@ var _myService = {
             d = b.querySelector('[name="search_game_text"]').value,
             c = b.querySelector('[name="search_server"]').value,
             a = b.querySelector('[name="search_server_text"]').value;
-        if(e.isEmpty()) {
+        if (e.isEmpty()) {
             return
         }
-        if(j.length > 0) {
+        if (j.length > 0) {
             var j = JSON.parse(j),
                 g = j.length;
-            for(var f = 0; f < g; f++) {
-                if(j[f].type === h && j[f].gameCode === e && j[f].serverCode === c) {
+            for (var f = 0; f < g; f++) {
+                if (j[f].type === h && j[f].gameCode === e && j[f].serverCode === c) {
                     k = f;
                     break
                 }
             }
-            if(k !== undefined) {
+            if (k !== undefined) {
                 j.splice(f, 1)
             }
         }
@@ -2959,33 +2972,33 @@ var _myService = {
             serverCode: "" + c + "",
             serverName: "" + a + ""
         });
-        if(j.length > _myService.count) {
+        if (j.length > _myService.count) {
             j = j.slice(0, _myService.count)
         }
         _cookie.add("userSerachListNew", JSON.stringify(j), null, "/", ".itemmania.com")
     },
     makeLastSearch: function() {
         var o = _myService.getLastCount();
-        if(o > 0) {
-            if(this.mySearchXml === null) {
+        if (o > 0) {
+            if (this.mySearchXml === null) {
                 this.getFavorite(_myService.makeLastSearch);
                 return
             }
         }
         var b = _myService.getLastSearch();
         var t = [];
-        if(b.length > 0) {
-            if(this.mySearchXml === null) {
+        if (b.length > 0) {
+            if (this.mySearchXml === null) {
                 var s = {}
             } else {
                 var s = {};
                 var l = _xml.getElements(_myService.mySearchXml, "item");
                 var q = l.length;
-                for(var n = 0; n < q; n++) {
+                for (var n = 0; n < q; n++) {
                     var p = $(l[n]);
                     var z = p.find("game");
                     var f = p.find("server");
-                    if(s[z.attr("id")] === undefined) {
+                    if (s[z.attr("id")] === undefined) {
                         s[z.attr("id")] = [];
                         s[z.attr("id")]["seq"] = [];
                         s[z.attr("id")]["server"] = []
@@ -2995,11 +3008,11 @@ var _myService = {
                 }
             }
             var x = b.length;
-            for(var y = 0; y < x; y++) {
+            for (var y = 0; y < x; y++) {
                 var j = b[y];
-                if(j) {
+                if (j) {
                     var c = j.type;
-                    var h = (c === "sell") ? "íŒë‹ˆë‹¤" : "ì‚½ë‹ˆë‹¤";
+                    var h = (c === "sell") ? "팝니다" : "삽니다";
                     var u = j.gameCode;
                     var e = j.gameName;
                     var k = j.serverCode;
@@ -3007,12 +3020,12 @@ var _myService = {
                     var r = e + " > " + w;
                     var m = "";
                     var v = "";
-                    if(s[u] !== undefined && s[u]["server"].indexOf(k) !== -1) {
+                    if (s[u] !== undefined && s[u]["server"].indexOf(k) !== -1) {
                         m = " on";
                         v = s[u]["seq"][s[u]["server"].indexOf(k)]
                     }
                     t.push('<li data-id="' + y + '">');
-                    if(k !== "0") {
+                    if (k !== "0") {
                         t.push('<i class="icon_star_' + c + m + '" data-mygame="' + v + '"></i>')
                     }
                     t.push('<a href="javascript:;" class="gs_name"><span class="' + c + '">[' + h + "]</span>" + r + "</a>");
@@ -3021,26 +3034,26 @@ var _myService = {
                 }
             }
         } else {
-            t.push('<li class="empty">ìµœê·¼ ê²€ìƒ‰ ê²Œìž„ì´ ì—†ìŠµë‹ˆë‹¤.</li>')
+            t.push('<li class="empty">최근 검색 게임이 없습니다.</li>')
         }
         var g = document.querySelectorAll('[data-content="tab_lastsearch"]');
         var d = g.length;
-        for(var n = 0; n < d; n++) {
+        for (var n = 0; n < d; n++) {
             var a = g[n].querySelector("ul");
             a.innerHTML = t.join("");
-            if(_myService.lastSearchHandler !== true) {
+            if (_myService.lastSearchHandler !== true) {
                 a.addEventListener("click", _myService.lastSearchClickHandler)
             }
         }
     },
     lastSearchClickHandler: function(c) {
         _myService.lastSearchHandler = true;
-        if(c.target.classList.contains("delete_btn") === true) {
+        if (c.target.classList.contains("delete_btn") === true) {
             _myService.deleteLastSearch(c.target.parentElement.getAttribute("data-id"));
             _myService.makeLastSearch();
             return
         }
-        if(c.target.classList.contains("icon_star_sell") === true || c.target.classList.contains("icon_star_buy") === true) {
+        if (c.target.classList.contains("icon_star_sell") === true || c.target.classList.contains("icon_star_buy") === true) {
             var d = _myService.getLastSearch();
             var g = c.target.parentElement.getAttribute("data-id");
             var j = c.target.getAttribute("data-mygame");
@@ -3051,13 +3064,13 @@ var _myService = {
                 server: d[g].serverCode,
                 server_text: d[g].serverName,
                 goods: "0",
-                goods_text: "ë¬¼í’ˆì „ì²´"
+                goods_text: "물품전체"
             };
-            var a = (d[g].type === "sell") ? "íŒë‹ˆë‹¤" : "ì‚½ë‹ˆë‹¤";
-            if(j.isEmpty() === true) {
-                if(confirm(a + " > " + f.game_text + " > " + f.server_text + " ê²Œìž„ì„ ë‚˜ë§Œì˜ ê²Œìž„ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€í•˜ì‹œê² ìŠµë‹ˆê¹Œ?") === true) {
+            var a = (d[g].type === "sell") ? "팝니다" : "삽니다";
+            if (j.isEmpty() === true) {
+                if (confirm(a + " > " + f.game_text + " > " + f.server_text + " 게임을 나만의 게임리스트에 추가하시겠습니까?") === true) {
                     _myService.addFavorite(f, function(e) {
-                        if(e.result === "SUCCESS") {
+                        if (e.result === "SUCCESS") {
                             c.target.setAttribute("data-mygame", e.mygameID);
                             c.target.classList.add("on");
                             _myService.getFavorite()
@@ -3065,9 +3078,9 @@ var _myService = {
                     })
                 }
             } else {
-                if(confirm(a + " > " + f.game_text + " > " + f.server_text + " ê²Œìž„ì„ ë‚˜ë§Œì˜ ê²Œìž„ë¦¬ìŠ¤íŠ¸ì—ì„œ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?") === true) {
+                if (confirm(a + " > " + f.game_text + " > " + f.server_text + " 게임을 나만의 게임리스트에서 삭제하시겠습니까?") === true) {
                     _myService.deleteFavorite(j, function(e) {
-                        if(e.result === "SUCCESS") {
+                        if (e.result === "SUCCESS") {
                             c.target.setAttribute("data-mygame", "");
                             c.target.classList.remove("on");
                             _myService.getFavorite()
@@ -3077,15 +3090,15 @@ var _myService = {
             }
         }
         var b = c.target;
-        while(b !== null && b.classList.contains("gs_name") === false) {
+        while (b !== null && b.classList.contains("gs_name") === false) {
             b = b.parentElement
         }
-        if(b !== null && b.className === "gs_name") {
+        if (b !== null && b.className === "gs_name") {
             var k = _myService.getGameServerEl(b);
-            if(k !== null) {
+            if (k !== null) {
                 var d = _myService.getLastSearch();
                 var h = b.parentElement.getAttribute("data-id");
-                if(k.formElement.querySelector('[value="' + d[h].type + '"]') !== null) {
+                if (k.formElement.querySelector('[value="' + d[h].type + '"]') !== null) {
                     k.formElement.querySelector('[value="' + d[h].type + '"]').checked = true
                 }
                 k.changeAction = true;
@@ -3096,11 +3109,11 @@ var _myService = {
         }
     },
     deleteLastSearch: function(b) {
-        if(b.isEmpty()) {
+        if (b.isEmpty()) {
             return
         }
         var a = _cookie.get("userSerachListNew") || [];
-        if(a.length > 0) {
+        if (a.length > 0) {
             var a = JSON.parse(a);
             a.splice(b, 1);
             _cookie.add("userSerachListNew", JSON.stringify(a), null, "/", ".itemmania.com")
@@ -3112,7 +3125,7 @@ var _myService = {
     },
     getGameServerEl: function(b) {
         var a = b.parentElement;
-        while(a !== null && a.classList.contains("g_search_frame") === false) {
+        while (a !== null && a.classList.contains("g_search_frame") === false) {
             a = a.parentElement
         }
         var c = a.querySelector('[data-gslist="true"]');
@@ -3125,13 +3138,13 @@ var g_nodeSleep;
 function _initialize() {
     rootObj = $("#g_BODY");
     g_nodeSleep = $("#g_SLEEP")[0];
-    if(g_nodeSleep) {
+    if (g_nodeSleep) {
         $.extend(g_nodeSleep, {
             enable: function(h) {
                 var m = $("#g_OVERLAY");
                 m.show();
                 $(this).removeClass("g_hidden");
-                if(h) {
+                if (h) {
                     this.node = h;
                     h.appendTo($(this));
                     var o = h.outerWidth();
@@ -3142,11 +3155,11 @@ function _initialize() {
                         "margin-left": "-" + (o / 2) + "px",
                         "z-index": "99"
                     };
-                    if(document.body.clientHeight > e) {
+                    if (document.body.clientHeight > e) {
                         var l = (document.documentElement.scrollTop || document.body.scrollTop);
                         var k = e / 2;
                         k = k + ((document.body.scrollHeight - window.innerHeight) / 2);
-                        if(l > 0) {
+                        if (l > 0) {
                             k = k - l
                         }
                         f.top = "50%";
@@ -3154,39 +3167,39 @@ function _initialize() {
                     } else {
                         m.css("height", e + "px")
                     }
-                    if(document.body.clientWidth < h.css("width").replace("px", "")) {
+                    if (document.body.clientWidth < h.css("width").replace("px", "")) {
                         m.css("width", o + "px")
                     }
                     h.removeClass("g_hidden").css(f).show().focus();
                     var j = this.node.find("DIV");
                     var g = j.length;
-                    for(var n = 0; n < g; n++) {
-                        if(j[n].className == "g_selectbox") {
+                    for (var n = 0; n < g; n++) {
+                        if (j[n].className == "g_selectbox") {
                             j[n].nodeList.css("z-index", "99");
                             $("body").append(j[n].nodeList)
                         }
                     }
                     $(window).on("resize", this.repositionLayer)
                 }
-                if("OnOpen" in this) {
+                if ("OnOpen" in this) {
                     this.OnOpen.call(this)
                 }
             },
             disable: function() {
-                if(this.node) {
+                if (this.node) {
                     this.node.hide()
                 }
                 $(this).addClass("g_hidden");
                 $("#g_OVERLAY").hide();
                 $(window).off("resize", this.repositionLayer);
-                if("OnClose" in this) {
+                if ("OnClose" in this) {
                     this.OnClose.call(this)
                 }
             },
             repositionLayer: function() {
                 var f = g_nodeSleep.node;
                 var e = $("#g_OVERLAY");
-                if(document.body.clientHeight > f.css("height").replace("px", "")) {
+                if (document.body.clientHeight > f.css("height").replace("px", "")) {
                     f.css({
                         top: "50%",
                         "margin-top": "-" + (f.height() / 2) + "px"
@@ -3199,7 +3212,7 @@ function _initialize() {
                     });
                     e.css("height", f.height() + "px")
                 }
-                if(document.body.clientWidth > f.css("width").replace("px", "")) {
+                if (document.body.clientWidth > f.css("width").replace("px", "")) {
                     e.css("width", "100%")
                 } else {
                     e.css("width", f.width() + "px")
@@ -3209,15 +3222,15 @@ function _initialize() {
     }
     var b = document.querySelectorAll("[data-popular]");
     var c = b.length;
-    for(var d = 0; d < c; d++) {
+    for (var d = 0; d < c; d++) {
         b[d].addEventListener("click", function(g) {
             var h = g.target;
-            while(h !== null && h.getAttribute("data-pgame") === null) {
+            while (h !== null && h.getAttribute("data-pgame") === null) {
                 h = h.parentElement
             }
-            if(h !== null && h.getAttribute("data-pgame") !== null) {
+            if (h !== null && h.getAttribute("data-pgame") !== null) {
                 var j = _myService.getGameServerEl(h);
-                if(j !== null) {
+                if (j !== null) {
                     var f = h.getAttribute("data-pgame");
                     j.changeAction = true;
                     j.gameList.gameCode = f;
@@ -3230,21 +3243,21 @@ function _initialize() {
     _selectbox.convertAll();
     g_fnBLUR();
     try {
-        if("_header" in window) {
+        if ("_header" in window) {
             _header()
         }
-        if("_init" in window) {
+        if ("_init" in window) {
             _init()
         }
-        if("__init" in window) {
+        if ("__init" in window) {
             __init()
         }
-        if("___init" in window) {
-            ___init()
+        if ("___init" in window) {
+            __init()
         }
         $("input, textarea").placeholder()
-    } catch(a) {
-        if(_DEBUG) {
+    } catch (a) {
+        if (_DEBUG) {
             a.print();
             return false
         }
@@ -3254,4 +3267,4 @@ function _initialize() {
 function login() {
     var a = encodeURIComponent(document.URL);
     window.open(SSL_DOMAIN + "/portal/user/login_form.html?returnUrl=" + a, "login", "height=564,width=330, status=no,toolbar=no,menubar=no,location=no,fullscreen=no,scrollbars=no,resizable=no,titlebar=no")
-};
+}

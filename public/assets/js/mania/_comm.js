@@ -1,4 +1,16 @@
+
 (function(j, l, f) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        statusCode: {
+            401: function(){
+                alert("로그아웃상태이므로 요청을 수락할수 없습니다.")
+                // Redirec the to the login page.
+            }
+        }
+    });
     var b = Object.prototype.toString.call(j.operamini) == "[object OperaMini]";
     var a = "placeholder" in l.createElement("input") && !b;
     var g = "placeholder" in l.createElement("textarea") && !b;
@@ -2756,9 +2768,10 @@ var _myService = {
             c.innerHTML = '<li class="empty">LOADING..</li>'
         }
         ajaxRequest({
-            url: "/_include/mySearchList.php",
+            url: "/api/mySearch",
             dataType: "xml",
             type: "get",
+            data:{api_token:a_token},
             success: function(f) {
                 _myService.mySearchXml = _xml.getElement(f, "mysearch", 0);
                 if (e) {

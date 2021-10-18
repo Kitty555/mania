@@ -13,4 +13,12 @@ class MItem extends Model
     public function user(){
         return $this->hasOne(User::class,'id','userId');
     }
+
+    public function game(){
+        return $this->hasOne(MGame::class,'id','game_code');
+    }
+    public function server(){
+        return $this->hasOne(MGame::class,'id','server_code');
+    }
+
 }

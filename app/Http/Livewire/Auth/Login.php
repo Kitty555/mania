@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Login extends Component
@@ -11,7 +12,7 @@ class Login extends Component
     public $email = '';
     public $password = '';
     public $remember_me = false;
-
+    private $apiToken;
     protected $rules = [
         'email' => 'required|email:rfc,dns',
         'password' => 'required|min:6',
@@ -21,7 +22,7 @@ class Login extends Component
     public function mount()
     {
         if (auth()->user()) {
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/index');
         }
         $this->fill([
             'email' => 'admin@volt.com',
@@ -33,9 +34,14 @@ class Login extends Component
     {
         $credentials = $this->validate();
         if (auth()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
+            $this->apiToken = Str::random(60);
             $user = User::where(['email' => $this->email])->first();
             auth()->login($user, $this->remember_me);
-            return redirect()->intended('/dashboard');
+            User::where("id",$user->id)
+                ->update([
+                    "api_token"=>$this->apiToken,
+                ]);
+            return redirect()->intended('/index');
         } else {
             return $this->addError('email', trans('auth.failed'));
         }

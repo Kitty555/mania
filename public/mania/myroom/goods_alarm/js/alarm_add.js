@@ -85,7 +85,7 @@ function requestData(callback){
             }
 
             ajaxRequest({
-                url: '/_json/gameserverlist.json',
+                url: '/api/_json/gameserverlist.json',
                 dataType: 'json',
                 cache: false,
                 success: function(res) {
