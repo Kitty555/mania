@@ -23,4 +23,5 @@ class MGame extends Model
     public function threeOfproperty(){
         return $this->belongsTo(MGame::class,'parent','id')->orderBy("order","ASC");
     }
+
 }

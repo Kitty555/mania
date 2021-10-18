@@ -79,7 +79,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/customer/myqna/list', [\App\Http\Controllers\VCustomerController::class, 'myqna_list'])->name('myqna_list');
     Route::get('/customer/myqna/view', [\App\Http\Controllers\VCustomerController::class, 'myqna_view'])->name('myqna_view');
 
-
     Route::get('/myroom', [\App\Http\Controllers\VMyRoomController::class, 'index'])->name('myroom');
     Route::get('/myroom/message', [\App\Http\Controllers\VMyRoomController::class, 'message'])->name('message');
 
@@ -115,8 +114,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/myroom/mileage/payment/payment_list', [\App\Http\Controllers\VMyRoomController::class, 'payment_list'])->name('payment_list');
     Route::get('/myroom/mileage/payment/payment_phone_list', [\App\Http\Controllers\VMyRoomController::class, 'payment_phone_list'])->name('payment_phone_list');
     Route::get('/myroom/mileage/payment/culturecash', [\App\Http\Controllers\VMyRoomController::class, 'culturecash'])->name('culturecash');
-
-
     Route::get('/sell', [\App\Http\Controllers\VSellController::class, 'index'])->name('sell');
     Route::get('/sell/index_view', [\App\Http\Controllers\VSellController::class, 'index_view'])->name('sell_index_view');
     Route::get('/sell/list_search', [\App\Http\Controllers\VSellController::class, 'list_search'])->name('sell_list_search');
@@ -133,10 +130,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/buy/application', [\App\Http\Controllers\VBuyController::class, 'buy_application'])->name('buy_application');
 
     Route::get('/certify/payment/user_certify', [\App\Http\Controllers\VCertifyController::class, 'user_certify'])->name('user_certify');
-
-    /** Testing push for Jon 1111
-     *  Again ...
-     */
 });
 
 /**

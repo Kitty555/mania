@@ -15,6 +15,15 @@
     </head>
 
     <body>
+    <script>
+        @if(Auth::check())
+        var a_token = '{{Auth::user()->api_token}}';
+        var _LOGINCHECK = '1';
+         @else
+        var a_token = '';
+        var _LOGINCHECK = '0';
+        @endif
+    </script>
         <div id="g_SLEEP" class="g_sleep g_hidden">
             <div id="g_OVERLAY" class="g_overlay"></div>
         </div>
@@ -27,7 +36,6 @@
         @yield('foot_attach')
 
         <script type="text/javascript">
-            var _LOGINCHECK = '1';
             _initialize();
         </script>
     </body>
